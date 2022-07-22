@@ -1,0 +1,75 @@
+@import url(./style.css);
+
+/* AUTHORIZATION FORM */
+.authorization {
+    height: 100vh;
+    width: 100%;
+    background: url(../images/authorization-page-img.png) no-repeat top/cover;
+    padding-top: 100px;
+}
+
+.authorization-form {
+    background-color: rgba(234, 234, 234, 0.8);
+    width: 516px;
+    height: 430px;
+    border-radius: 10px;
+    padding: 45px 57px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 55vw;
+}
+
+.authorization-form-logo {
+    width: 115px;
+    height: 80px;
+    margin-bottom: 21px;
+}
+
+.authorization-form__title {
+    margin-bottom: 37px;
+    color: #204464;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 23px;
+}
+
+.authorization-form__fields {
+    width: 400px;
+    height: 50px;
+    background-color: #fff;
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 17px 50px;
+    background-repeat: no-repeat;
+    background-position: 15px 15px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.authorization-form__button {
+    background-color: #BB3232;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    width: 400px;
+    height: 35px;
+    border-radius: 10px;
+}
+
+.authorization-form__button:hover {
+    background-color: #b71908;
+}
+
+.authorization-form__fields_username {
+    background-image: url(../images/username-icon.svg);
+}
+
+.authorization-form__fields_password {
+    background-image: url(../images/password-icon.svg);
+}
+
+/* AUTHORIZATION FORM */

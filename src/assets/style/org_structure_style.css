@@ -1,0 +1,126 @@
+@import url(./style.css);
+
+/* ORGANIZATION STRUCTURE TABLE*/
+.org-structure-container {
+    margin: 175px 0 0 100px;
+    display: flex;
+    justify-content: center;
+    color: #606060;
+}
+
+.org-structure {
+    width: 328px;
+    height: 750px;
+    background: #FDFDFD;
+    border: 1px solid #C8C8C8;
+    border-right: none;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.org-structure:last-child {
+    border-right: 1px solid #C8C8C8;
+    width: 490px;
+}
+/* ORGANIZATION STRUCTURE TABLE*/
+
+
+/* DEPARTMENT LIST */
+.department-list {
+    display: flex;
+    flex-direction: column;
+    padding: 35px 25px;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.department-list__search {
+    width: 280px;
+    height: 30px;
+    border: 1px solid #C8C8C8;
+    border-radius: 20px;
+    padding: 8px 15px;
+    background-image: url(../images/header-search-icon.svg);
+    background-repeat: no-repeat;
+    background-position: 250px 5px;
+}
+
+.department-list__departments {
+    font-size: 13px;
+    line-height: 14px;
+    margin-bottom: 15px;
+}
+
+.department-list__departments:hover { 
+    color: #3273AE;
+}
+/* DEPARTMENT LIST */
+
+
+/* DEPARTMENT DETAILS */
+.department-details {
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
+}
+
+.department-details__department-name {
+    padding-left: 30px;
+    font-size: 16px;
+    line-height: 19px;
+    margin-top: 35px;
+}
+
+.department-details__employee {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 30px;
+}
+
+.department-details__employee:hover {
+    background: rgba(50, 115, 174, 0.1);
+
+    color: #3273AE;
+}
+/* DEPARTMENT DETAILS */
+
+
+/* EMPLOYEE DETAILS */
+.employee-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 60px;
+}
+
+.employee-details__img {
+    width: 100px;
+    height: 100px;
+}
+
+.employee-details__name {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    margin-top: 23px;
+    margin-bottom: 40px;
+}
+
+.employee-details__contact-info {
+    display: flex;
+    gap: 25px;
+}
+
+.employee-details__value {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.employee-details__value_darker {
+    color: #343434;
+}
+/* EMPLOYEE DETAILS */

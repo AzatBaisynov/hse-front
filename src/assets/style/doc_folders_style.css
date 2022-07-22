@@ -1,0 +1,33 @@
+@import url(./style.css);
+
+.container {
+    margin: 175px 0 0 100px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 60px;
+}
+
+.doc-folder {
+    width: 370px;
+    height: 100px;
+    background: rgba(50, 115, 174, 0.1);
+    box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.25);
+    padding: 30px 35px;
+    display: flex;
+    align-items: center;
+    gap: 19px;
+}
+
+.doc-folder:hover > p {
+    color: #3273AE;
+}
+
+.doc-folder__name{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #7D7D7D;
+    cursor: pointer;
+}
+
