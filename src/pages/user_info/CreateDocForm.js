@@ -5,7 +5,6 @@ import DropzoneComponent from './DropzoneComponent';
 import { _LINK } from '../../data/links';
 import axios from 'axios';
 import { useSelector } from 'react-redux/es/exports';
-import { useHistory } from "react-router-dom";
 
 function CreateDocForm() {
 
@@ -19,36 +18,22 @@ function CreateDocForm() {
         const get = async () => {
             const config = {
                 method: "GET",
-                url: `${_LINK}/v1/api/org/all`,
+                url: `${_LINK}/v1/api/org/ldap/all`,
                 headers: {
                     "Authorization": localStorage.getItem("token")
                 }
             }
             try {
                 const { data } = await axios(config)
+                console.log(data)
                 setDepartments(data.departments)
-                setDocument({ ...document, department: { id: data.departments[0].id }, reviewPeriod: "3-months"})
+                setUsers(data.users)
+                setDocument({ ...document, readerUser: data.users[0].username, department: data.departments[0].depName, reviewPeriod: "3-months"})
             } catch (e) {
                 alert(e)
             }
         }
         get()
-        const getUsers = async () => {
-            const config = {
-                method: "GET",
-                url: `${_LINK}/v1/api/org/users/all`,
-                headers: {
-                    "Authorization": localStorage.getItem("token")
-                }
-            }
-            try {
-                const { data } = await axios(config)
-                setUsers(data)
-            } catch (e) {
-                alert(e)
-            }
-        }
-        getUsers()
     }, [])
 
     const handleSelectFiles = (e) => {
@@ -62,17 +47,21 @@ function CreateDocForm() {
             break
             case "document-name" : setDocument({...document, docTitle: value})
             break
+            case "document-revision" : setDocument({...document, documentRevision: value})
+            break
+            case "document-code" : setDocument({...document, documentCode: value})
+            break
             case "protocol-date" : {
                 setDocument({...document, protocolDate : value})
             }
             break
             case "fullName" : setDocument({...document, executorFullName: value}) 
             break
-            case "department" : setDocument({...document, department: {id: value}})
+            case "department" : setDocument({...document, department: value})
             break
             case "terms" : setDocument({...document, reviewPeriod: value})
             break
-            case "reader" : setDocument({...document, reader: {id : value}})
+            case "reader" : setDocument({...document, readerUser: value})
             break
             case "one-click-read" : {
                 setDocument({...document, oneClickRead: e.target.checked})
@@ -89,7 +78,6 @@ function CreateDocForm() {
         }
     }
 
-    const history = useHistory()
 
     const handleSend = async (e) => {
         e.preventDefault()
@@ -124,7 +112,6 @@ function CreateDocForm() {
             }
 
             alert("Запись добавлена")
-            history.push("/list")
         } catch (e) {
             alert(e)
         }
@@ -147,6 +134,18 @@ function CreateDocForm() {
                     </div>
                 </div>
                 <div className="create-doc__row">
+                    {/* FILE NAME  */}
+                    <div className="create-doc__field">
+                        <div className="create-doc__field-title">Редакция документа</div>
+                        <input onInput={handleInput} type="text" name="file-name" id="document-revision" className="create-doc__field-content" />
+                    </div>
+                    {/*  DOCUMENT NAME */}
+                    <div className="create-doc__field">
+                        <div className="create-doc__field-title">Код документа</div>
+                        <input onInput={handleInput} type="text" name="file-name" id="document-code" className="create-doc__field-content" />
+                    </div>
+                </div>
+                <div className="create-doc__row">
                     {/* DATE OF APPROVAL */}
                     <div className="create-doc__field">
                         <div className="create-doc__field-title">Номер и дата протокола
@@ -166,7 +165,7 @@ function CreateDocForm() {
                         <select onInput={handleInput} name="responsible-department" id="department" className="create-doc__field-content">
                             {
                                 departments?.map((el, idx) => (
-                                    <option key={idx} value={el.id}>{el.name}</option>
+                                    <option key={idx} value={el.depName}>{el.depName}</option>
                                 ))
                             }
                         </select>
@@ -175,10 +174,10 @@ function CreateDocForm() {
                     <div className="create-doc__field">
                         <div className="create-doc__field-title">Срок пересмотра</div>
                         <select onInput={handleInput} name="revision-time" id="terms" className="create-doc__field-content">
-                            <option value="3-месяца">3 месяца</option>
-                            <option value="6-месяцев">6 месяцев</option>
-                            <option value="1-год">1 год</option>
-                            <option value="3-года">3 года</option>
+                            <option value="3 месяца">3 месяца</option>
+                            <option value="6 месяцев">6 месяцев</option>
+                            <option value="1 год">1 год</option>
+                            <option value="3 года">3 года</option>
                         </select>
                     </div>
                 </div>
@@ -201,15 +200,12 @@ function CreateDocForm() {
                         <select onInput={handleInput} name="responsible-department" id="reader" className="create-doc__field-content">
                             {
                                 users?.map((el, idx) => (
-                                    <option key={idx} value={el.id}>{el.fullName}</option>
+                                    <option key={idx} value={el.username}>{el.username}</option>
                                 ))
                             }
                         </select>
+                        
                     </div>
-                    
-                </div>
-                {/* CHECKBOXES  */}
-                <div className="create-doc__field">
                     <div className="create-doc__checkbox-container">
                         {/* ONE-CICK READ */}
                         <div className="create-doc__checkbox">
@@ -227,6 +223,10 @@ function CreateDocForm() {
                             <label htmlFor="backup">Резервная копия </label>
                         </div>
                     </div>
+                </div>
+                {/* CHECKBOXES  */}
+                <div className="create-doc__field">
+                    
                 </div>
                 {/* ADDITION BUTTON  */}
                 <button onClick={handleSend} type="submit" className="create-doc__button">Добавить документ</button>

@@ -30,3 +30,23 @@ table {
 @import url("./pagination.css");
 
 
+.primary {
+    background: #6BA4FB;
+    text-align: center;
+    line-height: 20px;
+}
+.warn {
+    background: #E89F5D;
+    text-align: center;
+    line-height: 20px;
+}
+.error {
+    background: #E85D5D;
+    text-align: center;
+    line-height: 20px;
+}
+.success {
+    background: #78CA85;
+    text-align: center;
+    line-height: 20px;
+}

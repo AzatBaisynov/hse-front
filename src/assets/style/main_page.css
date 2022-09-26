@@ -1,0 +1,110 @@
+
+body {
+    background-image: url(../images/home-background.png);
+    background-size: cover;
+}
+.home-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* VISIBLE WINDOW */
+
+
+/* HSE LOGO */
+.hse-logo-container {
+    display: flex;
+    font-weight: 600;
+    font-size: 64px;
+    line-height: 78px;
+    text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.25);
+}
+
+.red {
+    color: #E31E24;
+}
+
+.blue {
+    color: #3273AE;
+}
+
+.light-blue {
+    color: #19B7DA;
+}
+
+.hse-full {
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 49px;
+    color: #767C82;
+}
+
+.home__img {
+    margin-top: 45px;
+    width: 319px;
+    height: 295px;
+}
+/* HSE LOGO */
+
+/* NOTIFICATIONS PANEL */
+.notifications {
+    margin-top: 20px;
+    height: 200px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+}
+
+@media screen and (max-width: 1388px) {
+    .notifications {
+        width: 1100px;
+    }
+}
+
+@media screen and (min-width: 1388px) and (max-width: 1920px) {
+    .notifications {
+        width: 1250px;
+    }
+}
+
+.notifications__radio {
+    display: none;
+}
+
+.notifications__tab {
+    display: inline-block;
+    padding: 16px 40px;
+    color: #767C82;
+    background-color: #F4F4F4;
+    margin-bottom: -1px;
+    margin-right: -5px;
+    border: 0.5px solid #CECECE;
+}
+
+.notifications__radio:checked + .notifications__tab{
+    border-top: 3px solid #EE3239;
+    background-color: #fff;
+    color: #3273AE;
+    border-bottom: 1px solid white;
+}
+
+.notification__panel {
+    height: 235px;
+    background-color: #fff;
+    border: 0.5px solid #CECECE;
+    display: none;
+    padding: 40px;
+    font-weight: 400;
+    font-size: 14px;
+    cursor: pointer;
+    overflow: auto;
+}
+
+.notification__panel a:hover {
+    color: #3273AE;
+}
+
+#tab1:checked ~ #newTasksPanel,
+#tab2:checked ~ #inWorkPanel { 
+    display: block;
+}

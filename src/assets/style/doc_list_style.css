@@ -1,6 +1,9 @@
 @import url(./style.css);
+@import url(./form_style.css);
 
+/* VISIBLE WINDOW */
 .doc-list-container {
+    margin-top: 143px;
     margin-left: 100px;
     width: calc(100vw - 100px);
     display: flex;
@@ -8,28 +11,59 @@
     align-items: center;
 }
 
-.doc-filter {
+.doc-list__content {
     width: 100%;
-    height: 110px;
-    margin-top: 130px;
+    height: 72px;
+    margin-top: 115px; 
     padding: 15px 30px;
-    background: rgba(50, 115, 174, 0.05);
-    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
-    margin-bottom: 3px;
+    background-color: #f5f8fb;
+}
+/* VISIBLE WINDOW */
+
+
+/* HEAD PANEL */
+.doc-list__head-panel {
+    width: 97%;
+    display: flex;
+    justify-content: space-between;
 }
 
-.doc-filter__row {
+.doc-list__buttons {
     display: flex;
     gap: 20px;
 }
 
-.doc-filter__filters {
+.button-general {
     font-weight: 600;
-    font-size: 13px;
-    line-height: 15px;
-    background-color: transparent;
-    border: none;
-    width: 150px;
+    font-size: 11px;
+    line-height: 13px;
+}
+
+.go-back-button {
+    width: 66px;
+    height: 23px;
+    background-color: #E2E2E2;
+    padding: 5px 16px;
+}
+
+.create-doc-button {
+    width: 120px;
+    height: 25px;
+    background-color: #BB3232;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-doc-button:hover {
+    background-color: #b71908;
+}
+
+.doc-list__search-row {
+    display: flex;
+    align-items: center;
+    gap: 13px;
 }
     
 .doc-filter__search {
@@ -41,12 +75,12 @@
     background-repeat: no-repeat;
     background-position: 165px 5px;
     padding: 0px 10px;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
 }
 
 .doc-filter__add {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 70px;
     height: 30px;
     color: white;
@@ -56,34 +90,90 @@
     line-height: 13px;
 }
 
-.doc-table {
-    font-size: 12px;
-    line-height: 14px;
-    width: inherit;
+.doc-list__filter {
     cursor: pointer;
 }
 
-@media screen and (max-width: 1440px) {
-    .doc-table {
-        margin-top: -52px;
+.filter-popup {
+    visibility: hidden;
+    position: absolute;
+    width: 450px;
+    height: fit-content;
+    top: 189px;
+    background: #F5F5F5;
+    box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.25);
+    z-index: 5;
+    padding: 17px 22px;
+
+}
+
+.show {
+    visibility: visible;
+}
+
+.filter-title {
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 15px;
+    color: #3273AE;
+}
+
+.filter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.filter-button {
+    width: 75px;
+    height: 25px;
+    background-color: #BB3232;
+    color: white;
+    font-weight: 600;
+    font-size: 11px;
+    line-height: 13px;
+    align-self: flex-end;
+}
+/* HEAD PANEL */
+
+
+/* DOCUMENTS TABLE */
+.doc-table {
+    font-size: 12px;
+    line-height: 14px;
+    min-width: 100%;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1388px) {
+    .filter-popup {
+        left: 62.5%;
     }
 }
 
-@media screen and (min-width: 1440px) and (max-width: 1920px) {
-    .doc-table {
-        margin-top: -38px;
+@media screen and (min-width: 1388px) and (max-width: 1920px) {
+    .doc-table__row td {
+        max-width: 200px;
+    }
+
+    .filter-popup {
+        left: 70%;
     }
 }
 
 .doc-table  th, td {
     padding: 10px;
+}
+
+.doc-table th, td:first-child {
     padding-left: 30px;
-    /* border: 1px solid black; */
 }
 
 .doc-table__row_titles {
     color: #3273AE;
     font-weight: 600;
+    background-color: #f5f8fb;
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
 }
 
 .doc-table__row {
@@ -93,5 +183,4 @@
 .doc-table__row:hover {
     color: #3273AE;
 }
-
-
+/* DOCUMENTS TABLE */

@@ -5,7 +5,7 @@ import DropzoneComponent from './DropzoneComponent';
 import { _LINK } from '../../data/links';
 import axios from 'axios';
 import { useSelector } from 'react-redux/es/exports';
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { downloadFile } from '../../data/downloader';
 
 function DocumentRead() {
@@ -17,6 +17,8 @@ function DocumentRead() {
 	const { dirId } = useSelector(store => store.files)
 	const [doc, setDoc] = useState({})
 	const [link, setLink] = useState({})
+
+	const navigate = useNavigate()
 
 	const {id} = useParams()
 
@@ -114,7 +116,6 @@ function DocumentRead() {
 		}
 	}
 
-	const history = useHistory()
 
 	const handleSend = async (e) => {
 		e.preventDefault()
@@ -130,7 +131,6 @@ function DocumentRead() {
 		try {
 			const { data } = await axios(config)
 			alert("Запись добавлена")
-			history.push("/list")
 		} catch (e) {
 			alert(e)
 		}
@@ -138,7 +138,7 @@ function DocumentRead() {
 
 	return (
 		<div className="create-doc-container">
-			<p className="create-doc__title">Документ №{doc?.id}</p>
+			<p className="create-doc__title">Просмотр документа</p>
 			<form action="" className="create-doc__form">
 				<div className="create-doc__row">
 					{/* FILE NAME  */}
@@ -150,6 +150,18 @@ function DocumentRead() {
 					<div className="create-doc__field">
 						<div className="create-doc__field-title">Название документа</div>
 						<input onInput={handleInput} value={doc?.docTitle} type="text" name="file-name" id="document-name" className="create-doc__field-content" />
+					</div>
+				</div>
+				<div className="create-doc__row">
+					{/* FILE NAME  */}
+					<div className="create-doc__field">
+						<div className="create-doc__field-title">Редакция документа</div>
+						<input onInput={handleInput} value={doc?.documentRevision} type="text" name="file-name" id="document-revision" className="create-doc__field-content" />
+					</div>
+					{/*  DOCUMENT NAME */}
+					<div className="create-doc__field">
+						<div className="create-doc__field-title">Код документа</div>
+						<input onInput={handleInput} value={doc?.documentCode} type="text" name="file-name" id="document-code" className="create-doc__field-content" />
 					</div>
 				</div>
 				<div className="create-doc__row">
@@ -169,7 +181,7 @@ function DocumentRead() {
 					{/* RESPONSIBLE DEPARTMENT */}
 					<div className="create-doc__field">
 						<div className="create-doc__field-title">Ответственный департамент</div>
-						<input onInput={handleInput} value={doc?.department?.name} type="text" name="file-name" id="fullName" className="create-doc__field-content" />
+						<input onInput={handleInput} value={doc?.department} type="text" name="file-name" id="fullName" className="create-doc__field-content" />
 						{/* <select onInput={handleInput} value={doc?.department?.name} name="responsible-department" id="department" className="create-doc__field-content">
 							{
 								departments?.map((el, idx) => (
@@ -209,7 +221,7 @@ function DocumentRead() {
 				<div className="create-doc__field" style={{alignSelf: "flex-start"}}>
 					<div className="create-doc__field">
 						<div className="create-doc__field-title">Доступ к чтению</div>
-						<input onInput={handleInput} value={doc?.reader?.fullName} type="text" name="file-name" id="fullName" className="create-doc__field-content" />
+						<input onInput={handleInput} value={doc?.readerUser} type="text" name="file-name" id="fullName" className="create-doc__field-content" />
 						{/* <select onInput={handleInput} name="responsible-department" id="reader" className="create-doc__select-user create-doc__field-content">
 							{
 								users?.map((el, idx) => (
@@ -218,30 +230,35 @@ function DocumentRead() {
 							}
 						</select> */}
 					</div>
-
-				</div>
-				{/* CHECKBOXES  */}
-				<div className="create-doc__field">
-					<div className="create-doc__checkbox-container">
-						{/* ONE-CICK READ */}
-						<div className="create-doc__checkbox">
-							<input onInput={handleInput} disabled="disabled" type="checkbox" defaultChecked={doc?.oneClickRead} name="one-click-read" id="one-click-read" className="checkbox" />
-							<label htmlFor="one-click-read">Чтение в один клик</label>
-						</div>
-						{/* UNLIMITED ARCHIVATION  */}
-						<div className="create-doc__checkbox">
-							<input onInput={handleInput} disabled="disabled" type="checkbox" defaultChecked={doc?.unlimitedArch} name="unlimitted-archivation" id="unlimitted-archivation" className="checkbox" />
-							<label htmlFor="unlimitted-archivation">Не ограниченный объем документов для архивации</label>
-						</div>
-						{/* BACKUP  */}
-						<div className="create-doc__checkbox">
-							<input onInput={handleInput} disabled="disabled" defaultChecked={doc?.backup} type="checkbox" name="backup" id="backup" className="checkbox" />
-							<label htmlFor="backup">Резервная копия </label>
+					<div className="create-doc__field">
+						<div className="create-doc__checkbox-container">
+							{/* ONE-CICK READ */}
+							<div className="create-doc__checkbox">
+								<input onInput={handleInput} disabled="disabled" type="checkbox" defaultChecked={doc?.oneClickRead} name="one-click-read" id="one-click-read" className="checkbox" />
+								<label htmlFor="one-click-read">Чтение в один клик</label>
+							</div>
+							{/* UNLIMITED ARCHIVATION  */}
+							<div className="create-doc__checkbox">
+								<input onInput={handleInput} disabled="disabled" type="checkbox" defaultChecked={doc?.unlimitedArch} name="unlimitted-archivation" id="unlimitted-archivation" className="checkbox" />
+								<label htmlFor="unlimitted-archivation">Не ограниченный объем документов для архивации</label>
+							</div>
+							{/* BACKUP  */}
+							<div className="create-doc__checkbox">
+								<input onInput={handleInput} disabled="disabled" defaultChecked={doc?.backup} type="checkbox" name="backup" id="backup" className="checkbox" />
+								<label htmlFor="backup">Резервная копия </label>
+							</div>
 						</div>
 					</div>
 				</div>
+				{/* CHECKBOXES  */}
 				{/* ADDITION BUTTON  */}
 				{/* <button onClick={handleSend} type="submit" className="create-doc__button">Добавить документ</button> */}
+				<div class="create-doc__buttons">
+					<button onClick={(e) => {
+						e.preventDefault()
+						navigate(`/info/edit/${doc?.id}`, { replace: true })
+					}} class="create-doc__button create-doc__button-text">Редактировать</button>
+				</div>
 			</form>
 		</div>
 	);

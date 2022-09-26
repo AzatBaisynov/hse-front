@@ -33,6 +33,7 @@
     padding: 35px 25px;
     align-items: flex-start;
     gap: 40px;
+    overflow-y: scroll;
 }
 
 .department-list__search {
@@ -63,6 +64,7 @@
     display: flex;
     flex-direction: column;
     gap: 45px;
+    overflow-y: scroll;
 }
 
 .department-details__department-name {
@@ -94,6 +96,10 @@
     flex-direction: column;
     align-items: center;
     padding-top: 60px;
+    overflow-y: scroll;
+}
+.employee-details_empty {
+    padding-top: 194px;
 }
 
 .employee-details__img {

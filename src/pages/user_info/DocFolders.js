@@ -40,7 +40,7 @@ function DocFolders() {
         <div className="container">
             {
                 dirs?.map((el, idx) => (
-                    <NavLink exact to="/list" onClick={() => {
+                    <NavLink exact to={`/info/list/${el.id}`} onClick={() => {
                         dispatch(setDir(el.id))
                     }} className="doc-folder" key={idx}>
                         <img src={folderIcon} alt="folder-icon" />
