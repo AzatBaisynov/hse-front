@@ -72,12 +72,14 @@
 .inner-nav {
     position: fixed;
     width: 100%;
-    height: 45px;
+    height: fit-content;
     top: 85px;
+    left: 100px;
     background: #F5F5F5;
     border-bottom: 1px solid #D1D1D1;
-    padding-top: 14px;
-    padding-left: 250px;
+    padding: 15px 100px;
+    display: flex;
+    gap: 50px;
     /* white-space: nowrap; */
 }
 
@@ -86,7 +88,6 @@
     font-size: 14px;
     line-height: 16px;
     color: #7D7D7D;
-    margin-right: 105px;
 }
 
 .inner-nav__link.active {

@@ -31,6 +31,21 @@ import UpdateEcoPlan3DocForm from './pages/ecology/plans3/UpdateEcoPlan3DocForm'
 import CreateEcoOvocDocForm from './pages/ecology/ovos/CreateEcoOvocDocForm';
 import ReadEcoOvocDocForm from './pages/ecology/ovos/ReadEcoOvocDocForm';
 import UpdateEcoOvocDocForm from './pages/ecology/ovos/UpdateEcoOvocDocForm';
+import {MainLaborProtection} from './pages/labor_protection/MainLaborProtection';
+import DocLaborProtectionFolders from './pages/labor_protection/DocLabopProtectionFolders';
+import Ensk from './pages/labor_protection/siz/Ensk';
+import PpeWarehouseManagement from './pages/labor_protection/siz/PpeWarehouseManagement.js';
+import PpePurchase from './pages/labor_protection/siz/PpePurchase';
+import PpeIssuanceCard from './pages/labor_protection/siz/PpeIssuanceCard';
+import PurchaseRequestMessage from './pages/labor_protection/siz/PurchaseRequestMessage';
+import PpeAllowance from './pages/labor_protection/siz/allowance/PpeAllowance';
+import PpeReviews from './pages/labor_protection/siz/reviews/PpeReviews';
+import PpeReviewsList from './pages/labor_protection/siz/reviews/PpeReviewsList';
+import PpeAllowanceList from './pages/labor_protection/siz/allowance/PpeAllowanceList';
+import PpeReviewsRead from './pages/labor_protection/siz/reviews/PpeReviewsRead';
+import PpeReviewsEdit from './pages/labor_protection/siz/reviews/PpeReviewsEdit';
+import PpeAllowanceRead from './pages/labor_protection/siz/allowance/PpeAllowanceRead';
+import PpeAllowanceEdit from './pages/labor_protection/siz/allowance/PpeAllowanceEdit';
 
 function App() {
   const { isAuth } = useSelector(store => store.login)
@@ -68,6 +83,21 @@ function App() {
           <Route exact path="/ecology/ovoc/create" element={<MainEcology><CreateEcoOvocDocForm /></MainEcology>} />
           <Route exact path="/ecology/ovoc/get/:id" element={<MainEcology><ReadEcoOvocDocForm /></MainEcology>} />
           <Route exact path="/ecology/ovoc/edit/:id" element={<MainEcology><UpdateEcoOvocDocForm /></MainEcology>} />
+          <Route exact path="/labor_protection/folders/:id/nest/:nest" element={<MainLaborProtection><DocLaborProtectionFolders /></MainLaborProtection>} />
+          <Route exact path="/labor_protection/list/43" element={<MainEcology><PpeReviewsList /></MainEcology>} />
+          <Route exact path="/labor_protection/list/38" element={<MainLaborProtection><Ensk/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/list/39" element={<MainLaborProtection><PpeWarehouseManagement/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/list/40" element={<MainLaborProtection><PpePurchase/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/list/42" element={<MainLaborProtection><PpePurchase/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/list/44" element={<MainLaborProtection><PpeIssuanceCard/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/list/50" element={<MainLaborProtection><PurchaseRequestMessage/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/siz/ppe_allowance" element={<MainLaborProtection><PpeAllowance/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/siz/ppe_reviews" element={<MainLaborProtection><PpeReviews/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/list/45" element={<MainLaborProtection><PpeAllowanceList/></MainLaborProtection>} />
+          <Route exact path="/labor/siz/reviews/get/:id" element={<MainLaborProtection><PpeReviewsRead/></MainLaborProtection>} />
+          <Route exact path="/labor/siz/edit/:id" element={<MainLaborProtection><PpeReviewsEdit/></MainLaborProtection>} />
+          <Route exact path="/labor/siz/allowance/get/:id" element={<MainLaborProtection><PpeAllowanceRead/></MainLaborProtection>} />
+          <Route exact path="/labor/siz/allowance/edit/:id" element={<MainLaborProtection><PpeAllowanceEdit/></MainLaborProtection>} />
         </Routes>
       </Router>
     );

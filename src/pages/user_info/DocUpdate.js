@@ -230,7 +230,7 @@ const DocUpdate = () => {
 				{/* DOCUMENT UPLOADING  */}
 				<div className="create-doc__field">
 					<div className="create-doc__field-title">Загрузка документа</div>
-					<div className="create-doc__upload-file create-doc__field-content">
+					<div className="create-doc__upload-file form__field-content form__field-content_long" style={{width: "965px"}}>
 						<label htmlFor="upload-file" >
 							<span className="create-doc__label">
 								<img src={uploadIcon} alt="" />

@@ -11,6 +11,7 @@ const CreateEcoWasteDocForm = () => {
 	const [file3, setFile3] = useState({})
 	const [document, setDocument] = useState({})
 	const { dirId } = useSelector(store => store.files)
+	console.log(dirId);
 
 	const handleSelectFiles = (e) => {
 		setFile1(e.target.files[0])
@@ -73,6 +74,8 @@ const CreateEcoWasteDocForm = () => {
 			},
 			data: JSON.stringify(document)
 		}
+
+		console.log(config);
 		try {
 			const { data } = await axios(config)
 

@@ -18,7 +18,7 @@
 
 .create-doc__form {
     margin-top: 40px;
-    width: fit-content;
+    max-width: 1070px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -72,8 +72,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    width: 965px;
     height: 70px;
     outline: 1px dashed #C8C8C8;
     outline-offset: -12px;
@@ -81,8 +79,6 @@
     font-size: 13px;
     line-height: 14px;
     color: #7D7D7D;
-    position: relative;
-    z-index: 10;
 }
 
 .create-doc__select-user {
@@ -194,3 +190,16 @@
 }
 /* ADDITION BUTTON */
 
+.form__fields-comment {
+    width: 1070px;
+    /* height: 154px; */
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.form__vertical-field-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
