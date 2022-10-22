@@ -36,7 +36,7 @@ import DocLaborProtectionFolders from './pages/labor_protection/DocLabopProtecti
 import Ensk from './pages/labor_protection/siz/Ensk';
 import PpeWarehouseManagement from './pages/labor_protection/siz/PpeWarehouseManagement.js';
 import PpePurchase from './pages/labor_protection/siz/PpePurchase';
-import PpeIssuanceCard from './pages/labor_protection/siz/PpeIssuanceCard';
+import PpeIssuanceCard from './pages/labor_protection/siz/issuanceCard/PpeIssuanceCard';
 import PurchaseRequestMessage from './pages/labor_protection/siz/PurchaseRequestMessage';
 import PpeAllowance from './pages/labor_protection/siz/allowance/PpeAllowance';
 import PpeReviews from './pages/labor_protection/siz/reviews/PpeReviews';
@@ -46,6 +46,9 @@ import PpeReviewsRead from './pages/labor_protection/siz/reviews/PpeReviewsRead'
 import PpeReviewsEdit from './pages/labor_protection/siz/reviews/PpeReviewsEdit';
 import PpeAllowanceRead from './pages/labor_protection/siz/allowance/PpeAllowanceRead';
 import PpeAllowanceEdit from './pages/labor_protection/siz/allowance/PpeAllowanceEdit';
+import PpeIssuanceList from './pages/labor_protection/siz/issuanceCard/PpeIssuanceList';
+import PpeIssuanceRead from './pages/labor_protection/siz/issuanceCard/PpeIssuanceRead'
+import PpeIssuanceEdit from './pages/labor_protection/siz/issuanceCard/PpeIssuanceEdit'
 
 function App() {
   const { isAuth } = useSelector(store => store.login)
@@ -89,8 +92,8 @@ function App() {
           <Route exact path="/labor_protection/list/39" element={<MainLaborProtection><PpeWarehouseManagement/></MainLaborProtection>} />
           <Route exact path="/labor_protection/list/40" element={<MainLaborProtection><PpePurchase/></MainLaborProtection>} />
           <Route exact path="/labor_protection/list/42" element={<MainLaborProtection><PpePurchase/></MainLaborProtection>} />
-          <Route exact path="/labor_protection/list/44" element={<MainLaborProtection><PpeIssuanceCard/></MainLaborProtection>} />
-          <Route exact path="/labor_protection/list/50" element={<MainLaborProtection><PurchaseRequestMessage/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/siz/ppe_issuance_card" element={<MainLaborProtection><PpeIssuanceCard/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/list/71" element={<MainLaborProtection><PurchaseRequestMessage/></MainLaborProtection>} />
           <Route exact path="/labor_protection/siz/ppe_allowance" element={<MainLaborProtection><PpeAllowance/></MainLaborProtection>} />
           <Route exact path="/labor_protection/siz/ppe_reviews" element={<MainLaborProtection><PpeReviews/></MainLaborProtection>} />
           <Route exact path="/labor_protection/list/45" element={<MainLaborProtection><PpeAllowanceList/></MainLaborProtection>} />
@@ -98,6 +101,9 @@ function App() {
           <Route exact path="/labor/siz/edit/:id" element={<MainLaborProtection><PpeReviewsEdit/></MainLaborProtection>} />
           <Route exact path="/labor/siz/allowance/get/:id" element={<MainLaborProtection><PpeAllowanceRead/></MainLaborProtection>} />
           <Route exact path="/labor/siz/allowance/edit/:id" element={<MainLaborProtection><PpeAllowanceEdit/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/list/44" element={<MainLaborProtection><PpeIssuanceList/></MainLaborProtection>} />
+          <Route exact path="/labor/siz/issuance/get/:id" element={<MainLaborProtection><PpeIssuanceRead/></MainLaborProtection>} />
+          <Route exact path="/labor/siz/issuance/edit/:id" element={<MainLaborProtection><PpeIssuanceEdit/></MainLaborProtection>} />
         </Routes>
       </Router>
     );

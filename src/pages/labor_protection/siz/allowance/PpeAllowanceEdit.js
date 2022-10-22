@@ -85,7 +85,7 @@ const PpeAllowanceEdit = () => {
 					file.name
 				)
 				try {
-					await axios.post(`${_LINK}/v1/api/eco/document/file/${data.id}`, formData, {
+					await axios.post(`${_LINK}/v1/api/labor/create/update`, formData, {
 						headers: {
 							'Authorization': localStorage.getItem("token"),
 						}

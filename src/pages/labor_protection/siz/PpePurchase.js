@@ -71,6 +71,10 @@ const PpePurchase = () => {
   []
   )
 
+  useEffect(() => {
+    console.log(file);
+  })
+
   function createTable() {
     const table = excel.excelRows?.map((row) => (
       <tr>
@@ -104,7 +108,7 @@ const PpePurchase = () => {
               </button>
             </form>
             <NavLink
-            exact to="/labor_protection/list/50" className="create-doc-button button-general" style={{backgroundColor: "#3273AE"}}>Сообщить о потребности в закупе
+            exact to="/labor_protection/list/71" className="create-doc-button button-general" style={{backgroundColor: "#3273AE"}}>Сообщить о потребности в закупе
           </NavLink>
           </div>
           {/* SEARCH AND FILTER */}

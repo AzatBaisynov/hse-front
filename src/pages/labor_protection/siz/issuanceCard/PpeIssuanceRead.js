@@ -1,92 +1,35 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import "../../../assets/style/siz_table.css";
-// import { NavLink } from "react-router-dom";
-import filterImage from "../../../assets/images/doc-lict-filter.png";
-import uploadDoc from "../../../assets/images/labor-protecttion-upload-doc.svg";
-import downloadDoc from "../../../assets/images/labor-protecttion-download-doc.svg";
-import { _LINK } from "../../../data/links";
-import loader from "../../../assets/images/loader.gif";
+import { useNavigate, useParams } from "react-router-dom";
+import { _LINK } from "../../../../data/links";
+import uploadDoc from "../../../../assets/images/labor-protecttion-upload-doc.svg";
+import downloadDoc from "../../../../assets/images/labor-protecttion-download-doc.svg";
+import filterImage from "../../../../assets/images/doc-lict-filter.png";
 
 const PpeIssuanceCard = () => {
-  const [file, setFile] = useState({});
-  const [excel, setExcel] = useState({});
-
-  const handleSelectFiles = (e) => {
-    setFile(e.target.files[0]);
-  };
-
-  const runLoader = async (isLoading) => {
-    const loader = document.getElementById("loader");
-    if (isLoading === true) {
-      loader.style.display = "flex";
-    } else {
-      loader.style.display = "none";
-    }
-  }
-
-  const handleSend = async (e) => {
-    e.preventDefault();
-    try {
-      if (file?.name) {
-        const formData = new FormData();
-        formData.append("file", file, file.name);
-        console.log(formData);
-        runLoader(true);
-        try {
-          await axios.post(`${_LINK}/v1/api/file/excel?skip=2&type=4&date=2022-10-12`, formData, {
-            headers: {
-              
-            },
-          })
-        } catch(e) {
-          alert(e);
-        }
-        runLoader(false);
-      }
-    } catch(e) {
-      alert(e);
-    }
-  };
+  const [document, setDocument] = useState({});
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const getArray = async () => {
+    const getDocument = async () => {
       const config = {
-        method: "get",
-        url: `${_LINK}/v1/api/file/excel/get?type=4`,
+        method: "GET",
+        url: `${_LINK}/v1/api/labor/id/${id}`,
         headers: {
           Authorization: localStorage.getItem("token"),
         },
       };
       try {
         const { data } = await axios(config);
-        setExcel(data);
+        console.log(data);
+        setDocument(data);
       } catch (e) {
-        console.log(e);
-        setExcel({});
+        alert(e);
       }
-    }
-    getArray();
-  },
-  []
-  )
-
-  useEffect(() => {
-    console.log(excel);
-  })
-
-  function createTable() {
-    const table = excel.excelRows?.map((row) => (
-      <tr>
-        {row.cells.map((cell) => (
-          <td>{cell.cellValue}</td>
-        ))}
-      </tr>
-    ));
-
-    return <tbody>{table}</tbody>;
-  }
-
+    };
+    getDocument();
+  }, []);
   return (
     <>
       <div className="table-container">
@@ -99,8 +42,11 @@ const PpeIssuanceCard = () => {
               <a href="./pasports_folders.html"
                 className="go-back-button button-general nohover">Назад</a>
               <form action="./pasports_create_doc.html">
-              <button className="create-doc-button button-general" type="submit" onClick={handleSend}>
-                Отправить
+              <button className="create-doc-button button-general" type="submit" onClick={(e) => {
+              e.preventDefault();
+              navigate(`/labor/siz/issuance/edit/${document?.id}`, { replace: true });
+            }}>
+                Редактировать
               </button>
             </form>
           </div>
@@ -119,7 +65,6 @@ const PpeIssuanceCard = () => {
               id="uploadExcel"
               hidden
               accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-              onInput={handleSelectFiles}
             />
               {/* DOCUMENT DOWNLOAD BUTTON */}
               <button id="ensk-download-doc">
@@ -197,7 +142,7 @@ const PpeIssuanceCard = () => {
                     <input
                       type="text"
                       name="employeeName"
-                      id="employeeName"
+                      id="employeeFullName"
                       className="form__field-content"
                     />
                   </div>
@@ -219,39 +164,76 @@ const PpeIssuanceCard = () => {
           {/* POPUP SCRIPT */}
         </div>
         <div className="ensk">
-          <table className="ensk-table">
-            <thead>
-              <tr>
-                <th>№</th>
-                <th>Таб. № SAP / SAP No.</th>
-                <th>ИИН / ID No.</th>
-                <th>ФИО/Name</th>
-                <th>Должность/ Профессия / Position</th>
-                <th>Подразделение / Division</th>
-                <th>Код МВЗ / CMC (cost management center) code</th>
-                <th>Номер номенклатурный / Nomenclature number</th>
-                <th>Наименование СИЗ / Name of PPE</th>
-                <th>Ед. Изм/ Unit of measure</th>
-                <th>Количество / Quantity</th>
-                <th>Дата выдачи / Date of issuance</th>
-              </tr>
-              <tr className="numeration">
-                <td />
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-                <td>5</td>
-                <td>6</td>
-                <td>7</td>
-                <td>8</td>
-                <td>9</td>
-                <td>10</td>
-                <td>11</td>
-              </tr>
-            </thead>
-            {createTable()}
-          </table>
+        <table className="ensk-table">
+  <tbody>
+    <tr>
+      <th>№</th>
+      <th>Таб. № SAP / SAP No.</th>
+      <th>ИИН / ID No.</th>
+      <th>ФИО/Name</th>
+      <th>Должность/ Профессия / Position</th>
+      <th>Подразделение / Division</th>
+      <th>Код МВЗ / CMC (cost management center) code</th>
+      <th>Номер номенклатурный / Nomenclature number</th>
+      <th>Наименование СИЗ / Name of PPE</th>
+      <th>Ед. Изм/ Unit of measure</th>
+      <th>Количество / Quantity</th>
+      <th>Дата выдачи / Date of issuance</th>
+    </tr>
+    <tr className="numeration">
+      <td />
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+      <td>9</td>
+      <td>10</td>
+      <td>11</td>
+    </tr>
+    <tr className="table-input">
+      <td>
+        <input type="number" id="indexNum" style={{ width: 60 }} value={document?.indexNum} />
+      </td>
+      <td>
+        <input type="text" id="sapNum" value={document?.sapNum} />
+      </td>
+      <td>
+        <input type="text" id="employeeId" value={document?.employeeId} />
+      </td>
+      <td>
+        <input type="text" id="employeeFullName" value={document?.employeeFullName} />
+      </td>
+      <td>
+        <input type="text" id="position" value={document?.position} />
+      </td>
+      <td>
+        <input type="text" id="divisionName" value={document?.divisionName} />
+      </td>
+      <td>
+        <input type="text" id="cmcCode" value={document?.cmcCode} />
+      </td>
+      <td>
+        <input type="text" id="itemNum" value={document?.itemNum} />
+      </td>
+      <td>
+        <input type="text" id="ppeName" value={document?.ppeName} />
+      </td>
+      <td>
+        <input type="text" id="measureUnit" value={document?.measureUnit} />
+      </td>
+      <td>
+        <input type="number" id="quantity" value={document?.quantity} />
+      </td>
+      <td>
+        <input type="date" id="dateFull" value={document?.dateFull} />
+      </td>
+    </tr>
+  </tbody>
+</table>
         </div>
       </div>
     </>

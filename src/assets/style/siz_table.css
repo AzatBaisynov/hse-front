@@ -76,3 +76,12 @@
     height: 120px;
 }
 
+.table-input td{
+    padding: 0px;
+}
+
+.table-input input {
+    border: none;
+    height: 30px;
+    padding: 10px;
+}

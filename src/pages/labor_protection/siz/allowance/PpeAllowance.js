@@ -57,9 +57,10 @@ const PpeAllowance = () => {
 					file.name
 				)
 				try {
-					await axios.post(`${_LINK}/v1/api/labor/create/update/${data.id}`, formData, {
+					await axios.post(`${_LINK}/v1/api/labor/create/update/${data.id}/1`, formData, {
 						headers: {
 							'Authorization': localStorage.getItem("token"),
+              'Content-Type': "application/json",
 						}
 					})
 				} catch (e) {

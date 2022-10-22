@@ -20,7 +20,7 @@ const MainPage = () => {
       console.log("hello 222");
       const config = {
         method: "get",
-        url: `${_LINK}/v1/api/labor/dir/50`,
+        url: `${_LINK}/v1/api/labor/dir/71`,
         headers: {
           Authorization: localStorage.getItem("token"),
         },
