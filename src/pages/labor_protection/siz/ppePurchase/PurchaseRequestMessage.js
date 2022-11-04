@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import uploadIcon from "../../../assets/images/upload-icon.svg"
-import { _LINK } from "../../../data/links";
+import uploadIcon from "../../../../assets/images/upload-icon.svg"
+import { _LINK } from "../../../../data/links";
 
 const PurchaseRequestMessage = () => {
   const [file, setFile] = useState({})
@@ -57,9 +57,10 @@ const PurchaseRequestMessage = () => {
 					file.name
 				)
 				try {
-					await axios.post(`${_LINK}/v1/api/labor/create/update/${data.id}`, formData, {
+					await axios.post(`${_LINK}/v1/api/labor/file/${data.id}`, formData, {
 						headers: {
 							'Authorization': localStorage.getItem("token"),
+              'Content-Type': "multipart/form-data",
 						}
 					})
 				} catch (e) {

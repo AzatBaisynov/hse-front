@@ -5,17 +5,23 @@ import uploadIcon from "../../../../assets/images/upload-icon.svg";
 import { _LINK } from "../../../../data/links";
 
 const PpeAllowance = () => {
-  const [file, setFile] = useState({})
+  const [file1, setFile1] = useState({})
+  const [file2, setFile2] = useState({})
+  const [file3, setFile3] = useState({})
 	const [document, setDocument] = useState({})
 	const { dirId } = useSelector((store) => store.files)
 
   console.log(dirId);
 
 	const handleSelectFiles = (e) => {
-		setFile(e.target.files[0])
+		setFile1(e.target.files[0]);
+		setFile2(e.target.files[0]);
+		setFile3(e.target.files[0]);
 	}
 
-  console.log(file);
+  console.log(file1);
+  console.log(file2);
+  console.log(file3);
 
 	const handleInput = (e) => {
 		const { id, value } = e.target
@@ -49,18 +55,53 @@ const PpeAllowance = () => {
     try {
       const { data } = await axios(config);
       console.log(data);
-      if (file?.name) {
+      if (file1?.name) {
 				const formData = new FormData()
 				formData.append(
 					'file',
-					file,
-					file.name
+					file1,
+					file1.name
 				)
 				try {
-					await axios.post(`${_LINK}/v1/api/labor/create/update/${data.id}/1`, formData, {
+					await axios.post(`${_LINK}/v1/api/labor/file/${data.id}`, formData, {
 						headers: {
 							'Authorization': localStorage.getItem("token"),
-              'Content-Type': "application/json",
+              'Content-Type': "multipart/form-data",
+						}
+					})
+				} catch (e) {
+					alert(e)
+				}
+			}
+      
+			if (file2?.name) {
+				const formData = new FormData()
+				formData.append(
+					'file',
+					file2,
+					file2.name
+				)
+				try {
+					await axios.post(`${_LINK}/v1/api/eco/document/file/${data.id}/2`, formData, {
+						headers: {
+							'Authorization': localStorage.getItem("token"),
+						}
+					})
+				} catch (e) {
+					alert(e)
+				}
+			}
+			if (file3?.name) {
+				const formData = new FormData()
+				formData.append(
+					'file',
+					file3,
+					file3.name
+				)
+				try {
+					await axios.post(`${_LINK}/v1/api/eco/document/file/${data.id}/3`, formData, {
+						headers: {
+							'Authorization': localStorage.getItem("token"),
 						}
 					})
 				} catch (e) {
@@ -115,10 +156,10 @@ const PpeAllowance = () => {
 						<label htmlFor="file" >
 							<span className="create-doc__label">
 								<img src={uploadIcon} alt="" />
-								<span>{file?.name || "Нажмите или перетащите файл для загрузки"}</span>
+								<span>{file1?.name && file2.name && file3.name || "Нажмите или перетащите файл для загрузки"}</span>
 							</span>
 						</label>
-						<input type="file" id="file" hidden onInput={handleSelectFiles} />
+						<input type="file" id="file" hidden multiple onInput={handleSelectFiles} />
 					</div>
 				</div>
         <textarea

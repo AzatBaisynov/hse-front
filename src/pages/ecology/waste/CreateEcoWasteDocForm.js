@@ -13,9 +13,21 @@ const CreateEcoWasteDocForm = () => {
 	const { dirId } = useSelector(store => store.files)
 	console.log(dirId);
 
-	const handleSelectFiles = (e) => {
-		setFile1(e.target.files[0])
+	const handleSelectFiles1 = (e) => {
+		setFile1(e.target.files[0]);
 	}
+
+	const handleSelectFiles2 = (e) => {
+		setFile2(e.target.files[0]);
+	}
+
+	const handleSelectFiles3 = (e) => {
+		setFile3(e.target.files[0]);
+	}
+
+	console.log(file1);
+	console.log(file2);
+	console.log(file3);
 
 	const handleInput = (e) => {
 		const { id, value } = e.target
@@ -176,7 +188,7 @@ const CreateEcoWasteDocForm = () => {
 								<span>{file1?.name || "Нажмите или перетащите файл для загрузки"}</span>
 							</span>
 						</label>
-						<input type="file" id="file1" hidden onInput={handleSelectFiles} />
+						<input type="file" id="file1" hidden multiple onInput={handleSelectFiles1} />
 					</div>
 				</div>
 				<div className="create-doc__buttons">

@@ -36,11 +36,7 @@ const PpeAllowanceEdit = () => {
     };
     getDocument();
   }, []);
-
-  // const handleSelectFiles = (e) => {
-  // 	setFile(e.target.files[0])
-  // }
-
+  
   const handleInput = (e) => {
     const { id, value } = e.target;
     switch (id) {
@@ -68,7 +64,7 @@ const PpeAllowanceEdit = () => {
       method: "POST",
       url: `${_LINK}/v1/api/labor/create/update`,
       headers: {
-        Authorization: localStorage.getItem("token"),
+        "Authorization": localStorage.getItem("token"),
         "Content-Type": "application/json",
       },
       data: JSON.stringify(document),
@@ -84,8 +80,9 @@ const PpeAllowanceEdit = () => {
 					file,
 					file.name
 				)
+        console.log(formData);
 				try {
-					await axios.post(`${_LINK}/v1/api/labor/create/update`, formData, {
+					await axios.post(`${_LINK}/v1/api/labor/file/${data.id}`, formData, {
 						headers: {
 							'Authorization': localStorage.getItem("token"),
 						}

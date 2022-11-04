@@ -1,0 +1,114 @@
+@import url(./style.css);
+@import url(./create_doc_form_style.css);
+
+.card {
+    width: 960px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 35px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.card__title {
+  font-size: 20px;
+  line-height: 23px;
+}
+
+.card__btn-row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card__import-export {
+    display: flex;
+    gap: 10px;
+}
+
+.card__plan-fact {
+    display: flex;
+    gap: 30px;
+    font-size: 14px;
+}
+
+._horizontal {
+    display: flex;
+}
+
+._horizontal:first-child {
+    margin-bottom: 15px;
+}
+
+#observerDrivingExperience {
+    width: 249px;
+}
+
+.card__column-input {
+    border: none;
+    border-bottom: 1px solid #D1D1D1;
+    width: 100%;
+    height: 25px;
+}
+
+.card__column-item_date {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.card__column-unit {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.card__table {
+    width: 100%;
+    color: #000000;
+}
+
+.card__table th {
+    background-color: #E0E9F2;
+    color: #3273AE;
+    font-weight: 600;
+    padding: 10px;
+    width: 480px;
+    border: 1px solid #9ABAD7;
+}
+
+.card__table td {
+    border: 1px solid #D1D1D1;
+    padding: 10px 15px;
+    /* vertical-align: bottom; */
+}
+
+.card__table-safety {
+    text-align: center;
+}
+
+.card__table-green {
+    background-color: #E0F2E7;
+}
+
+.card__indicators {
+    font-size: 13px;
+}
+
+.comment__header {
+    background-color: #E0E9F2;
+    color: #3273AE;
+    font-weight: 600;
+    border: 1px solid #9ABAD7;
+    text-align: center;
+    padding: 12px 200px;
+}
+
+.comment__content {
+    border: 1px solid #D1D1D1;
+    border-top: none;
+    padding: 15px;
+}

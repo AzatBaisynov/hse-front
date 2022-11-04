@@ -35,9 +35,9 @@ import {MainLaborProtection} from './pages/labor_protection/MainLaborProtection'
 import DocLaborProtectionFolders from './pages/labor_protection/DocLabopProtectionFolders';
 import Ensk from './pages/labor_protection/siz/Ensk';
 import PpeWarehouseManagement from './pages/labor_protection/siz/PpeWarehouseManagement.js';
-import PpePurchase from './pages/labor_protection/siz/PpePurchase';
+import PpePurchase from './pages/labor_protection/siz/ppePurchase/PpePurchase';
 import PpeIssuanceCard from './pages/labor_protection/siz/issuanceCard/PpeIssuanceCard';
-import PurchaseRequestMessage from './pages/labor_protection/siz/PurchaseRequestMessage';
+import PurchaseRequestMessage from './pages/labor_protection/siz/ppePurchase/PurchaseRequestMessage';
 import PpeAllowance from './pages/labor_protection/siz/allowance/PpeAllowance';
 import PpeReviews from './pages/labor_protection/siz/reviews/PpeReviews';
 import PpeReviewsList from './pages/labor_protection/siz/reviews/PpeReviewsList';
@@ -49,6 +49,10 @@ import PpeAllowanceEdit from './pages/labor_protection/siz/allowance/PpeAllowanc
 import PpeIssuanceList from './pages/labor_protection/siz/issuanceCard/PpeIssuanceList';
 import PpeIssuanceRead from './pages/labor_protection/siz/issuanceCard/PpeIssuanceRead'
 import PpeIssuanceEdit from './pages/labor_protection/siz/issuanceCard/PpeIssuanceEdit'
+import PnbrList from './pages/labor_protection/pnb/pnbr/PnbrList'
+import Pnbr from './pages/labor_protection/pnb/pnbr/Pnbr'
+import PnbrCard from './pages/labor_protection/pnb/pnbrCard/PnbrCard'
+import PnbvCard from './pages/labor_protection/pnb/pnbrCard/PnbvCard'
 
 function App() {
   const { isAuth } = useSelector(store => store.login)
@@ -104,6 +108,10 @@ function App() {
           <Route exact path="/labor_protection/list/44" element={<MainLaborProtection><PpeIssuanceList/></MainLaborProtection>} />
           <Route exact path="/labor/siz/issuance/get/:id" element={<MainLaborProtection><PpeIssuanceRead/></MainLaborProtection>} />
           <Route exact path="/labor/siz/issuance/edit/:id" element={<MainLaborProtection><PpeIssuanceEdit/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/list/47" element={<MainLaborProtection><PnbrList/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/pnbr" element={<MainLaborProtection><Pnbr/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/pnbr_card" element={<MainLaborProtection><PnbrCard/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/pnbv_card" element={<MainLaborProtection><PnbvCard/></MainLaborProtection>} />
         </Routes>
       </Router>
     );

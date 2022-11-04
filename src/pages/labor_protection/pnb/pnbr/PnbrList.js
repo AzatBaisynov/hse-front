@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import "../../../../assets/style/doc_list_style.css";
-import { useSelector } from "react-redux/es/exports";
 import { Paginate } from "../../../../components/Paginate";
 import { _LINK } from "../../../../data/links";
 import axios from "axios";
 import filterImage from "../../../../assets/images/doc-lict-filter.png";
 
-const PpeAllowanceList = () => {
+const PnbrList = () => {
   const [page, setPage] = useState(0);
   const [back, setBack] = useState({});
   const navigate = useNavigate();
@@ -20,7 +19,7 @@ const PpeAllowanceList = () => {
       console.log("hello 222");
       const config = {
         method: "get",
-        url: `${_LINK}/v1/api/labor/dir/45`,
+        url: `${_LINK}/v1/api/labor/dir/47`,
         headers: {
           Authorization: localStorage.getItem("token"),
         },
@@ -62,7 +61,7 @@ const PpeAllowanceList = () => {
           </NavLink>
           <NavLink
             exact
-            to="/labor_protection/siz/ppe_allowance"
+            to=""
             className="create-doc-button button-general"
           >
             Создать документ
@@ -155,10 +154,9 @@ const PpeAllowanceList = () => {
       <table className="doc-table">
         <tbody>
           <tr className="doc-table__row doc-table__row_titles">
-            <td>Имя файла</td>
+            <td>Имя документа</td>
             <td>Код документа</td>
-            <td>Дата</td>
-            <td>Наименование документа</td>
+            <td>Отчетный период</td>
           </tr>
 
           {
@@ -175,10 +173,9 @@ const PpeAllowanceList = () => {
                   navigate(`/labor/siz/allowance/get/${back[key].id}`, { replace: true });
                 }}
               >
-                <td>{back[key]?.fileName}</td>
+                <td>Статистика отчетов (сводная) по ПНБ и ПНБВ</td>
                 <td>{back[key]?.id}</td>
                 <td>{back[key]?.dateFull}</td>
-                <td>{back[key]?.docName}</td>
               </tr>
             ))}
         </tbody>
@@ -197,4 +194,4 @@ const PpeAllowanceList = () => {
   );
 };
 
-export default PpeAllowanceList;
+export default PnbrList;

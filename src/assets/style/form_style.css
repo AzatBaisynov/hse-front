@@ -36,11 +36,15 @@
     width: 885px;
 }
 
+.form__field-content_short {
+    width: 220px;
+}
+
 .form__comment {
     width: 1070px;
     height: 70px;
     border: 1px solid #C8C8C8;
-    padding: 15px;
+    padding: 10px;
 }
 
 .create-doc__checkbox-container {

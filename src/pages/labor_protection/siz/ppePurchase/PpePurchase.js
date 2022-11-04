@@ -1,12 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import "../../../assets/style/siz_table.css";
+import "../../../../assets/style/siz_table.css";
 import { NavLink } from "react-router-dom";
-import filterImage from "../../../assets/images/doc-lict-filter.png";
-import uploadDoc from "../../../assets/images/labor-protecttion-upload-doc.svg";
-import downloadDoc from "../../../assets/images/labor-protecttion-download-doc.svg";
-import { _LINK } from "../../../data/links";
-import loader from "../../../assets/images/loader.gif";
+import filterImage from "../../../../assets/images/doc-lict-filter.png";
+import uploadDoc from "../../../../assets/images/labor-protecttion-upload-doc.svg";
+import downloadDoc from "../../../../assets/images/labor-protecttion-download-doc.svg";
+import { _LINK } from "../../../../data/links";
+import loader from "../../../../assets/images/loader.gif";
 
 const PpePurchase = () => {
   const [file, setFile] = useState({});
