@@ -29,6 +29,9 @@ table {
 /* BASIC CONF */
 @import url("./pagination.css");
 
+body {
+    overflow-x: hidden;
+}
 
 .primary {
     background: #6BA4FB;

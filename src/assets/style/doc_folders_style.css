@@ -5,7 +5,10 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    display: flex;
+    flex-direction: row;
     gap: 60px;
+    align-items: center;
 }
 
 .doc-folder {

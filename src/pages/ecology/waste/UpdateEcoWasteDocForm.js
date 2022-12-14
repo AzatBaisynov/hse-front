@@ -100,6 +100,7 @@ const UpdateEcoWasteDocForm = () => {
 		}
 		try {
 			const { data } = await axios(config)
+			console.log(data);
 
 			if (file1?.name) {
 				const formData = new FormData()

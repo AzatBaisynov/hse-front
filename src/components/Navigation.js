@@ -29,8 +29,8 @@ function Navigation() {
                 <Link to="/info"><p className="sidebar__module-title">Инфо для пользователя</p></Link>
                 <a href="#"><img src={reports} alt="reports" /></a>
                 <p className="sidebar__module-title">Отчеты</p>
-                <a href="#"><img src={laborSafety} alt="labor-protection" /></a>
-                <p className="sidebar__module-title">Охрана труда </p>
+                <Link to="/labor_protection/folders/8/nest/0"><img src={laborSafety} alt="labor-protection" /></Link>
+                <Link to="/labor_protection/folders/8/nest/0"><p className="sidebar__module-title">Охрана труда </p></Link>
                 <Link to="/ecology/folders/3/nest/0"><img src={ecology} alt="ecology" /></Link>
                 <Link to="/ecology/folders/3/nest/0"><p className="sidebar__module-title">Экология</p></Link>
             </aside>

@@ -205,7 +205,7 @@ function DocumentRead() {
 				{/* DOCUMENT UPLOADING  */}
 				<div className="create-doc__field">
 					<div className="create-doc__field-title">Документ</div>
-					<div className="create-doc__upload-file create-doc__field-content" style={{ cursor: "pointer" }} >
+					<div className="create-doc__upload-file form__field-content form__field-content_long" style={{ cursor: "pointer", width: "965px" }} >
 						{ link?.download && (
 							<a href={link?.href} download={link?.download}>
 							<label htmlFor="upload-file" >
