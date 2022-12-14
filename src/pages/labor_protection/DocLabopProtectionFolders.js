@@ -26,7 +26,6 @@ function DocLaborProtectionFolders() {
 				}
 				try {
 					const { data } = await axios(config)
-					console.log(data)
 					setDirs(data)
 				} catch (e) {
 					alert(e)
@@ -41,7 +40,6 @@ function DocLaborProtectionFolders() {
 				}
 				try {
 					const { data } = await axios(config)
-					console.log(data)
 					setDirs(data.dirs)
 				} catch (e) {
 					alert(e)

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
-import "../../../../assets/style/doc_list_style.css";
-import { Paginate } from "../../../../components/Paginate";
-import { _LINK } from "../../../../data/links";
+import "../../../assets/style/doc_list_style.css";
+import { useSelector } from "react-redux/es/exports";
+import { Paginate } from "../../../components/Paginate";
+import { _LINK } from "../../../data/links";
 import axios from "axios";
-import filterImage from "../../../../assets/images/doc-lict-filter.png";
+import filterImage from "../../../assets/images/doc-lict-filter.png";
 
-const PnbrList = () => {
+const TransportTrafficList = () => {
   const [page, setPage] = useState(0);
   const [back, setBack] = useState({});
   const navigate = useNavigate();
@@ -16,29 +17,22 @@ const PnbrList = () => {
 
   useEffect(() => {
     const get = async () => {
-      console.log("hello 222");
       const config = {
         method: "get",
-        url: `${_LINK}/v1/api/labor/dir/47`,
+        url: `${_LINK}/v1/api/labor/dir/60`,
         headers: {
           Authorization: localStorage.getItem("token"),
         },
       };
-      console.log('Hello');
       try {
         const { data } = await axios(config);
         setBack(data);
-        console.log(data);
       } catch (e) {
         alert(e);
       }
     };
     get();
   }, [page]);
-
-  useEffect(() => {
-    console.log(back);
-  })
 
   useEffect(() => {
     if (isOld) {
@@ -54,14 +48,14 @@ const PnbrList = () => {
         <div className="doc-list__buttons">
           <NavLink
             exact
-            to="/labor_protection/folders/8/nest/0"
+            to="/labor_protection/folders/11/nest/0"
             className="go-back-button button-general"
           >
             Назад
           </NavLink>
           <NavLink
             exact
-            to=""
+            to="/labor_protection/transport_traffic_violation"
             className="create-doc-button button-general"
           >
             Создать документ
@@ -154,9 +148,14 @@ const PnbrList = () => {
       <table className="doc-table">
         <tbody>
           <tr className="doc-table__row doc-table__row_titles">
-            <td>Имя документа</td>
+            <td>Имя файла</td>
             <td>Код документа</td>
-            <td>Отчетный период</td>
+            <td>Дата</td>
+            <td>Регион</td>
+            <td>Подразделение</td>
+            <td>ФИО водителя</td>
+            <td>Гос номер машины</td>
+            <td>Наличие пострадавших</td>
           </tr>
 
           {
@@ -166,16 +165,19 @@ const PnbrList = () => {
                 id={idx}
                 onContextMenu={(e) => {
                   e.preventDefault();
-                  console.log("hello world");
                 }}
                 onClick={(e) => {
-                  console.log(key);
-                  navigate(`/labor/siz/allowance/get/${back[key].id}`, { replace: true });
+                  navigate(`/labor/transport/traffic/get/${back[key].id}`, { replace: true });
                 }}
               >
-                <td>Статистика отчетов (сводная) по ПНБ и ПНБВ</td>
+                <td>Информация по ДТП</td>
                 <td>{back[key]?.id}</td>
                 <td>{back[key]?.dateFull}</td>
+                <td>{back[key]?.location}</td>
+                <td>{back[key]?.divisionName}</td>
+                <td>{back[key]?.employeeFullName}</td>
+                <td>{back[key]?.licensePlate}</td>
+                <td>{back[key]?.hasVictims}</td>
               </tr>
             ))}
         </tbody>
@@ -194,4 +196,4 @@ const PnbrList = () => {
   );
 };
 
-export default PnbrList;
+export default TransportTrafficList;

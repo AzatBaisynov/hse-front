@@ -15,12 +15,17 @@
     width: 100%;
     text-align: left;
     overflow-x: auto;
+    display: flex;
 }
 
 .ensk-table {
     width: 100%;
     font-size: 12px;
     color: #606060;
+}
+
+.ensk-table__division {
+    width: 300px;
 }
 
 .ensk-table th {
@@ -84,4 +89,14 @@
     border: none;
     height: 30px;
     padding: 10px;
+}
+
+.head-panel__title {
+    color: #3273AE;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.head-panel__week {
+    height: 25px;
 }

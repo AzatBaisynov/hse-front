@@ -4,42 +4,51 @@ import { useSelector } from "react-redux";
 import { _LINK } from "../../../../data/links";
 import "../../../../assets/style/pnbr.css";
 
-const Pnbr = () => {
-  // const [file, setFile] = useState({})
+const PnbStatistics = () => {
   const [document, setDocument] = useState({});
   const { dirId } = useSelector((store) => store.files);
-  
-  useEffect(() => {
-    console.log(dirId);
-  }, []);
-
-  // const handleSelectFiles = (e) => {
-  // 	setFile(e.target.files[0])
-  // }
 
   const handleInput = (e) => {
     const { id, value } = e.target;
     switch (id) {
-      case "dateFull":
-        setDocument({ ...document, dateFull: value });
+      case "almatyComment":
+        setDocument({ ...document, almatyComment: value });
         break;
-      case "employeeFullName":
-        setDocument({ ...document, employeeFullName: value });
+      case "tarazComment":
+        setDocument({ ...document, tarazComment: value });
         break;
-      case "position":
-        setDocument({ ...document, position: value });
+      case "shymkentComment":
+        setDocument({ ...document, shymkentComment: value });
         break;
-      case "divisionName":
-        setDocument({ ...document, divisionName: value });
+      case "pnbvCaComment":
+        setDocument({ ...document, pnbvCaComment: value });
         break;
-      case "divisionCode":
-        setDocument({ ...document, divisionCode: value });
+      case "pnbvAlmatyComment":
+        setDocument({ ...document, pnbvAlmatyComment: value });
         break;
-      case "issuancePeriod":
-        setDocument({ ...document, issuancePeriod: value });
+      case "pnbvTarazComment":
+        setDocument({ ...document, pnbvTarazComment: value });
+        break;
+      case "pnbvShymkentComment":
+        setDocument({ ...document, pnbvShymkentComment: value });
+        break;
+      case "pnbvShymkentComment":
+        setDocument({ ...document, pnbvShymkentComment: value });
         break;
       case "comment":
         setDocument({ ...document, comment: value });
+        break;
+      case "startDatePnbr":
+        setDocument({ ...document, startDatePnbr: value });
+        break;
+      case "startDatePnbv":
+        setDocument({ ...document, startDatePnbv: value });
+        break;
+      case "endDatePnbr":
+        setDocument({ ...document, endDatePnbr: value });
+        break;
+      case "endDatePnbv":
+        setDocument({ ...document, endDatePnbv: value });
         break;
     }
   };
@@ -48,7 +57,6 @@ const Pnbr = () => {
     e.preventDefault();
     const doc = document;
     doc.dir = { id: dirId };
-    console.log(document);
     const config = {
       method: "POST",
       url: `${_LINK}/v1/api/labor/create/update`,
@@ -58,10 +66,8 @@ const Pnbr = () => {
       },
       data: JSON.stringify(document),
     };
-    console.log(dirId);
     try {
       const { data } = await axios(config);
-      console.log(data);
       alert("Запись добавлена");
     } catch (e) {
       alert(e);
@@ -90,6 +96,7 @@ const Pnbr = () => {
               name="startDatePnbr"
               id="startDatePnbr"
               className="form__field-content form__field-content_short"
+              onInput={handleInput}
             />
           </div>
           <div className="form__field">
@@ -101,6 +108,7 @@ const Pnbr = () => {
               name="endDatePnbr"
               id="endDatePnbr"
               className="form__field-content form__field-content_short"
+              onInput={handleInput}
             />
           </div>
         </div>
@@ -125,44 +133,44 @@ const Pnbr = () => {
             <tr>
               <td className="pnbr-table__num">1</td>
               <td className="pnbr-table__cs">УТГ Алматы</td>
-              <td />
-              <td />
-              <td />
-              <td />
-              <td />
-              <td />
-              <td contentEditable="true" />
+              <td><input type="text" id="almatyPlan" value={document?.almatyPlan}/></td>
+              <td><input type="text" id="almatyOutPlan" value={document?.almatyOutPlan}/></td>
+              <td><input type="text" id="almatyFact" value={document?.almatyFact}/></td>
+              <td><input type="text" id="almatySafe" value={document?.almatySafe}/></td>
+              <td><input type="text" id="almatyDanger" value={document?.almatyDanger}/></td>
+              <td><input type="text" id="almatyNone" value={document?.almatyNone}/></td>
+              <td><textarea type="text" id="almatyComment" onInput={handleInput}/></td>
             </tr>
             <tr>
               <td className="pnbr-table__num">2</td>
               <td className="pnbr-table__cs">УТГ Тараз</td>
-              <td />
-              <td />
-              <td />
-              <td />
-              <td />
-              <td />
-              <td contentEditable="true" />
+              <td><input type="text" id="tarazPlan" value={document?.tarazPlan}/></td>
+              <td><input type="text" id="tarazOutPlan" value={document?.tarazOutPlan}/></td>
+              <td><input type="text" id="tarazFact" value={document?.tarazFact}/></td>
+              <td><input type="text" id="tarazSafe" value={document?.tarazSafe}/></td>
+              <td><input type="text" id="tarazDanger" value={document?.tarazDanger}/></td>
+              <td><input type="text" id="tarazNone" value={document?.tarazNone}/></td>
+              <td><textarea type="text" id="tarazComment" onInput={handleInput} /></td>
             </tr>
             <tr>
               <td className="pnbr-table__num">3</td>
               <td className="pnbr-table__cs">УТГ Шымкент</td>
-              <td />
-              <td />
-              <td />
-              <td />
-              <td />
-              <td />
-              <td contentEditable="true" />
+              <td><input type="text" id="shymkentPlan" value={document?.shymkentPlan}/></td>
+              <td><input type="text" id="shymkentOutPlan" value={document?.shymkentOutPlan}/></td>
+              <td><input type="text" id="shymkentFact" value={document?.shymkentFact}/></td>
+              <td><input type="text" id="shymkentSafe" value={document?.shymkentSafe}/></td>
+              <td><input type="text" id="shymkentDanger" value={document?.shymkentDanger}/></td>
+              <td><input type="text" id="shymkentNone" value={document?.shymkentNone}/></td>
+              <td><textarea type="text" id="shymkentComment" onInput={handleInput}/></td>
             </tr>
             <tr className="pnbr-table__total">
               <td colSpan={2}>Всего:</td>
-              <td />
-              <td />
-              <td />
-              <td />
-              <td />
-              <td />
+              <td><input type="text" id="planTotal" value={document?.planTotal}/></td>
+              <td><input type="text" id="outPlanTotal" value={document?.outPlanTotal}/></td>
+              <td><input type="text" id="factTotal" value={document?.factTotal}/></td>
+              <td><input type="text" id="safeTotal" value={document?.safeTotal}/></td>
+              <td><input type="text" id="dangerTotal" value={document?.dangerTotal}/></td>
+              <td><input type="text" id="noneTotal" value={document?.noneTotal}/></td>
               <td />
             </tr>
           </tbody>
@@ -181,6 +189,7 @@ const Pnbr = () => {
               name="startDatePnbv"
               id="startDatePnbv"
               className="form__field-content form__field-content_short"
+              onInput={handleInput}
             />
           </div>
           <div className="form__field">
@@ -192,6 +201,7 @@ const Pnbr = () => {
               name="endDate"
               id="endDatePnbv"
               className="form__field-content form__field-content_short"
+              onInput={handleInput}
             />
           </div>
         </div>
@@ -216,55 +226,55 @@ const Pnbr = () => {
             <tr>
               <td className="pnbr-table__num">1</td>
               <td className="pnbr-table__cs">ЦА</td>
-              <td />
-              <td />
-              <td />
-              <td />
-              <td />
-              <td />
-              <td contentEditable="true" />
+              <td><input type="text" id="pnbvCaPlan" value={document?.pnbvCaPlan}/></td>
+              <td><input type="text" id="pnbvCaOutPlan" value={document?.pnbvCaOutPlan}/></td>
+              <td><input type="text" id="pnbvCaFact" value={document?.pnbvCaFact}/></td>
+              <td><input type="text" id="pnbvCaSafe" value={document?.pnbvCaSafe}/></td>
+              <td><input type="text" id="pnbvCaDanger" value={document?.pnbvCaDanger}/></td>
+              <td><input type="text" id="pnbvCaNone" value={document?.pnbvCaNone}/></td>
+              <td><textarea type="text" id="pnbvCaComment" onInput={handleInput}/></td>
             </tr>
             <tr>
               <td className="pnbr-table__num">2</td>
               <td className="pnbr-table__cs">УТГ Алматы</td>
-              <td />
-              <td />
-              <td />
-              <td />
-              <td />
-              <td />
-              <td contentEditable="true" />
+              <td><input type="text" id="pnbvAlmatyPlan" value={document?.pnbvAlmatyPlan}/></td>
+              <td><input type="text" id="pnbvAlmatyOutPlan" value={document?.pnbvAlmatyOutPlan}/></td>
+              <td><input type="text" id="pnbvAlmatyFact" value={document?.pnbvAlmatyFact}/></td>
+              <td><input type="text" id="pnbvAlmatySafe" value={document?.pnbvAlmatySafe}/></td>
+              <td><input type="text" id="pnbvAlmatyDanger" value={document?.pnbvAlmatyDanger}/></td>
+              <td><input type="text" id="pnbvAlmatyNone" value={document?.pnbvAlmatyNone}/></td>
+              <td><textarea type="text" id="pnbvAlmatyComment" onInput={handleInput}/></td>
             </tr>
             <tr>
               <td className="pnbr-table__num">3</td>
               <td className="pnbr-table__cs">УТГ Тараз</td>
-              <td />
-              <td />
-              <td />
-              <td />
-              <td />
-              <td />
-              <td contentEditable="true" />
+              <td><input type="text" id="pnbvTarazPlan" value={document?.pnbvTarazPlan}/></td>
+              <td><input type="text" id="pnbvTarazOutPlan" value={document?.pnbvTarazOutPlan}/></td>
+              <td><input type="text" id="pnbvTarazFact" value={document?.pnbvTarazFact}/></td>
+              <td><input type="text" id="pnbvTarazSafe" value={document?.pnbvTarazSafe}/></td>
+              <td><input type="text" id="pnbvTarazDanger" value={document?.pnbvTarazDanger}/></td>
+              <td><input type="text" id="pnbvTarazNone" value={document?.pnbvTarazNone}/></td>
+              <td><textarea type="text" id="pnbvTarazComment" onInput={handleInput}/></td>
             </tr>
             <tr>
               <td className="pnbr-table__num">4</td>
               <td className="pnbr-table__cs">УТГ Шымкент</td>
-              <td />
-              <td />
-              <td />
-              <td />
-              <td />
-              <td />
-              <td contentEditable="true" />
+              <td><input type="text" id="pnbvShymkentPlan" value={document?.pnbvShymkentPlan}/></td>
+              <td><input type="text" id="pnbvShymkentOutPlan" value={document?.pnbvShymkentOutPlan}/></td>
+              <td><input type="text" id="pnbvShymkentFact" value={document?.pnbvShymkentFact}/></td>
+              <td><input type="text" id="pnbvShymkentSafe" value={document?.pnbvShymkentSafe}/></td>
+              <td><input type="text" id="pnbvShymkentDanger" value={document?.pnbvShymkentDanger}/></td>
+              <td><input type="text" id="pnbvShymkentNone" value={document?.pnbvShymkentNone}/></td>
+              <td><textarea type="text" id="pnbvShymkentComment" onInput={handleInput}/></td>
             </tr>
             <tr className="pnbr-table__total">
               <td colSpan={2}>Всего:</td>
-              <td />
-              <td />
-              <td />
-              <td />
-              <td />
-              <td />
+              <td><input type="text" id="pnbvPlanTotal" value={document?.pnbvPlanTotal}/></td>
+              <td><input type="text" id="pnbvOutPlanTotal" value={document?.pnbvOutPlanTotal}/></td>
+              <td><input type="text" id="pnbvFactTotal" value={document?.pnbvFactTotal}/></td>
+              <td><input type="text" id="pnbvSafeTotal" value={document?.pnbvSafeTotal}/></td>
+              <td><input type="text" id="pnbvDangerTotal" value={document?.pnbvDangerTotal}/></td>
+              <td><input type="text" id="pnbvNoneTotal" value={document?.pnbvNoneTotal}/></td>
               <td />
             </tr>
           </tbody>
@@ -284,7 +294,7 @@ const Pnbr = () => {
           className="form__comment"
           style={{width: '100%'}}
           placeholder="Comment"
-          defaultValue={""}
+          onInput={handleInput}
         />
         {/* Prepared by */}
         <p
@@ -323,10 +333,25 @@ const Pnbr = () => {
             />
           </div>
         </div>
+        {/* ADDITION BUTTON */}
+        <div className="create-doc__buttons">
+          <a
+            href="./utilization_contracts_doc_list.html"
+            className="create-doc__cancel-button create-doc__button-text"
+          >
+            Отменить
+          </a>
+          <button
+            type="submit"
+            className="create-doc__button create-doc__button-text"
+          onClick={handleSend}>
+            Отправить
+          </button>
+        </div>
       </div>
     </div>
 
   );
 };
 
-export default Pnbr;
+export default PnbStatistics;

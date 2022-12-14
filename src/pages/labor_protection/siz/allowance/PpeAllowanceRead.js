@@ -7,16 +7,10 @@ import { _LINK } from "../../../../data/links";
 import { downloadFile } from "../../../../data/downloader";
 
 const PpeAllowanceRead = () => {
-  const [file, setFile] = useState({});
   const [document, setDocument] = useState({});
   const { id } = useParams();
   const navigate = useNavigate();
-  const { dirId } = useSelector((store) => store.files);
   const [link, setLink] = useState({});
-
-  const handleSelectFiles = (e) => {
-    setFile(e.target.files[0]);
-  };
 
   useEffect(() => {
     const getDocument = async () => {
@@ -27,17 +21,14 @@ const PpeAllowanceRead = () => {
           Authorization: localStorage.getItem("token"),
         },
       };
-      console.log(config);
       try {
         const { data } = await axios(config);
-        console.log(data);
         setDocument(data);
         const l = await downloadFile(
-          `${_LINK}/v1/api/file/${data?.uploadFile[0].name}`,
-          data?.uploadFile[0].name
+          `${_LINK}/v1/api/file/${data?.uploadFile[0]?.name}`,
+          data?.uploadFile[0]?.name
         );
         setLink(l);
-        console.log(l);
       } catch (e) {
         alert(e);
       }
@@ -78,7 +69,7 @@ const PpeAllowanceRead = () => {
           <div className="form__field-title">Наименование документа</div>
           <input
             type="text"
-            name="docName"
+            name="documentName"
             id="docName"
             className="form__field-content form__field-content_long"
             value={document?.docName}
@@ -100,7 +91,7 @@ const PpeAllowanceRead = () => {
                       style={{ cursor: "pointer" }}
                     />
                     <span style={{ cursor: "pointer" }}>
-                      {document?.uploadFile[0].name ||
+                      {document?.uploadFile[0]?.name ||
                         "Нажмите или перетащите файл для загрузки"}
                     </span>
                   </span>

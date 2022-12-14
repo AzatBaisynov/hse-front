@@ -11,17 +11,11 @@ const PpeAllowance = () => {
 	const [document, setDocument] = useState({})
 	const { dirId } = useSelector((store) => store.files)
 
-  console.log(dirId);
-
 	const handleSelectFiles = (e) => {
 		setFile1(e.target.files[0]);
 		setFile2(e.target.files[0]);
 		setFile3(e.target.files[0]);
 	}
-
-  console.log(file1);
-  console.log(file2);
-  console.log(file3);
 
 	const handleInput = (e) => {
 		const { id, value } = e.target
@@ -41,7 +35,6 @@ const PpeAllowance = () => {
     e.preventDefault();
     const doc = document;
     doc.dir = { id: dirId };
-    console.log(document);
     const config = {
       method: "POST",
       url: `${_LINK}/v1/api/labor/create/update`,
@@ -51,10 +44,8 @@ const PpeAllowance = () => {
       },
       data: JSON.stringify(document),
     };
-    console.log(dirId);
     try {
       const { data } = await axios(config);
-      console.log(data);
       if (file1?.name) {
 				const formData = new FormData()
 				formData.append(

@@ -28,7 +28,6 @@ const PpeAllowanceEdit = () => {
       };
       try {
         const { data } = await axios(config);
-        console.log(data);
         setDocument(data);
       } catch (e) {
         alert(e);
@@ -59,7 +58,6 @@ const PpeAllowanceEdit = () => {
     e.preventDefault();
     const doc = document;
     doc.dir = { id: dirId };
-    console.log(document);
     const config = {
       method: "POST",
       url: `${_LINK}/v1/api/labor/create/update`,
@@ -69,10 +67,8 @@ const PpeAllowanceEdit = () => {
       },
       data: JSON.stringify(document),
     };
-    console.log(dirId);
     try {
       const { data } = await axios(config);
-      console.log(data);
       if (file?.name) {
 				const formData = new FormData()
 				formData.append(
@@ -80,7 +76,6 @@ const PpeAllowanceEdit = () => {
 					file,
 					file.name
 				)
-        console.log(formData);
 				try {
 					await axios.post(`${_LINK}/v1/api/labor/file/${data.id}`, formData, {
 						headers: {
@@ -130,7 +125,7 @@ const PpeAllowanceEdit = () => {
           <div className="form__field-title">Наименование документа</div>
           <input
             type="text"
-            name="docName"
+            name="documentName"
             id="docName"
             className="form__field-content form__field-content_long"
             value={document?.docName} onInput={handleInput}

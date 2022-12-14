@@ -22,7 +22,6 @@ const PpeIssuanceCard = () => {
       };
       try {
         const { data } = await axios(config);
-        console.log(data);
         setDocument(data);
       } catch (e) {
         alert(e);
@@ -30,6 +29,7 @@ const PpeIssuanceCard = () => {
     };
     getDocument();
   }, []);
+  
   return (
     <>
       <div className="table-container">

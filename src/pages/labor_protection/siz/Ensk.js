@@ -32,12 +32,11 @@ const Ensk = () => {
       if (file?.name) {
         const formData = new FormData();
         formData.append("file", file, file.name);
-        console.log(formData);
         runLoader(true);
         try {
           await axios.post(`${_LINK}/v1/api/file/excel?skip=1&type=1&date=2022-10-12`, formData, {
             headers: {
-              
+              "Authorization": localStorage.getItem("token")
             },
           })
         } catch(e) {
@@ -71,10 +70,6 @@ const Ensk = () => {
   },
   []
   )
-
-  useEffect(() => {
-    console.log(excel);
-  })
 
   function createTable() {
     const table = excel.excelRows?.map((row) => (

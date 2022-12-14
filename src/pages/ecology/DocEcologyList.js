@@ -73,7 +73,7 @@ const DocEcologyList = () => {
 					<span class="go-back-button button-general" onClick={() => { navigate(-1) }}>Назад</span>
 					{(+id === 10 || +id === 11 || +id === 12 || +id === 37 || +id === 33) && <NavLink exact to="/ecology/create" className="create-doc-button button-general">Создать документ</NavLink>}
 					{(+id > 12 && +id < 21 ) && <NavLink exact to="/ecology/util/create" className="create-doc-button button-general">Создать документ</NavLink>}
-					{(+id === 22 || (+id === 26) || +id === 29 || +id === 35) && <NavLink exact to="/ecology/plan/create" className="create-doc-button button-general">Создать документ</NavLink>}
+					{(+id === 22 || +id === 23 || +id === 24 || (+id === 26) || +id === 29 || +id === 35) && <NavLink exact to="/ecology/plan/create" className="create-doc-button button-general">Создать документ</NavLink>}
 					{(+id === 27 || +id === 30  || +id === 34) && <NavLink exact to="/ecology/plan2/create" className="create-doc-button button-general">Создать документ</NavLink>}
 					{(+id === 28 || +id === 31 || +id === 36) && <NavLink exact to="/ecology/plan3/create" className="create-doc-button button-general">Создать документ</NavLink>}
 					{(+id === 32) && <NavLink exact to="/ecology/ovoc/create" className="create-doc-button button-general">Создать документ</NavLink>}
@@ -175,7 +175,7 @@ const DocEcologyList = () => {
 									console.log(el)
 									if (+id === 10 || +id === 11 || +id === 12) navigate(`/ecology/get/${el.id}`, { replace: true })
 									if (+id > 12 && +id < 21)  navigate(`/ecology/util/get/${el.id}`, { replace: true })
-									if (+id === 22 || +id === 26 || +id === 29) navigate(`/ecology/plan2/get/${el.id}`, { replace: true })
+									if (+id === 22 || +id === 23 || +id === 24 || +id === 26 || +id === 29) navigate(`/ecology/plan/get/${el.id}`, { replace: true })
 									if (+id === 27 ) navigate(`/ecology/plan2/get/${el.id}`, { replace: true })
 									if (+id === 28) navigate(`/ecology/plan3/get/${el.id}`, { replace: true })
 								}}
@@ -207,7 +207,7 @@ const DocEcologyList = () => {
 									console.log(el)
 									if (+id === 10 || +id === 11 || +id === 12) navigate(`/ecology/get/${el.id}`, { replace: true })
 									if (+id > 12 && +id < 21) navigate(`/ecology/util/get/${el.id}`, { replace: true })
-									if (+id === 22 || +id === 26 || +id === 29) navigate(`/ecology/plan2/get/${el.id}`, { replace: true })
+									if (+id === 22 || +id === 23 || +id === 24 || +id === 26 || +id === 29) navigate(`/ecology/plan/get/${el.id}`, { replace: true })
 									if (+id === 27) navigate(`/ecology/plan2/get/${el.id}`, { replace: true })
 									if (+id === 28) navigate(`/ecology/plan3/get/${el.id}`, { replace: true })
 									if (+id === 32) navigate(`/ecology/ovoc/get/${el.id}`, { replace: true })

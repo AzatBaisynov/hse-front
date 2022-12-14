@@ -17,7 +17,6 @@ const PpeAllowanceList = () => {
 
   useEffect(() => {
     const get = async () => {
-      console.log("hello 222");
       const config = {
         method: "get",
         url: `${_LINK}/v1/api/labor/dir/45`,
@@ -25,11 +24,9 @@ const PpeAllowanceList = () => {
           Authorization: localStorage.getItem("token"),
         },
       };
-      console.log('Hello');
       try {
         const { data } = await axios(config);
         setBack(data);
-        console.log(data);
       } catch (e) {
         alert(e);
       }
@@ -38,7 +35,6 @@ const PpeAllowanceList = () => {
   }, [page]);
 
   useEffect(() => {
-    console.log(back);
   })
 
   useEffect(() => {
@@ -168,10 +164,8 @@ const PpeAllowanceList = () => {
                 id={idx}
                 onContextMenu={(e) => {
                   e.preventDefault();
-                  console.log("hello world");
                 }}
                 onClick={(e) => {
-                  console.log(key);
                   navigate(`/labor/siz/allowance/get/${back[key].id}`, { replace: true });
                 }}
               >

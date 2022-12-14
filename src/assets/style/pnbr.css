@@ -7,22 +7,6 @@
   font-size: 14px;
 }
 
-/* INPUT TITLE */
-.create-doc__subtitle {
-  font-weight: 400;
-  text-align: center;
-  font-size: 16px;
-  margin: 45px 0 35px;
-}
-
-.form__field-title_blue {
-  background-color: #e0e9f2;
-  color: #3273ae;
-  font-weight: 600;
-  border: 1px solid #9abad7;
-  font-size: 12px;
-}
-
 /* PNBR TABLE */
 .pnbr-table {
   font-size: 12px;
@@ -48,7 +32,7 @@
   border: 1px solid #d1d1d1;
   height: 30px;
   color: #303030;
-  padding: 10px;
+  padding: 0 10px;
 }
 
 .pnbr-table td:not(:first-child, :last-child) {
@@ -58,6 +42,15 @@
 .pnbr-table td:last-child {
     width: 220px;
     max-width: 220px;
+}
+
+.pnbr-table input, textarea {
+  border: none;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  background-color: inherit;
+  font-weight: inherit;
 }
 
 .pnbr-table__cs {

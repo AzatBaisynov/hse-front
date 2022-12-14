@@ -9,13 +9,9 @@ const PurchaseRequestMessage = () => {
 	const [document, setDocument] = useState({})
 	const { dirId } = useSelector((store) => store.files)
 
-  console.log(dirId);
-
 	const handleSelectFiles = (e) => {
 		setFile(e.target.files[0])
 	}
-
-  console.log(file);
 
 	const handleInput = (e) => {
 		const { id, value } = e.target
@@ -35,7 +31,6 @@ const PurchaseRequestMessage = () => {
     e.preventDefault();
     const doc = document;
     doc.dir = { id: dirId };
-    console.log(document);
     const config = {
       method: "POST",
       url: `${_LINK}/v1/api/labor/create/update`,
@@ -45,10 +40,8 @@ const PurchaseRequestMessage = () => {
       },
       data: JSON.stringify(document),
     };
-    console.log(dirId);
     try {
       const { data } = await axios(config);
-      console.log(data);
       if (file?.name) {
 				const formData = new FormData()
 				formData.append(

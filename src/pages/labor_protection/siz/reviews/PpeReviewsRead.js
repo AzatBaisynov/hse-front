@@ -19,7 +19,6 @@ const PpeReviewsRead = () => {
       };
       try {
         const { data } = await axios(config);
-        console.log(data);
         setDocument(data);
       } catch (e) {
         alert(e);
@@ -79,11 +78,6 @@ const PpeReviewsRead = () => {
             className="form__field-content form__field-content_long"
             value={document?.ppeName}
           />
-          <datalist id="ppeName">
-            <option value={1}>1</option>
-            <option value={2}>2</option>
-            <option value={3}>3</option>
-          </datalist>
         </div>
         {/* COMMENT */}
         <textarea

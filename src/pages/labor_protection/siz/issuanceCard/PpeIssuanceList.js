@@ -17,7 +17,6 @@ const PpeReviewsList = () => {
 
   useEffect(() => {
     const get = async () => {
-      console.log("hello 222");
       const config = {
         method: "get",
         url: `${_LINK}/v1/api/labor/dir/44`,
@@ -25,21 +24,15 @@ const PpeReviewsList = () => {
           Authorization: localStorage.getItem("token"),
         },
       };
-      console.log('Hello');
       try {
         const { data } = await axios(config);
         setBack(data);
-        console.log(data);
       } catch (e) {
         alert(e);
       }
     };
     get();
   }, [page]);
-
-  useEffect(() => {
-    console.log(back);
-  })
 
   useEffect(() => {
     if (isOld) {
@@ -163,10 +156,8 @@ const PpeReviewsList = () => {
                 id={idx}
                 onContextMenu={(e) => {
                   e.preventDefault();
-                  console.log("hello world");
                 }}
                 onClick={(e) => {
-                  console.log(key);
                   navigate(`/labor/siz/issuance/get/${back[key].id}`, { replace: true });
                 }}
               >

@@ -18,10 +18,8 @@
 
 .create-doc__form {
     margin-top: 40px;
-    max-width: 1070px;
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 20px;
 }
 
@@ -191,7 +189,7 @@
 /* ADDITION BUTTON */
 
 .form__fields-comment {
-    width: 1070px;
+    width: 100%;
     /* height: 154px; */
     display: flex;
     flex-direction: row;

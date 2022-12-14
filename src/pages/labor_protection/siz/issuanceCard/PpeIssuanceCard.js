@@ -67,7 +67,6 @@ const PpeIssuanceCard = () => {
     e.preventDefault();
     const doc = document;
     doc.dir = { id: dirId };
-    console.log(document);
     const config = {
       method: "POST",
       url: `${_LINK}/v1/api/labor/create/update`,
@@ -77,10 +76,8 @@ const PpeIssuanceCard = () => {
       },
       data: JSON.stringify(document),
     };
-    console.log(dirId);
     try {
       const { data } = await axios(config);
-      console.log(data);
       alert("Запись добавлена");
     } catch (e) {
       alert(e);

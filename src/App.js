@@ -49,10 +49,41 @@ import PpeAllowanceEdit from './pages/labor_protection/siz/allowance/PpeAllowanc
 import PpeIssuanceList from './pages/labor_protection/siz/issuanceCard/PpeIssuanceList';
 import PpeIssuanceRead from './pages/labor_protection/siz/issuanceCard/PpeIssuanceRead'
 import PpeIssuanceEdit from './pages/labor_protection/siz/issuanceCard/PpeIssuanceEdit'
-import PnbrList from './pages/labor_protection/pnb/pnbr/PnbrList'
-import Pnbr from './pages/labor_protection/pnb/pnbr/Pnbr'
+import PnbrList from './pages/labor_protection/pnb/pnbr/PnbStatList'
+import Pnbr from './pages/labor_protection/pnb/pnbr/PnbStatistics'
 import PnbrCard from './pages/labor_protection/pnb/pnbrCard/PnbrCard'
-import PnbvCard from './pages/labor_protection/pnb/pnbrCard/PnbvCard'
+import PnbvCard from './pages/labor_protection/pnb/pnbvCard/PnbvCard'
+import ScheduleYear from './pages/labor_protection/pnb/schedule/ScheduleYear'
+import ScheduleMonth from './pages/labor_protection/pnb/schedule/ScheduleMonth'
+import ScheduleWeek from './pages/labor_protection/pnb/schedule/ScheduleWeek';
+import ScheduleYearFolders from './pages/labor_protection/pnb/schedule/ScheduleYearFolders';
+import PnbStatistics from './pages/labor_protection/pnb/pnbr/PnbStatistics';
+import PnbStatList from './pages/labor_protection/pnb/pnbr/PnbStatList';
+import PnbStatisticsRead from './pages/labor_protection/pnb/pnbr/PnbStatisticsRead';
+import PnbrCardList from './pages/labor_protection/pnb/pnbrCard/PnbrCardList';
+import PnbvCardList from './pages/labor_protection/pnb/pnbvCard/PnbvCardList';
+import FactLoggingYear from './pages/labor_protection/pnb/fact_logging/FactLoggingYear';
+import FactLoggingMonth from './pages/labor_protection/pnb/fact_logging/FactLoggingMonth';
+import FactLoggingWeek from './pages/labor_protection/pnb/fact_logging/FactLoggingWeek';
+import PnbvScheduleYear from './pages/labor_protection/pnb/schedule/PnbvScheduleYear';
+import PnbvScheduleMonth from './pages/labor_protection/pnb/schedule/PnbvScheduleMonth';
+import PnbvScheduleWeek from './pages/labor_protection/pnb/schedule/PnbvScheduleWeek';
+import PnbvFactLoggingYear from './pages/labor_protection/pnb/fact_logging/PnbvFactLoggingYear';
+import PnbvFactLoggingMonth from './pages/labor_protection/pnb/fact_logging/PnbvFactLoggingMonth';
+import PnbvFactLoggingWeek from './pages/labor_protection/pnb/fact_logging/PnbvFactLoggingWeek';
+import TransportAccidentsCreate from './pages/labor_protection/transport/TransportAccidentsCreate';
+import TransportTrafficViolationCreate from './pages/labor_protection/transport/TransportTrafficViolationCreate';
+import TransportTrafficViolationEdit from './pages/labor_protection/transport/TransportTrafficViolationEdit';
+import TransportAccidentsList from './pages/labor_protection/transport/TransportAccidentsList';
+import TransportAccidentsRead from './pages/labor_protection/transport/TransportAccidentsRead';
+import TransportTrafficViolationRead from './pages/labor_protection/transport/TransportTrafficViolationRead';
+import TransportAccidentsEdit from './pages/labor_protection/transport/TransportAccidentsEdit';
+import TransportTrafficList from './pages/labor_protection/transport/TransportTrafficList';
+import TransportFuelConsumption from './pages/labor_protection/transport/TransportFuelConsumption';
+import TransportList from './pages/labor_protection/transport/TransportList';
+import ContractorCard from './pages/labor_protection/contractorManagement/ContractorCard';
+import PnbrCardRead from './pages/labor_protection/pnb/pnbrCard/PnbrCardRead';
+import PnbvCardRead from './pages/labor_protection/pnb/pnbvCard/PnbvCardRead';
 
 function App() {
   const { isAuth } = useSelector(store => store.login)
@@ -108,10 +139,44 @@ function App() {
           <Route exact path="/labor_protection/list/44" element={<MainLaborProtection><PpeIssuanceList/></MainLaborProtection>} />
           <Route exact path="/labor/siz/issuance/get/:id" element={<MainLaborProtection><PpeIssuanceRead/></MainLaborProtection>} />
           <Route exact path="/labor/siz/issuance/edit/:id" element={<MainLaborProtection><PpeIssuanceEdit/></MainLaborProtection>} />
-          <Route exact path="/labor_protection/list/47" element={<MainLaborProtection><PnbrList/></MainLaborProtection>} />
-          <Route exact path="/labor_protection/pnbr" element={<MainLaborProtection><Pnbr/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/list/57" element={<MainLaborProtection><PnbStatList/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/pnb_statistics" element={<MainLaborProtection><PnbStatistics/></MainLaborProtection>} />
           <Route exact path="/labor_protection/pnbr_card" element={<MainLaborProtection><PnbrCard/></MainLaborProtection>} />
           <Route exact path="/labor_protection/pnbv_card" element={<MainLaborProtection><PnbvCard/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/pnb_schedule_year" element={<MainLaborProtection><ScheduleYear/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/list/50" element={<MainLaborProtection><ScheduleYearFolders/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/list/51" element={<MainLaborProtection><ScheduleYearFolders/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/list/49" element={<MainLaborProtection><ScheduleYearFolders/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/list/53" element={<MainLaborProtection><ScheduleYearFolders/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/list/54" element={<MainLaborProtection><ScheduleYearFolders/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/list/55" element={<MainLaborProtection><ScheduleYearFolders/></MainLaborProtection>} />
+          <Route exact path="/labor/pnb/get/:id" element={<MainLaborProtection><PnbStatisticsRead/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/list/47" element={<MainLaborProtection><PnbrCardList/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/list/48" element={<MainLaborProtection><PnbvCardList/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/pnb_schedule_month" element={<MainLaborProtection><ScheduleMonth/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/pnb_schedule_week" element={<MainLaborProtection><ScheduleWeek/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/pnb_fact_year" element={<MainLaborProtection><FactLoggingYear/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/pnb_fact_month" element={<MainLaborProtection><FactLoggingMonth/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/pnb_fact_week" element={<MainLaborProtection><FactLoggingWeek/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/pnbv_schedule_year" element={<MainLaborProtection><PnbvScheduleYear/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/pnbv_schedule_month" element={<MainLaborProtection><PnbvScheduleMonth/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/pnbv_schedule_week" element={<MainLaborProtection><PnbvScheduleWeek/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/pnbv_fact_year" element={<MainLaborProtection><PnbvFactLoggingYear/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/pnbv_fact_month" element={<MainLaborProtection><PnbvFactLoggingMonth/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/pnbv_fact_week" element={<MainLaborProtection><PnbvFactLoggingWeek/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/transport_accidents" element={<MainLaborProtection><TransportAccidentsCreate/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/transport_traffic_violation" element={<MainLaborProtection><TransportTrafficViolationCreate/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/list/61" element={<MainLaborProtection><TransportAccidentsList/></MainLaborProtection>} />
+          <Route exact path="/labor/transport/accidents/get/:id" element={<MainLaborProtection><TransportAccidentsRead/></MainLaborProtection>} />
+          <Route exact path="/labor/transport/accidents/edit/:id" element={<MainLaborProtection><TransportAccidentsEdit/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/list/60" element={<MainLaborProtection><TransportTrafficList/></MainLaborProtection>} />
+          <Route exact path="/labor/transport/traffic/get/:id" element={<MainLaborProtection><TransportTrafficViolationRead/></MainLaborProtection>} />
+          <Route exact path="/labor/transport/traffic/edit/:id" element={<MainLaborProtection><TransportTrafficViolationEdit/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/list/63" element={<MainLaborProtection><TransportFuelConsumption/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/list/62" element={<MainLaborProtection><TransportList/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/list/69" element={<MainLaborProtection><ContractorCard/></MainLaborProtection>} />
+          <Route exact path="/labor/pnb/pnbr_card/get/:id" element={<MainLaborProtection><PnbrCardRead/></MainLaborProtection>} />
+          <Route exact path="/labor/pnb/pnbv_card/get/:id" element={<MainLaborProtection><PnbvCardRead/></MainLaborProtection>} />
         </Routes>
       </Router>
     );

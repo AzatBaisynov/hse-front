@@ -1,73 +1,33 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { _LINK } from "../../../../data/links";
 import "../../../../assets/style/pnbr_card.css";
 
-const PnbvCard = () => {
-  // const [file, setFile] = useState({})
+const PnbvCardRead = () => {
   const [document, setDocument] = useState({});
-  const { dirId } = useSelector((store) => store.files);
-  
+  const { id } = useParams();
+
   useEffect(() => {
-    console.log(dirId);
-  }, []);
-
-  // const handleSelectFiles = (e) => {
-  // 	setFile(e.target.files[0])
-  // }
-
-  const handleInput = (e) => {
-    const { id, value } = e.target;
-    switch (id) {
-      case "dateFull":
-        setDocument({ ...document, dateFull: value });
-        break;
-      case "employeeFullName":
-        setDocument({ ...document, employeeFullName: value });
-        break;
-      case "position":
-        setDocument({ ...document, position: value });
-        break;
-      case "divisionName":
-        setDocument({ ...document, divisionName: value });
-        break;
-      case "divisionCode":
-        setDocument({ ...document, divisionCode: value });
-        break;
-      case "issuancePeriod":
-        setDocument({ ...document, issuancePeriod: value });
-        break;
-      case "comment":
-        setDocument({ ...document, comment: value });
-        break;
-    }
-  };
-
-  const handleSend = async (e) => {
-    e.preventDefault();
-    const doc = document;
-    doc.dir = { id: dirId };
-    console.log(document);
-    const config = {
-      method: "POST",
-      url: `${_LINK}/v1/api/labor/create/update`,
-      headers: {
-        Authorization: localStorage.getItem("token"),
-        "Content-Type": "application/json",
-      },
-      data: JSON.stringify(document),
+    const getDocument = async () => {
+      const config = {
+        method: "GET",
+        url: `${_LINK}/v1/api/labor/id/${id}`,
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      };
+      try {
+        const { data } = await axios(config);
+        setDocument(data);
+      } catch (e) {
+        alert(e);
+      }
     };
-    console.log(dirId);
-    try {
-      const { data } = await axios(config);
-      console.log(data);
-      alert("Запись добавлена");
-    } catch (e) {
-      alert(e);
-    }
-    alert("Запись добавлена");
-  };
+    getDocument();
+  }, []);
+  
+
 
   return (
     <div className="create-doc-container">
@@ -96,11 +56,11 @@ const PnbvCard = () => {
       {/* Plan and Fact buttons */}
       <div className="card__plan-fact">
         <div>
-          <input type="radio" defaultValue="plan" id="plan" name="schedule" />
+          <input type="radio" defaultValue="plan" id="plan" name="schedule"  checked={document?.plan} />
           <label htmlFor="plan">По графику</label>
         </div>
         <div>
-          <input type="radio" defaultValue="fact" id="fact" name="schedule" />
+          <input type="radio" defaultValue="fact" id="fact" name="schedule" checked={document?.plan} />
           <label htmlFor="plan">Не по графику</label>
         </div>
       </div>
@@ -121,6 +81,7 @@ const PnbvCard = () => {
                 name="employeeFullName"
                 id="employeeFullName"
                 className="card__column-input"
+                value={document?.employeeFullName}
               />
             </div>
             <div className="_horizontal">
@@ -131,6 +92,7 @@ const PnbvCard = () => {
                 name="observerDrivingExperience"
                 id="observerDrivingExperience"
                 className="card__column-input"
+                value={document?.observerDrivingExperience}
               />
             </div>
           </td>
@@ -141,7 +103,7 @@ const PnbvCard = () => {
                 type="text"
                 name="employeeFullName"
                 id="outsourceDivisionName"
-                className="card__column-input"
+                className="card__column-input" value={document?.outsourceDivisionName}
               />
             </div>
           </td>
@@ -155,7 +117,7 @@ const PnbvCard = () => {
                 type="text"
                 name="divisionName"
                 id="divisionName"
-                className="card__column-input"
+                className="card__column-input" value={document?.divisionName}
               />
             </div>
           </td>
@@ -167,7 +129,7 @@ const PnbvCard = () => {
                 type="text"
                 name="observerDrivingExperience"
                 id="driverDrivingExperience"
-                className="card__column-input"
+                className="card__column-input" value={document?.driverDrivingExperience}
               />
             </div>
           </td>
@@ -181,7 +143,7 @@ const PnbvCard = () => {
                 type="date"
                 name="rideDate"
                 id="dateFull"
-                className="card__column-input"
+                className="card__column-input" value={document?.dateFull}
               />
             </div>
           </td>
@@ -193,7 +155,7 @@ const PnbvCard = () => {
                 type="time"
                 name="startTime"
                 id="startTime"
-                className="card__column-input"
+                className="card__column-input" value={document?.startTime}
               />
             </div>
           </td>
@@ -205,7 +167,7 @@ const PnbvCard = () => {
                 type="time"
                 name="endTime"
                 id="endTime"
-                className="card__column-input"
+                className="card__column-input" value={document?.endTime}
               />
             </div>
           </td>
@@ -217,7 +179,7 @@ const PnbvCard = () => {
                 type="text"
                 name="location"
                 id="location"
-                className="card__column-input"
+                className="card__column-input" value={document?.location}
               />
             </div>
           </td>
@@ -245,20 +207,20 @@ const PnbvCard = () => {
             Предпоездковая проверка автомобиля, а также осмотр помех вокруг ТС
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety1" id="" defaultValue="safe" />
+            <input type="radio" name="safety1" id="safe1" defaultValue="safe" checked={document?.safe1}/>
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety1" id="" defaultValue="danger" />
+            <input type="radio" name="safety1" id="danger1" defaultValue="danger" checked={document?.danger1} />
           </td>
         </tr>
         <tr>
           <td>1.2</td>
           <td>Водитель использует ремень безопасности</td>
           <td className="card__table-safety">
-            <input type="radio" name="safety2" id="" defaultValue="safe" />
+            <input type="radio" name="safety2" id="safe2" defaultValue="safe" checked={document?.safe2} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety2" id="" defaultValue="danger" />
+            <input type="radio" name="safety2" id="danger2" defaultValue="danger" checked={document?.danger2} />
           </td>
         </tr>
         <tr>
@@ -267,10 +229,10 @@ const PnbvCard = () => {
             Контролирует использование ремней безопасности всеми пассажирами
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety3" id="" defaultValue="safe" />
+            <input type="radio" name="safety3" id="safe3" defaultValue="safe" checked={document?.safe3} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety3" id="" defaultValue="danger" />
+            <input type="radio" name="safety3" id="danger3" defaultValue="danger" checked={document?.danger3} />
           </td>
         </tr>
         <tr className="card__table-green">
@@ -283,10 +245,10 @@ const PnbvCard = () => {
           <td>2.1</td>
           <td>Водитель соблюдает безопасную дистанцию во время движения ТС</td>
           <td className="card__table-safety">
-            <input type="radio" name="safety4" id="" defaultValue="safe" />
+            <input type="radio" name="safety4" id="safe4" defaultValue="safe" checked={document?.safe4} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety4" id="" defaultValue="danger" />
+            <input type="radio" name="safety4" id="danger4" defaultValue="danger" checked={document?.danger4} />
           </td>
         </tr>
         <tr>
@@ -297,10 +259,10 @@ const PnbvCard = () => {
             начала маневра
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety5" id="" defaultValue="safe" />
+            <input type="radio" name="safety5" id="safe5" defaultValue="safe" checked={document?.safe5} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety5" id="" defaultValue="danger" />
+            <input type="radio" name="safety5" id="danger5" defaultValue="danger" checked={document?.danger5} />
           </td>
         </tr>
         <tr>
@@ -310,10 +272,10 @@ const PnbvCard = () => {
             условиям
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety6" id="" defaultValue="safe" />
+            <input type="radio" name="safety6" id="safe6" defaultValue="safe" checked={document?.safe6} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety6" id="" defaultValue="danger" />
+            <input type="radio" name="safety6" id="danger6" defaultValue="danger" checked={document?.danger6} />
           </td>
         </tr>
         <tr>
@@ -323,60 +285,60 @@ const PnbvCard = () => {
             переходам
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety7" id="" defaultValue="safe" />
+            <input type="radio" name="safety7" id="safe7" defaultValue="safe" checked={document?.safe7} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety7" id="" defaultValue="danger" />
+            <input type="radio" name="safety7" id="danger7" defaultValue="danger" checked={document?.danger7} />
           </td>
         </tr>
         <tr>
           <td>2.5</td>
           <td>Плавно тормозит и не осуществляет резких торможений</td>
           <td className="card__table-safety">
-            <input type="radio" name="safety8" id="" defaultValue="safe" />
+            <input type="radio" name="safety8" id="safe8" defaultValue="safe" checked={document?.safe8} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety8" id="" defaultValue="danger" />
+            <input type="radio" name="safety8" id="danger8" defaultValue="danger" checked={document?.danger8} />
           </td>
         </tr>
         <tr>
           <td>2.6</td>
           <td>Безопасно совершает переезд перекрестков и ЖД путей</td>
           <td className="card__table-safety">
-            <input type="radio" name="safety9" id="" defaultValue="safe" />
+            <input type="radio" name="safety9" id="safe9" defaultValue="safe" checked={document?.safe9} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety9" id="" defaultValue="danger" />
+            <input type="radio" name="safety9" id="danger9" defaultValue="danger" checked={document?.danger9} />
           </td>
         </tr>
         <tr>
           <td>2.7</td>
           <td>Безопасно совершает обгон</td>
           <td className="card__table-safety">
-            <input type="radio" name="safety10" id="" defaultValue="safe" />
+            <input type="radio" name="safety10" id="safe10" defaultValue="safe" checked={document?.safe10} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety10" id="" defaultValue="danger" />
+            <input type="radio" name="safety10" id="danger10" defaultValue="danger" checked={document?.danger10} />
           </td>
         </tr>
         <tr>
           <td>2.8</td>
           <td>Своевременно использует внешние световые приборы</td>
           <td className="card__table-safety">
-            <input type="radio" name="safety11" id="" defaultValue="safe" />
+            <input type="radio" name="safety11" id="safe11" defaultValue="safe" checked={document?.safe11} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety11" id="" defaultValue="danger" />
+            <input type="radio" name="safety11" id="danger11" defaultValue="danger" checked={document?.danger11} />
           </td>
         </tr>
         <tr>
           <td>2.9</td>
           <td>Не использует мобильный телефон во время движения ТС </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety12" id="" defaultValue="safe" />
+            <input type="radio" name="safety12" id="safe12" defaultValue="safe" checked={document?.safe12} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety12" id="" defaultValue="danger" />
+            <input type="radio" name="safety12" id="danger12" defaultValue="danger" checked={document?.danger12} />
           </td>
         </tr>
         <tr className="card__table-green">
@@ -389,50 +351,50 @@ const PnbvCard = () => {
           <td>3.1</td>
           <td>Водитель соблюдает безопасную дистанцию во время остановки ТС</td>
           <td className="card__table-safety">
-            <input type="radio" name="safety13" id="" defaultValue="safe" />
+            <input type="radio" name="safety13" id="safe13" defaultValue="safe" checked={document?.safe13} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety13" id="" defaultValue="danger" />
+            <input type="radio" name="safety13" id="danger13" defaultValue="danger" checked={document?.danger13} />
           </td>
         </tr>
         <tr>
           <td>3.2</td>
           <td>Полностью останавливает ТС перед «СТОП» знаком</td>
           <td className="card__table-safety">
-            <input type="radio" name="safety14" id="" defaultValue="safe" />
+            <input type="radio" name="safety14" id="safe14" defaultValue="safe" checked={document?.safe14} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety14" id="" defaultValue="danger" />
+            <input type="radio" name="safety14" id="danger14" defaultValue="danger" checked={document?.danger14} />
           </td>
         </tr>
         <tr>
           <td>3.3</td>
           <td>Безопасно совершает движение задним ходом</td>
           <td className="card__table-safety">
-            <input type="radio" name="safety15" id="" defaultValue="safe" />
+            <input type="radio" name="safety15" id="safe15" defaultValue="safe" checked={document?.safe15} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety15" id="" defaultValue="danger" />
+            <input type="radio" name="safety15" id="danger15" defaultValue="danger" checked={document?.danger15} />
           </td>
         </tr>
         <tr>
           <td>3.4</td>
           <td>Паркует ТС в предназначенных для остановки местах</td>
           <td className="card__table-safety">
-            <input type="radio" name="safety16" id="" defaultValue="safe" />
+            <input type="radio" name="safety16" id="safe16" defaultValue="safe" checked={document?.safe16} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety16" id="" defaultValue="danger" />
+            <input type="radio" name="safety16" id="danger16" defaultValue="danger" checked={document?.danger16} />
           </td>
         </tr>
         <tr>
           <td>3.5</td>
           <td>Осуществляет парковку ТС лицом к выезду</td>
           <td className="card__table-safety">
-            <input type="radio" name="safety17" id="" defaultValue="safe" />
+            <input type="radio" name="safety17" id="safe17" defaultValue="safe" checked={document?.safe17} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety17" id="" defaultValue="danger" />
+            <input type="radio" name="safety17" id="danger17" defaultValue="danger" checked={document?.danger17} />
           </td>
         </tr>
         <tr className="card__table-green">
@@ -445,20 +407,20 @@ const PnbvCard = () => {
           <td>4.1</td>
           <td>Чувствовали ли вы себя безопасно во время поездки</td>
           <td className="card__table-safety">
-            <input type="radio" name="safety18" id="" defaultValue="safe" />
+            <input type="radio" name="safety18" id="safe18" defaultValue="safe" checked={document?.safe18} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety18" id="" defaultValue="danger" />
+            <input type="radio" name="safety18" id="danger18" defaultValue="danger" checked={document?.danger18} />
           </td>
         </tr>
         <tr>
           <td>4.2</td>
           <td>Технические неисправности</td>
           <td className="card__table-safety">
-            <input type="radio" name="safety19" id="" defaultValue="safe" />
+            <input type="radio" name="safety19" id="safe19" defaultValue="safe" checked={document?.safe19} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety19" id="" defaultValue="danger" />
+            <input type="radio" name="safety19" id="danger19" defaultValue="danger" checked={document?.danger19} />
           </td>
         </tr>
       </tbody>
@@ -478,7 +440,7 @@ const PnbvCard = () => {
         cols={130}
         rows={5}
         className="comment__content"
-        defaultValue={""}
+        value={document?.comment}
       />
     </div>
     {/* Comments */}
@@ -490,11 +452,11 @@ const PnbvCard = () => {
       </div>
       <textarea
         name="comment"
-        id="comment"
+        id="comment2"
         cols={130}
         rows={5}
         className="comment__content"
-        defaultValue={""}
+        value={document?.comment2}
       />
     </div>
     {/* ADDITION BUTTON */}
@@ -508,8 +470,9 @@ const PnbvCard = () => {
       <button
         type="submit"
         className="create-doc__button create-doc__button-text"
+        
       >
-        Сохранить
+        Отправить
       </button>
     </div>
   </div>
@@ -518,4 +481,4 @@ const PnbvCard = () => {
   );
 };
 
-export default PnbvCard;
+export default PnbvCardRead;

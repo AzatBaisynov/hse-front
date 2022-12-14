@@ -8,9 +8,10 @@ import downloadDoc from "../../../../assets/images/labor-protecttion-download-do
 import { _LINK } from "../../../../data/links";
 import loader from "../../../../assets/images/loader.gif";
 
-const PpePurchase = () => {
+const PnbvScheduleWeek = () => {
   const [file, setFile] = useState({});
   const [excel, setExcel] = useState({});
+  const [document, setDocument] = useState({});
 
   const handleSelectFiles = (e) => {
     setFile(e.target.files[0]);
@@ -23,7 +24,7 @@ const PpePurchase = () => {
     } else {
       loader.style.display = "none";
     }
-  }
+  };
 
   const handleSend = async (e) => {
     e.preventDefault();
@@ -33,17 +34,19 @@ const PpePurchase = () => {
         formData.append("file", file, file.name);
         runLoader(true);
         try {
-          await axios.post(`${_LINK}/v1/api/file/excel?skip=3&type=2&date=2022-10-12`, formData, {
-            headers: {
-              
-            },
-          })
-        } catch(e) {
+          await axios.post(
+            `${_LINK}/v1/api/file/excel?skip=4&cols=0&type12&date=2022-10-12`,
+            formData,
+            {
+              headers: {},
+            }
+          );
+        } catch (e) {
           alert(e);
         }
         runLoader(false);
       }
-    } catch(e) {
+    } catch (e) {
       alert(e);
     }
   };
@@ -52,7 +55,7 @@ const PpePurchase = () => {
     const getArray = async () => {
       const config = {
         method: "get",
-        url: `${_LINK}/v1/api/file/excel/get?type=2`,
+        url: `${_LINK}/v1/api/file/excel/get?type=12`,
         headers: {
           Authorization: localStorage.getItem("token"),
         },
@@ -64,12 +67,10 @@ const PpePurchase = () => {
         console.log(e);
         setExcel({});
       }
-    }
+    };
     getArray();
-  },
-  []
-  )
-  
+  }, []);
+
   function createTable() {
     const table = excel.excelRows?.map((row) => (
       <tr>
@@ -81,6 +82,15 @@ const PpePurchase = () => {
 
     return <tbody>{table}</tbody>;
   }
+
+  const handleInput = (e) => {
+    const { id, value } = e.target;
+    switch (id) {
+      case "dateFull":
+        setDocument({ ...document, dateFull: value });
+        break;
+    }
+  };
 
   return (
     <div className="table-container">
@@ -98,14 +108,34 @@ const PpePurchase = () => {
             </a>
             {/* ADD FIELD */}
             <form action="./pasports_create_doc.html">
-              <button className="create-doc-button button-general" type="submit" onClick={handleSend}>
+              <button
+                className="create-doc-button button-general"
+                type="submit"
+                onClick={handleSend}
+              >
                 Отправить
               </button>
             </form>
-            <NavLink
-            exact to="/labor_protection/list/71" className="create-doc-button button-general" style={{backgroundColor: "#3273AE"}}>Сообщить о потребности в закупе
-          </NavLink>
+            {/* TITLE */}
+            <div className="form__field head-panel__week">
+              <div className="form__field-title form__field-title_blue"
+              style={{width: "80px"}}>
+                Неделя:
+              </div>
+              <input
+                type="week"
+                name="dateFull"
+                id="dateFull"
+                className="head-panel__week"
+                onInput={handleInput}
+                style={{padding: "0 10px"}}
+              />
+            </div>
+            <p className="head-panel__title"></p>
           </div>
+          <p className="head-panel__title">
+            План-график ПНБР на неделю
+          </p>
           {/* SEARCH AND FILTER */}
           <div className="doc-list__search-row">
             {/* DOCUMENT UPLOAD BUTTON */}
@@ -132,11 +162,7 @@ const PpePurchase = () => {
               />
             </button>
             {/* FILTER BUTTON */}
-            <img
-              src={filterImage}
-              alt="filter"
-              className="doc-list__filter"
-            />
+            <img src={filterImage} alt="filter" className="doc-list__filter" />
             {/* FILTER POPUP */}
             <div className="filter-popup" id="filter">
               <p className="filter-title">Фильтр</p>
@@ -221,45 +247,17 @@ const PpePurchase = () => {
         <table className="ensk-table">
           <thead>
             <tr>
-              <th rowSpan={2}>Статья бюджета / Budget item</th>
-              <th rowSpan={2}>Структурное подразделение / Name of division</th>
-              <th rowSpan={2}>Наименование службы</th>
-              <th rowSpan={2}>Name of division</th>
-              <th rowSpan={2}>МВЗ (код службы)/ МВЗ (code of service)</th>
-              <th rowSpan={2}>НН материала/ Material stock number</th>
-              <th rowSpan={2}>Наименование</th>
-              <th rowSpan={2}>Item name</th>
-              <th rowSpan={2}>ед.изм.</th>
-              <th rowSpan={2}>Unit of measure</th>
-              <th rowSpan={2}>Итого количество/Total quantity</th>
-              <th colSpan={12} className="ensk-table__th-center">
-                Потребность планируемого года / Need of the planned year
-              </th>
-              <th rowSpan={2}>Склад поставки/ Delivery warehouse</th>
-              <th>
-                Прогноз списания со складов/Forecast of writing-off from
-                warehouse{" "}
-              </th>
-              <th>
-                Прогноз списания со складов/Forecast of writing-off from
-                warehouse
-              </th>
-            </tr>
-            <tr>
-              <th>Январь</th>
-              <th>Февраль</th>
-              <th>Март</th>
-              <th>Апрель</th>
-              <th>Май</th>
-              <th>Июнь</th>
-              <th>Июль</th>
-              <th>Август</th>
-              <th>Сентябрь</th>
-              <th>Октябрь</th>
-              <th>Ноябрь</th>
-              <th>Декабрь</th>
-              <th>количество/quantity</th>
-              <th>количество/quantity</th>
+              <th>№</th>
+              <th>Структурное подразделение</th>
+              <th>Должность</th>
+              <th>Ф.И.О.</th>
+              <th>Понедельник</th>
+              <th>Вторник</th>
+              <th>Среда</th>
+              <th>Четверг</th>
+              <th>Пятница</th>
+              <th>Суббота</th>
+              <th>Воскресенье</th>
             </tr>
           </thead>
           {createTable()}
@@ -272,4 +270,4 @@ const PpePurchase = () => {
   );
 };
 
-export default PpePurchase;
+export default PnbvScheduleWeek;

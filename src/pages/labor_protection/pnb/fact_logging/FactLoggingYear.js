@@ -8,7 +8,7 @@ import downloadDoc from "../../../../assets/images/labor-protecttion-download-do
 import { _LINK } from "../../../../data/links";
 import loader from "../../../../assets/images/loader.gif";
 
-const PpePurchase = () => {
+const FactLoggingYear = () => {
   const [file, setFile] = useState({});
   const [excel, setExcel] = useState({});
 
@@ -23,7 +23,7 @@ const PpePurchase = () => {
     } else {
       loader.style.display = "none";
     }
-  }
+  };
 
   const handleSend = async (e) => {
     e.preventDefault();
@@ -33,17 +33,21 @@ const PpePurchase = () => {
         formData.append("file", file, file.name);
         runLoader(true);
         try {
-          await axios.post(`${_LINK}/v1/api/file/excel?skip=3&type=2&date=2022-10-12`, formData, {
-            headers: {
-              
-            },
-          })
-        } catch(e) {
+          await axios.post(
+            `${_LINK}/v1/api/file/excel?skip=4&col=2&type=7&date=2022-10-12`,
+            formData,
+            {
+              headers: {
+                Authorization: localStorage.getItem("token"),
+              },
+            }
+          );
+        } catch (e) {
           alert(e);
         }
         runLoader(false);
       }
-    } catch(e) {
+    } catch (e) {
       alert(e);
     }
   };
@@ -52,7 +56,7 @@ const PpePurchase = () => {
     const getArray = async () => {
       const config = {
         method: "get",
-        url: `${_LINK}/v1/api/file/excel/get?type=2`,
+        url: `${_LINK}/v1/api/file/excel/get?type=7`,
         headers: {
           Authorization: localStorage.getItem("token"),
         },
@@ -64,12 +68,10 @@ const PpePurchase = () => {
         console.log(e);
         setExcel({});
       }
-    }
+    };
     getArray();
-  },
-  []
-  )
-  
+  }, []);
+
   function createTable() {
     const table = excel.excelRows?.map((row) => (
       <tr>
@@ -81,6 +83,11 @@ const PpePurchase = () => {
 
     return <tbody>{table}</tbody>;
   }
+
+  const date = new Date();
+  const year = date.getFullYear();
+  const title = `Незапланированные записи по факту ПНБР на ${year} год`;
+
 
   return (
     <div className="table-container">
@@ -98,14 +105,17 @@ const PpePurchase = () => {
             </a>
             {/* ADD FIELD */}
             <form action="./pasports_create_doc.html">
-              <button className="create-doc-button button-general" type="submit" onClick={handleSend}>
+              <button
+                className="create-doc-button button-general"
+                type="submit"
+                onClick={handleSend}
+              >
                 Отправить
               </button>
             </form>
-            <NavLink
-            exact to="/labor_protection/list/71" className="create-doc-button button-general" style={{backgroundColor: "#3273AE"}}>Сообщить о потребности в закупе
-          </NavLink>
           </div>
+          {/* TITLE */}
+          <p className="head-panel__title">{title}</p>
           {/* SEARCH AND FILTER */}
           <div className="doc-list__search-row">
             {/* DOCUMENT UPLOAD BUTTON */}
@@ -132,11 +142,7 @@ const PpePurchase = () => {
               />
             </button>
             {/* FILTER BUTTON */}
-            <img
-              src={filterImage}
-              alt="filter"
-              className="doc-list__filter"
-            />
+            <img src={filterImage} alt="filter" className="doc-list__filter" />
             {/* FILTER POPUP */}
             <div className="filter-popup" id="filter">
               <p className="filter-title">Фильтр</p>
@@ -219,47 +225,146 @@ const PpePurchase = () => {
       </div>
       <div className="ensk">
         <table className="ensk-table">
+            <thead>
+              <tr>
+                <th>№</th>
+                <th>Структурное подразделение</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>УТГ "Тараз"</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>УТГ "Алматы"</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>УТГ "Шымкент"</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td rowSpan={2}>УЗРГ</td>
+              </tr>
+              <tr>
+                <td>5</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td rowSpan={2}>КС-1</td>
+              </tr>
+              <tr>
+                <td>7</td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td rowSpan={2}>КС-2</td>
+              </tr>
+              <tr>
+                <td>9</td>
+              </tr>
+              <tr>
+                <td>10</td>
+                <td rowSpan={2}>СКС-1</td>
+              </tr>
+              <tr>
+                <td>11</td>
+              </tr>
+              <tr>
+                <td>12</td>
+                <td rowSpan={2}>СКС-2</td>
+              </tr>
+              <tr>
+                <td>13</td>
+              </tr>
+              <tr>
+                <td>14</td>
+                <td rowSpan={2}>КС-4</td>
+              </tr>
+              <tr>
+                <td>15</td>
+              </tr>
+              <tr>
+                <td>16</td>
+                <td rowSpan={2}>СКС-3</td>
+              </tr>
+              <tr>
+                <td>17</td>
+              </tr>
+              <tr>
+                <td>18</td>
+                <td rowSpan={2}>СКС-4</td>
+              </tr>
+              <tr>
+                <td>19</td>
+              </tr>
+              <tr>
+                <td>20</td>
+                <td rowSpan={2}>СКС-5</td>
+              </tr>
+              <tr>
+                <td>21</td>
+              </tr>
+              <tr>
+                <td>22</td>
+                <td rowSpan={2}>КС-6</td>
+              </tr>
+              <tr>
+                <td>23</td>
+              </tr>
+              <tr>
+                <td>24</td>
+                <td rowSpan={2}>СКС-6</td>
+              </tr>
+              <tr>
+                <td>25</td>
+              </tr>
+              <tr>
+                <td>26</td>
+                <td rowSpan={2}>КС-7</td>
+              </tr>
+              <tr>
+                <td>27</td>
+              </tr>
+              <tr>
+                <td>28</td>
+                <td rowSpan={2}>СКС-7</td>
+              </tr>
+              <tr>
+                <td>29</td>
+              </tr>
+              <tr>
+                <td>30</td>
+                <td rowSpan={2}>СКС-8</td>
+              </tr>
+              <tr>
+                <td>31</td>
+              </tr>
+              <tr>
+                <td rowSpan={2} colSpan={2}>Всего:</td>
+              </tr>
+            </tbody>
+        </table>
+        <table className="ensk-table">
           <thead>
             <tr>
-              <th rowSpan={2}>Статья бюджета / Budget item</th>
-              <th rowSpan={2}>Структурное подразделение / Name of division</th>
-              <th rowSpan={2}>Наименование службы</th>
-              <th rowSpan={2}>Name of division</th>
-              <th rowSpan={2}>МВЗ (код службы)/ МВЗ (code of service)</th>
-              <th rowSpan={2}>НН материала/ Material stock number</th>
-              <th rowSpan={2}>Наименование</th>
-              <th rowSpan={2}>Item name</th>
-              <th rowSpan={2}>ед.изм.</th>
-              <th rowSpan={2}>Unit of measure</th>
-              <th rowSpan={2}>Итого количество/Total quantity</th>
-              <th colSpan={12} className="ensk-table__th-center">
-                Потребность планируемого года / Need of the planned year
-              </th>
-              <th rowSpan={2}>Склад поставки/ Delivery warehouse</th>
-              <th>
-                Прогноз списания со складов/Forecast of writing-off from
-                warehouse{" "}
-              </th>
-              <th>
-                Прогноз списания со складов/Forecast of writing-off from
-                warehouse
-              </th>
-            </tr>
-            <tr>
-              <th>Январь</th>
-              <th>Февраль</th>
-              <th>Март</th>
-              <th>Апрель</th>
-              <th>Май</th>
-              <th>Июнь</th>
-              <th>Июль</th>
-              <th>Август</th>
-              <th>Сентябрь</th>
-              <th>Октябрь</th>
-              <th>Ноябрь</th>
-              <th>Декабрь</th>
-              <th>количество/quantity</th>
-              <th>количество/quantity</th>
+              <th>Должность</th>
+              <th>Ф.И.О.</th>
+              <th>Адрес электронной почты</th>
+              <th>январь</th>
+              <th>февраль</th>
+              <th>март</th>
+              <th>апрель</th>
+              <th>май</th>
+              <th>июнь</th>
+              <th>июль</th>
+              <th>август</th>
+              <th>сентябрь</th>
+              <th>октябрь</th>
+              <th>ноябрь</th>
+              <th>декабрь</th>
             </tr>
           </thead>
           {createTable()}
@@ -272,4 +377,4 @@ const PpePurchase = () => {
   );
 };
 
-export default PpePurchase;
+export default FactLoggingYear;

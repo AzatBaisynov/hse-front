@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import "../../../../assets/style/doc_list_style.css";
-import { useSelector } from "react-redux/es/exports";
 import { Paginate } from "../../../../components/Paginate";
 import { _LINK } from "../../../../data/links";
 import axios from "axios";
 import filterImage from "../../../../assets/images/doc-lict-filter.png";
 
-const PpeReviewsList = () => {
+const PnbrCardList = () => {
   const [page, setPage] = useState(0);
   const [back, setBack] = useState({});
   const navigate = useNavigate();
@@ -19,7 +18,7 @@ const PpeReviewsList = () => {
     const get = async () => {
       const config = {
         method: "get",
-        url: `${_LINK}/v1/api/labor/dir/43`,
+        url: `${_LINK}/v1/api/labor/dir/47`,
         headers: {
           Authorization: localStorage.getItem("token"),
         },
@@ -46,10 +45,16 @@ const PpeReviewsList = () => {
     <div className="doc-list-container">
       <div className="doc-list__head-panel">
         <div className="doc-list__buttons">
-          <span className="go-back-button button-general">Назад</span>
           <NavLink
             exact
-            to="/labor_protection/siz/ppe_reviews"
+            to="/labor_protection/folders/8/nest/0"
+            className="go-back-button button-general"
+          >
+            Назад
+          </NavLink>
+          <NavLink
+            exact
+            to="/labor_protection/pnbr_card"
             className="create-doc-button button-general"
           >
             Создать документ
@@ -143,12 +148,10 @@ const PpeReviewsList = () => {
         <tbody>
           <tr className="doc-table__row doc-table__row_titles">
             <td>Код документа</td>
-            <td>ФИО</td>
-            <td>Должность</td>
-            <td>Подразделение</td>
-            <td>Объект</td>
-            <td>Период поставки</td>
-            <td>Дата</td>
+            <td>Имя наблюдателя</td>
+            <td>Наблюдаемый отдел / компания</td>
+            <td>Наблюдаемое рабочее задание</td>
+            <td>Дата и время наблюдения</td>
           </tr>
 
           {
@@ -160,16 +163,14 @@ const PpeReviewsList = () => {
                   e.preventDefault();
                 }}
                 onClick={(e) => {
-                  navigate(`/labor/siz/reviews/get/${back[key].id}`, { replace: true });
+                  navigate(`/labor/pnb/pnbr_card/get/${back[key].id}`, { replace: true });
                 }}
               >
                 <td>{back[key]?.id}</td>
                 <td>{back[key]?.employeeFullName}</td>
-                <td>{back[key]?.position}</td>
-                <td>{back[key]?.divisionName}</td>
-                <td>{back[key]?.divisionCode}</td>
-                <td>{back[key]?.issuancePeriod}</td>
-                <td>{back[key]?.dateFull}</td>
+                <td>{back[key]?.monitoredDep}</td>
+                <td>{back[key]?.monitoredTask}</td>
+                <td>{back[key]?.dateTime}</td>
               </tr>
             ))}
         </tbody>
@@ -188,4 +189,4 @@ const PpeReviewsList = () => {
   );
 };
 
-export default PpeReviewsList;
+export default PnbrCardList;

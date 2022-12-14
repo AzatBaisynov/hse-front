@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
-import "../../../../assets/style/doc_list_style.css";
+import "../../../assets/style/doc_list_style.css";
 import { useSelector } from "react-redux/es/exports";
-import { Paginate } from "../../../../components/Paginate";
-import { _LINK } from "../../../../data/links";
+import { Paginate } from "../../../components/Paginate";
+import { _LINK } from "../../../data/links";
 import axios from "axios";
-import filterImage from "../../../../assets/images/doc-lict-filter.png";
+import filterImage from "../../../assets/images/doc-lict-filter.png";
 
-const PpeReviewsList = () => {
+const TransportAccidentsList = () => {
   const [page, setPage] = useState(0);
   const [back, setBack] = useState({});
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ const PpeReviewsList = () => {
     const get = async () => {
       const config = {
         method: "get",
-        url: `${_LINK}/v1/api/labor/dir/43`,
+        url: `${_LINK}/v1/api/labor/dir/61`,
         headers: {
           Authorization: localStorage.getItem("token"),
         },
@@ -46,10 +46,16 @@ const PpeReviewsList = () => {
     <div className="doc-list-container">
       <div className="doc-list__head-panel">
         <div className="doc-list__buttons">
-          <span className="go-back-button button-general">Назад</span>
           <NavLink
             exact
-            to="/labor_protection/siz/ppe_reviews"
+            to="/labor_protection/folders/11/nest/0"
+            className="go-back-button button-general"
+          >
+            Назад
+          </NavLink>
+          <NavLink
+            exact
+            to="/labor_protection/transport_accidents"
             className="create-doc-button button-general"
           >
             Создать документ
@@ -142,13 +148,14 @@ const PpeReviewsList = () => {
       <table className="doc-table">
         <tbody>
           <tr className="doc-table__row doc-table__row_titles">
+            <td>Имя файла</td>
             <td>Код документа</td>
-            <td>ФИО</td>
-            <td>Должность</td>
-            <td>Подразделение</td>
-            <td>Объект</td>
-            <td>Период поставки</td>
             <td>Дата</td>
+            <td>Место происшествия</td>
+            <td>Подразделение</td>
+            <td>ФИО водителя</td>
+            <td>Гос номер машины</td>
+            <td>Наличие пострадавших</td>
           </tr>
 
           {
@@ -160,16 +167,17 @@ const PpeReviewsList = () => {
                   e.preventDefault();
                 }}
                 onClick={(e) => {
-                  navigate(`/labor/siz/reviews/get/${back[key].id}`, { replace: true });
+                  navigate(`/labor/transport/accidents/get/${back[key].id}`, { replace: true });
                 }}
               >
+                <td>Информация по ДТП</td>
                 <td>{back[key]?.id}</td>
-                <td>{back[key]?.employeeFullName}</td>
-                <td>{back[key]?.position}</td>
-                <td>{back[key]?.divisionName}</td>
-                <td>{back[key]?.divisionCode}</td>
-                <td>{back[key]?.issuancePeriod}</td>
                 <td>{back[key]?.dateFull}</td>
+                <td>{back[key]?.location}</td>
+                <td>{back[key]?.divisionName}</td>
+                <td>{back[key]?.employeeFullName}</td>
+                <td>{back[key]?.licensePlate}</td>
+                <td>{back[key]?.hasVictims}</td>
               </tr>
             ))}
         </tbody>
@@ -188,4 +196,4 @@ const PpeReviewsList = () => {
   );
 };
 
-export default PpeReviewsList;
+export default TransportAccidentsList;

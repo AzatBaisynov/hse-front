@@ -22,7 +22,6 @@ const PpeReviewsEdit = () => {
         }
         try {
             const { data } = await axios(config)
-            console.log(data)
             setDocument(data)
         } catch (e) {
             alert(e)
@@ -59,6 +58,9 @@ const PpeReviewsEdit = () => {
       case "comment":
         setDocument({ ...document, comment: value });
         break;
+      case "ppeName":
+        setDocument({ ...document, ppeName: value });
+        break;
     }
   };
 
@@ -66,7 +68,6 @@ const PpeReviewsEdit = () => {
     e.preventDefault();
     const doc = document;
     doc.dir = {id: dirId};
-    console.log(document);
     const config = {
       method: "POST",
       url: `${_LINK}/v1/api/labor/create/update`,
@@ -76,10 +77,8 @@ const PpeReviewsEdit = () => {
       },
       data: JSON.stringify(document),
     };
-    console.log(dirId);
     try {
       const { data } = await axios(config);
-      console.log(data);
       alert("Запись добавлена");
     } catch (e) {
       alert(e);
@@ -141,13 +140,8 @@ const PpeReviewsEdit = () => {
           </select> */}
           <input
             list="ppeName"
-            className="form__field-content form__field-content_long" id="ppeName" onInput={handleInput}
+            className="form__field-content form__field-content_long" id="ppeName" onInput={handleInput} value={document?.ppeName}
           />
-          <datalist>
-            <option value={1}>1</option>
-            <option value={2}>2</option>
-            <option value={3}>3</option>
-          </datalist>
         </div>
         {/* COMMENT */}
         <textarea
@@ -155,7 +149,8 @@ const PpeReviewsEdit = () => {
           id="comment"
           className="form__comment form__field-content"
           placeholder="Отзыв по СИЗ / Review PPE"
-          defaultValue={""}
+          value={document?.comment}
+          onInput={handleInput}
         />
         {/* ADDITION BUTTON */}
         <div className="create-doc__buttons">

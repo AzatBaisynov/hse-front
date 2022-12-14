@@ -1,13 +1,21 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { _LINK } from "../../../../data/links";
-import "../../../../assets/style/ppe_reviews.css";
+import { _LINK } from "../../../data/links";
+import "../../../assets/style/ppe_reviews.css";
 
 const PpeReviews = () => {
+  // const [file, setFile] = useState({})
   const [document, setDocument] = useState({});
   const { dirId } = useSelector((store) => store.files);
 
+  useEffect(() => {
+    console.log(dirId);
+  }, []);
+
+  // const handleSelectFiles = (e) => {
+  // 	setFile(e.target.files[0])
+  // }
 
   const handleInput = (e) => {
     const { id, value } = e.target;
@@ -33,9 +41,6 @@ const PpeReviews = () => {
       case "comment":
         setDocument({ ...document, comment: value });
         break;
-      case "ppeName":
-        setDocument({ ...document, ppeName: value });
-        break;
     }
   };
 
@@ -43,6 +48,7 @@ const PpeReviews = () => {
     e.preventDefault();
     const doc = document;
     doc.dir = { id: dirId };
+    console.log(document);
     const config = {
       method: "POST",
       url: `${_LINK}/v1/api/labor/create/update`,
@@ -52,8 +58,10 @@ const PpeReviews = () => {
       },
       data: JSON.stringify(document),
     };
+    console.log(dirId);
     try {
       const { data } = await axios(config);
+      console.log(data);
       alert("Запись добавлена");
     } catch (e) {
       alert(e);
@@ -66,38 +74,11 @@ const PpeReviews = () => {
       className="container"
       style={{ flexDirection: "column", alignItems: "center", gap: "0" }}
     >
-      <div className="create-doc__title">Отзывы и предложения по СИЗ</div>
+      <div className="create-doc__title">Карточка подрядчика</div>
       <form action="#" className="create-doc__form">
         <div className="horizontal-form">
           <div className="horizontal-form__column">
-            <div className="column-title">Дата / Date</div>
-            <input
-              type="date"
-              onInput={handleInput}
-              className="column-content"
-              id="dateFull"
-            />
-          </div>
-          <div className="horizontal-form__column">
-            <div className="column-title">ФИО / Name</div>
-            <input
-              type="text"
-              onInput={handleInput}
-              className="column-content"
-              id="employeeFullName"
-            />
-          </div>
-          <div className="horizontal-form__column">
-            <div className="column-title">Должность / Position</div>
-            <input
-              type="text"
-              onInput={handleInput}
-              className="column-content"
-              id="position"
-            />
-          </div>
-          <div className="horizontal-form__column">
-            <div className="column-title">Подразделение / Division</div>
+            <div className="column-title">Загрузка списка работников</div>
             <input
               type="text"
               onInput={handleInput}
@@ -106,56 +87,103 @@ const PpeReviews = () => {
             />
           </div>
           <div className="horizontal-form__column">
-            <div className="column-title">Объект / Object</div>
+            <div className="column-title">БИН / ИИН</div>
             <input
               type="text"
               onInput={handleInput}
               className="column-content"
-              id="divisionCode"
+              id="employeeId"
+            />
+          </div>
+          <div className="horizontal-form__column">
+            <div className="column-title">Номер договора на услуги / товар</div>
+            <input
+              type="text"
+              onInput={handleInput}
+              className="column-content"
+              id="#"
             />
           </div>
           <div className="horizontal-form__column">
             <div className="column-title">
-              Период поставки / Period of issuance
+              Дата договора и его срок действия
             </div>
             <input
-              type="month"
+              type="date"
               onInput={handleInput}
               className="column-content"
-              id="issuancePeriod"
+              id="#"
+            />
+          </div>
+          <div className="horizontal-form__column">
+            <div className="column-title">
+              Предмет договора - описание услуги / товара
+            </div>
+            <input
+              type="text"
+              onInput={handleInput}
+              className="column-content"
+              id="#"
+            />
+          </div>
+          <div className="horizontal-form__column">
+            <div className="column-title">Количество работников в проекте</div>
+            <input
+              type="number"
+              onInput={handleInput}
+              className="column-content"
+              id="#"
+            />
+          </div>
+          <div className="horizontal-form__column">
+            <div className="column-title">
+              Департамент ответственный за Договор
+            </div>
+            <input
+              type="text"
+              onInput={handleInput}
+              className="column-content"
+              id="#"
+            />
+          </div>
+          <div className="horizontal-form__column">
+            <div className="column-title">№ совместного приказа</div>
+            <input
+              type="number"
+              onInput={handleInput}
+              className="column-content"
+              id="#"
+            />
+          </div>
+          <div className="horizontal-form__column">
+            <div className="column-title">Дата приказа</div>
+            <input
+              type="date"
+              onInput={handleInput}
+              className="column-content"
+              id="dateFull"
             />
           </div>
         </div>
-        <div className="form__field">
-          <div
-            className="form__field-title"
-            style={{
-              backgroundColor: "rgba(50, 115, 174, 0.1)",
-              border: "1px solid #9ABAD7",
-              color: "#3273AE",
-              fontWeight: 600,
-            }}
-          >
-            Наименование СИЗ / Name of PPE
-          </div>
-          {/* <select name="itemName" id="itemName" class="form__field-content form__field-content_long">
-              <option value="1">item 1</option> 
-              <option value="2">item 2</option>
-              <option value="3">item 3</option>
-          </select> */}
-          <input
-            list="ppeName"
-            className="form__field-content form__field-content_long"
-            id="ppeName"
-            onInput={handleInput}
-          />
-        </div>
+        <div className="create-doc__title">Список работников</div>
+        <div className="create-doc__field" >
+					<div className="create-doc__field-title">Загрузка документа</div>
+					<div className="create-doc__upload-file create-doc__field-content" style={{ width: "886px" }}>
+						<label htmlFor="file" >
+							<span className="create-doc__label">
+								{/* <img src={} alt="" /> */}
+								<span>{"Нажмите или перетащите файл для загрузки"}</span>
+							</span>
+						</label>
+						<input type="file" id="file" hidden multiple />
+					</div>
+				</div>
         {/* COMMENT */}
         <textarea
           name="comment"
           id="comment"
           className="form__comment form__field-content"
-          placeholder="Отзыв по СИЗ / Review PPE"
+          placeholder="Список требований к подрядчикам"
           defaultValue={""}
         />
         {/* ADDITION BUTTON */}

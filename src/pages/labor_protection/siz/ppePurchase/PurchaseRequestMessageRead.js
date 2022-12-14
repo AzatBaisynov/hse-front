@@ -27,7 +27,6 @@ const PurchaseRequestMessage = () => {
       };
       try {
         const { data } = await axios(config);
-        console.log(data);
         setDocument(data);
       } catch (e) {
         alert(e);
@@ -40,7 +39,6 @@ const PurchaseRequestMessage = () => {
     e.preventDefault();
     const doc = document;
     doc.dir = { id: dirId };
-    console.log(document);
     const config = {
       method: "POST",
       url: `${_LINK}/v1/api/labor/create/update`,
@@ -50,14 +48,11 @@ const PurchaseRequestMessage = () => {
       },
       data: JSON.stringify(document),
     };
-    console.log(dirId);
     try {
       const { data } = await axios(config);
-      console.log(data);
       setDocument(data)
 				const l = await downloadFile(`${_LINK}/v1/api/file/${data?.file?.name}`, data?.file?.name)
 				setLink(l)
-				console.log(l)
     } catch (e) {
       alert(e);
     }

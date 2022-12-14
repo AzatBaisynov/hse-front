@@ -1,62 +1,84 @@
 .form__field {
-    display: flex;
+  display: flex;
 }
 
 .form__field-title {
-    width: 185px;
-    height: fit-content, inherit;
-    padding: 11px;
-    background: #F1F1F1;
-    border: 1px solid #C8C8C8;
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 14px;
-    display: flex;
-    align-items: center;
+  width: 185px;
+  height: fit-content, inherit;
+  padding: 11px;
+  background: #f1f1f1;
+  border: 1px solid #c8c8c8;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
 }
 
+.form__field-title_blue {
+  background-color: #e0e9f2;
+  color: #3273ae;
+  font-weight: 600;
+  border: 1px solid #9abad7;
+  font-size: 12px;
+}
+
+/* INPUT TITLE */
+.create-doc__subtitle {
+    font-weight: 400;
+    text-align: center;
+    font-size: 16px;
+    margin: 45px 0 35px;
+  }
+
 .form__field-content {
-    width: 340px;
-    height: inherit;
-    border-width: 1px 1px 1px 0px;
-    border-style: solid;
-    border-color: #C8C8C8;
-    padding: 0 15px;
+  width: 340px;
+  height: inherit;
+  border-width: 1px 1px 1px 0px;
+  border-style: solid;
+  border-color: #c8c8c8;
+  padding: 0 15px;
 }
 
 .form__field-validity {
-    width: 170px;
-    border-width: 1px 1px 1px 0px;
-    border-style: solid;
-    border-color: #C8C8C8;
-    padding: 0 15px;
+  width: 170px;
+  border-width: 1px 1px 1px 0px;
+  border-style: solid;
+  border-color: #c8c8c8;
+  padding: 0 15px;
 }
 
 .form__field-content_long {
-    width: 885px;
+  width: calc(100% - 185px);
 }
 
 .form__field-content_short {
-    width: 220px;
+  width: 220px;
 }
 
 .form__comment {
-    width: 1070px;
-    height: 70px;
-    border: 1px solid #C8C8C8;
-    padding: 10px;
+  width: 100%;
+  height: 70px;
+  border: 1px solid #c8c8c8;
+  padding: 10px;
+  text-align: left;
+}
+
+.form__comment-title {
+    font-size: 14px;
+    margin-bottom: 10px;
 }
 
 .create-doc__checkbox-container {
-    display: flex;
-    gap: 25px;
-    align-items: center;
-    font-weight: 400;
-    font-size: 10px;
-    color: #343434;
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  font-weight: 400;
+  font-size: 10px;
+  color: #343434;
 }
 
 .create-doc__checkbox {
-    display: flex;
-    gap: 5.5px;
+  display: flex;
+  gap: 5.5px;
 }
