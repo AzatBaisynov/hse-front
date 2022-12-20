@@ -238,8 +238,8 @@ const UpdateEcoOvocDocForm = () => {
 						<div className="create-doc__field-title">Согласующий департамент</div>
 						<select onInput={handleInput} name="responsible-department" id="issuingAuthority" className="create-doc__field-content">
 							{
-								departments?.map((el, idx) => (
-									<option key={idx} value={el.depName}>{el.depName}</option>
+								users?.map((el, idx) => (
+									<option key={idx} value={el.department}>{el.department}</option>
 								))
 							}
 						</select>

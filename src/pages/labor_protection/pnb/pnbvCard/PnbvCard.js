@@ -7,6 +7,35 @@ import "../../../../assets/style/pnbr_card.css";
 const PnbvCard = () => {
   const [document, setDocument] = useState({});
   const { dirId } = useSelector((store) => store.files);
+  const [departments, setDepartments] = useState([]);
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const get = async () => {
+      const config = {
+        method: "GET",
+        url: `${_LINK}/v1/api/org/ldap/all`,
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      };
+      try {
+        const { data } = await axios(config);
+        console.log(data);
+        setDepartments(data.departments);
+        setUsers(data.users);
+        setDocument({
+          ...document,
+          senderUser: data.users[0].username,
+          issuingAuthority: data.users[0].department,
+          makerUser: data.users[0].username,
+        });
+      } catch (e) {
+        alert(e);
+      }
+    };
+    get();
+  }, []);
 
   const handleInput = (e) => {
     const { id, value } = e.target;
@@ -227,13 +256,19 @@ const PnbvCard = () => {
               <td colSpan={3}>
                 <div className="_horizontal">
                   <p>Ф.И.О.:</p>
-                  <input
-                    type="text"
+                  <select
+                    onInput={handleInput}
                     name="employeeFullName"
                     id="employeeFullName"
-                    className="card__column-input"
-                    onInput={handleInput}
-                  />
+                    className="create-doc__field-content"
+                    style={{ width: "100%", border: "none" }}
+                  >
+                    {users?.map((el, idx) => (
+                      <option key={idx} value={el.username}>
+                        {el.username}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 <div className="_horizontal">
                   {/* Observer's driving experience */}
@@ -250,13 +285,19 @@ const PnbvCard = () => {
               <td>
                 <div className="card__column-unit">
                   <p>СТРУКТУРНОЕ ПОДРАЗДЕЛЕНИЕ/АУТСОРСИНГ:</p>
-                  <input
-                    type="text"
+                  <select
+                    onInput={handleInput}
                     name="outsourceDivisionName"
                     id="outsourceDivisionName"
-                    className="card__column-input"
-                    onInput={handleInput}
-                  />
+                    className="create-doc__field-content"
+                    style={{ width: "100%", border: "none" }}
+                  >
+                    {users?.map((el, idx) => (
+                      <option key={idx} value={el.department}>
+                        {el.department}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </td>
             </tr>
@@ -265,13 +306,19 @@ const PnbvCard = () => {
                 {/* Observer's division */}
                 <div className="card__column-unit">
                   <p>СТРУКТУРНОЕ ПОДРАЗДЕЛЕНИЕ:</p>
-                  <input
-                    type="text"
+                  <select
+                    onInput={handleInput}
                     name="divisionName"
                     id="divisionName"
-                    className="card__column-input"
-                    onInput={handleInput}
-                  />
+                    className="create-doc__field-content"
+                    style={{ width: "100%", border: "none" }}
+                  >
+                    {users?.map((el, idx) => (
+                      <option key={idx} value={el.department}>
+                        {el.department}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </td>
               <td>
@@ -815,7 +862,7 @@ const PnbvCard = () => {
         {/* ADDITION BUTTON */}
         <div className="create-doc__buttons" style={{ marginTop: 0 }}>
           <a
-            href="./management_programs_doc_list.html"
+            href="/labor_protection/list/48"
             className="create-doc__cancel-button create-doc__button-text"
           >
             Отменить

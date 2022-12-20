@@ -123,7 +123,7 @@ const PnbvScheduleMonth = () => {
           {/* BUTTONS */}
           <div className="doc-list__buttons">
             <a
-              href="./pasports_folders.html"
+              href="/labor_protection/list/50"
               className="go-back-button button-general nohover"
             >
               Назад

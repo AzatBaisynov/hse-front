@@ -7,6 +7,35 @@ import "../../../../assets/style/pnbr_card.css";
 const PnbrCard = () => {
   const [document, setDocument] = useState({});
   const { dirId } = useSelector((store) => store.files);
+  const [departments, setDepartments] = useState([]);
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const get = async () => {
+      const config = {
+        method: "GET",
+        url: `${_LINK}/v1/api/org/ldap/all`,
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      };
+      try {
+        const { data } = await axios(config);
+        console.log(data);
+        setDepartments(data.departments);
+        setUsers(data.users);
+        setDocument({
+          ...document,
+          senderUser: data.users[0].username,
+          issuingAuthority: data.users[0].department,
+          makerUser: data.users[0].username,
+        });
+      } catch (e) {
+        alert(e);
+      }
+    };
+    get();
+  }, []);
 
   const handleInput = (e) => {
     const { id, value } = e.target;
@@ -113,7 +142,7 @@ const PnbrCard = () => {
       case "safe25":
         setDocument({ ...document, safe25: true });
         break;
-        case "danger1":
+      case "danger1":
         setDocument({ ...document, danger1: true });
         break;
       case "danger2":
@@ -221,473 +250,744 @@ const PnbrCard = () => {
 
   return (
     <div className="create-doc-container">
-        <div className="card">
-            {/* Title */}
-            <p className="card__title">
-            Карточка поведенческого наблюдения по безопасности работ
-            </p>
-            {/* Upper row buttons */}
-            <div className="card__btn-row">
-            {/* Plan and Fact buttons */}
-            <div className="card__plan-fact">
-                <div>
-                <input type="radio"  id="plan" name="schedule" onInput={handleInput}/>
-                <label htmlFor="plan">По графику</label>
-                </div>
-                <div>
-                <input type="radio" id="fact" name="schedule" onInput={handleInput}/>
-                <label htmlFor="plan">Не по графику</label>
-                </div>
-            </div>
-            </div>
-            {/* Card table */}
-            <table className="card__table">
-            <tbody>
-                <tr>
-                <th colSpan={2}>НАБЛЮДАТЕЛЬ</th>
-                <th>НАБЛЮДАЕМЫЙ</th>
-                </tr>
-                <tr>
-                <td colSpan={2}>
-                    <div>
-                    <p>Ф.И.О.:</p>
-                    <input
-                        type="text"
-                        name="employeeFullName"
-                        id="employeeFullName"
-                        className="card__column-input"
-                        onInput={handleInput}
-                    />
-                    </div>
-                </td>
-                <td>
-                    <div>
-                    {/* Observer's driving experience */}
-                    <p>НАБЛЮДАЕМЫЙ ОТДЕЛ / КОМПАНИЯ: </p>
-                    <input
-                        type="text"
-                        name="monitoredDep"
-                        id="monitoredDep"
-                        className="card__column-input"
-                        onInput={handleInput}
-                    />
-                    </div>
-                </td>
-                </tr>
-                <tr>
-                <td colSpan={2}>
-                    {/* Observer's division */}
-                    <div className="card__column-unit">
-                    <p>СТРУКТУРНОЕ ПОДРАЗДЕЛЕНИЕ:</p>
-                    <input
-                        type="text"
-                        name="divisionName"
-                        id="divisionName"
-                        className="card__column-input"
-                        onInput={handleInput}
-                    />
-                    </div>
-                </td>
-                <td>
-                    {/* Driver's driving experience */}
-                    <div className="card__column-unit">
-                    <p>НАБЛЮДАЕМОЕ РАБОЧЕЕ ЗАДАНИЕ:</p>
-                    <input
-                        type="text"
-                        name="monitoredTask"
-                        id="monitoredTask"
-                        className="card__column-input"
-                        onInput={handleInput}
-                    />
-                    </div>
-                </td>
-                </tr>
-                <tr>
-                <td>
-                    {/* Observer's ride date */}
-                    <div className="card__column-unit">
-                    <p>ДАТА / ВРЕМЯ:</p>
-                    <input
-                        type="datetime-local"
-                        name="dateTime"
-                        id="dateTime"
-                        className="card__column-input"
-                        onInput={handleInput}
-                    />
-                    </div>
-                </td>
-                <td>
-                    {/* Observer's ride start */}
-                    <div className="card__column-unit">
-                    <p>КОЛИЧЕСТВО НАБЛЮДАЕМЫХ:</p>
-                    <input
-                        type="number"
-                        name="monitoringNum"
-                        id="monitoringNum"
-                        className="card__column-input"
-                        onInput={handleInput}
-                    />
-                    </div>
-                </td>
-                <td>
-                    {/* Observer's location */}
-                    <div className="card__column-unit">
-                    <p>МЕСТО ПРОВЕДЕНИЯ:</p>
-                    <input
-                        type="text"
-                        name="location"
-                        id="location"
-                        className="card__column-input"
-                        onInput={handleInput}
-                    />
-                    </div>
-                </td>
-                </tr>
-            </tbody>
-            </table>
-            {/* Driving evaluation */}
-            <table className="card__table card__indicators">
-            <tbody>
-                <tr>
-                <th style={{ width: 60 }}>КОД</th>
-                <th style={{ width: 945 }}>АСПЕКТЫ ПОВЕДЕНИЯ</th>
-                <th>БЕЗОПАСНО</th>
-                <th>ОПАСНО</th>
-                </tr>
-                <tr className="card__table-green">
-                <td>1.0</td>
-                <td>ПРОЦЕДУРЫ</td>
-                <td className="card__table-safety"></td>
-                <td className="card__table-safety"></td>
-                </tr>
-                <tr>
-                <td>1.1</td>
-                <td>Подготовка к работе и выявление опасных факторов</td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety1" id="safe1" onInput={handleInput}/>
-                </td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety1" id="danger1" onInput={handleInput}/>
-                </td>
-                </tr>
-                <tr>
-                <td>1.2</td>
-                <td>Соблюдение пошаговых производственных инструкций</td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety2" id="safe2" onInput={handleInput}/>
-                </td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety2" id="danger2" onInput={handleInput}/>
-                </td>
-                </tr>
-                <tr>
-                <td>1.3</td>
-                <td>Соблюдение требований наряда-допуска</td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety3" id="safe3" onInput={handleInput}/>
-                </td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety3" id="danger3" onInput={handleInput}/>
-                </td>
-                </tr>
-                <tr>
-                <td>1.4</td>
-                <td>Взаимосвязь с коллегами</td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety25" id="safe4" onInput={handleInput}/>
-                </td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety25" id="danger4" onInput={handleInput}/>
-                </td>
-                </tr>
-                <tr className="card__table-green">
-                <td>2.0</td>
-                <td>СРЕДСТВА ИНДИВИДУАЛЬНОЙ ЗАЩИТЫ (СИЗ)</td>
-                <td className="card__table-safety"></td>
-                <td className="card__table-safety"></td>
-                </tr>
-                <tr>
-                <td>2.1</td>
-                <td>Защита тела (комбинезон)</td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety4" id="safe5" onInput={handleInput}/>
-                </td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety4" id="danger5" onInput={handleInput}/>
-                </td>
-                </tr>
-                <tr>
-                <td>2.2</td>
-                <td>Защита головы</td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety5" id="safe6" onInput={handleInput}/>
-                </td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety5" id="danger6" onInput={handleInput}/>
-                </td>
-                </tr>
-                <tr>
-                <td>2.3</td>
-                <td>Защита глаз и лица</td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety6" id="safe7" onInput={handleInput}/>
-                </td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety6" id="danger7" onInput={handleInput}/>
-                </td>
-                </tr>
-                <tr>
-                <td>2.4</td>
-                <td>Защита органов слуха</td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety7" id="safe8" onInput={handleInput}/>
-                </td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety7" id="danger8" onInput={handleInput}/>
-                </td>
-                </tr>
-                <tr>
-                <td>2.5</td>
-                <td>Защита органов дыхания</td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety8" id="safe9" onInput={handleInput}/>
-                </td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety8" id="danger9" onInput={handleInput}/>
-                </td>
-                </tr>
-                <tr>
-                <td>2.6</td>
-                <td>Защита рук</td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety9" id="safe10" onInput={handleInput}/>
-                </td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety9" id="safe10" onInput={handleInput}/>
-                </td>
-                </tr>
-                <tr>
-                <td>2.7</td>
-                <td>Защита ног</td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety10" id="safe11" onInput={handleInput}/>
-                </td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety10" id="danger11" onInput={handleInput}/>
-                </td>
-                </tr>
-                <tr>
-                <td>2.8</td>
-                <td>Защита от падения</td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety11" id="safe12" onInput={handleInput}/>
-                </td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety11" id="danger12" onInput={handleInput}/>
-                </td>
-                </tr>
-                <tr className="card__table-green">
-                <td>3.0</td>
-                <td>ПОЛОЖЕНИЕ / ДВИЖЕНИЕ ТЕЛА</td>
-                <td className="card__table-safety"></td>
-                <td className="card__table-safety"></td>
-                </tr>
-                <tr>
-                <td>3.1</td>
-                <td>Находиться «под ударом»</td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety12" id="safe13" onInput={handleInput}/>
-                </td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety12" id="danger13" onInput={handleInput}/>
-                </td>
-                </tr>
-                <tr>
-                <td>3.2</td>
-                <td>Избегать точек защемления</td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety13" id="safe14" onInput={handleInput}/>
-                </td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety13" id="danger14" onInput={handleInput}/>
-                </td>
-                </tr>
-                <tr>
-                <td>3.3</td>
-                <td>Следить за работой и смотреть под ноги</td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety14" id="safe15" onInput={handleInput}/>
-                </td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety14" id="danger15" onInput={handleInput}/>
-                </td>
-                </tr>
-                <tr>
-                <td>3.4</td>
-                <td>Подниматься/спускаться (люди)</td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety15" id="safe16" onInput={handleInput}/>
-                </td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety15" id="danger16" onInput={handleInput}/>
-                </td>
-                </tr>
-                <tr>
-                <td>3.5</td>
-                <td>Передвигаться по установленным дорожкам</td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety16" id="safe17" onInput={handleInput}/>
-                </td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety16" id="danger17"  onInput={handleInput}/>
-                </td>
-                </tr>
-                <tr>
-                <td>3.6</td>
-                <td>Поднимать/опускать/толкать/тянуть (груз)</td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety17" id="safe18"  onInput={handleInput}/>
-                </td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety17" id="danger18"  onInput={handleInput}/>
-                </td>
-                </tr>
-                <tr className="card__table-green">
-                <td>4.0</td>
-                <td>Инструменты и оборудование</td>
-                <td className="card__table-safety"></td>
-                <td className="card__table-safety"></td>
-                </tr>
-                <tr>
-                <td>4.1</td>
-                <td>Выбор и использование инструментов /Оборудования</td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety18" id="safe19"  onInput={handleInput}/>
-                </td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety18" id="danger19"  onInput={handleInput}/>
-                </td>
-                </tr>
-                <tr>
-                <td>4.2</td>
-                <td>
-                    Использование защитных ограждений/Устройств предупредительной
-                    сигнализации
-                </td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety19" id="safe20" onInput={handleInput}/>
-                </td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety19" id="danger20" onInput={handleInput}/>
-                </td>
-                </tr>
-                <tr>
-                <td>5.0</td>
-                <td>МЕСТО ПРОВЕДЕНИЯ РАБОТ</td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety20" id="safe21" onInput={handleInput}/>
-                </td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety20" id="danger21" onInput={handleInput}/>
-                </td>
-                </tr>
-                <tr>
-                <td>5.1</td>
-                <td>Работа в стабильном положении</td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety21" id="safe22" onInput={handleInput}/>
-                </td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety21" id="danger22" onInput={handleInput}/>
-                </td>
-                </tr>
-                <tr>
-                <td>5.2</td>
-                <td>
-                    Уборка / хранение инструментов и оборудования (порядок на рабочем
-                    месте)
-                </td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety22" id="safe23" onInput={handleInput}/>
-                </td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety22" id="danger23" onInput={handleInput}/>
-                </td>
-                </tr>
-                <tr>
-                <td>5.3</td>
-                <td>Раздельный сбор и хранение отходов</td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety23" id="safe24" onInput={handleInput}/>
-                </td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety23" id="danger24" onInput={handleInput}/>
-                </td>
-                </tr>
-                <tr>
-                <td>5.4</td>
-                <td>Соответствующая маркировка контейнеров c химикатами</td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety24" id="safe25" onInput={handleInput}/>
-                </td>
-                <td className="card__table-safety">
-                    <input type="radio" name="safety24" id="danger25" onInput={handleInput}/>
-                </td>
-                </tr>
-            </tbody>
-            </table>
-            {/* Comments */}
-            <div className="comment">
-            <div className="comment__header">
-                КОММЕНТАРИИ <br />
-                (положительные или отрицательные): <br />
-                ЧТО?/КОГДА?/ПОЧЕМУ?/РЕШЕНИЕ
-            </div>
-            <textarea
-                name="comment"
-                id="comment"
-                cols={130}
-                rows={5}
-                className="comment__content"
-                placeholder="Comment"
+      <div className="card">
+        {/* Title */}
+        <p className="card__title">
+          Карточка поведенческого наблюдения по безопасности работ
+        </p>
+        {/* Upper row buttons */}
+        <div className="card__btn-row">
+          {/* Plan and Fact buttons */}
+          <div className="card__plan-fact">
+            <div>
+              <input
+                type="radio"
+                id="plan"
+                name="schedule"
                 onInput={handleInput}
-            />
+              />
+              <label htmlFor="plan">По графику</label>
             </div>
-            {/* Comments */}
-            <div className="comment">
-            <div className="comment__header">
-                Комментарии по обратной связи в форме обмена <br /> мнениями между
-                наблюдателем и наблюдаемым(и):
-            </div>
-            <textarea
-                name="comment"
-                id="comment2"
-                cols={130}
-                rows={5}
-                className="comment__content"
-                placeholder="Comment"
+            <div>
+              <input
+                type="radio"
+                id="fact"
+                name="schedule"
                 onInput={handleInput}
-            />
+              />
+              <label htmlFor="plan">Не по графику</label>
             </div>
-            {/* ADDITION BUTTON */}
-            <div className="create-doc__buttons" style={{ marginTop: 0 }}>
-            <a
-                href="./management_programs_doc_list.html"
-                className="create-doc__cancel-button create-doc__button-text"
-            >
-                Отменить
-            </a>
-            <button
-                type="submit"
-                className="create-doc__button create-doc__button-text"
-                onClick={handleSend}
-            >
-                Отправить
-            </button>
-            </div>
+          </div>
         </div>
+        {/* Card table */}
+        <table className="card__table">
+          <tbody>
+            <tr>
+              <th colSpan={2}>НАБЛЮДАТЕЛЬ</th>
+              <th>НАБЛЮДАЕМЫЙ</th>
+            </tr>
+            <tr>
+              <td colSpan={2}>
+                <div>
+                  <p>Ф.И.О.:</p>
+                  <select
+                    onInput={handleInput}
+                    name="employeeFullName"
+                    id="employeeFullName"
+                    className="create-doc__field-content"
+                    style={{ width: "100%", border: "none" }}
+                  >
+                    {users?.map((el, idx) => (
+                      <option key={idx} value={el.username}>
+                        {el.username}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </td>
+              <td>
+                <div>
+                  {/* Observer's driving experience */}
+                  <p>НАБЛЮДАЕМЫЙ ОТДЕЛ / КОМПАНИЯ: </p>
+                  <input
+                    type="text"
+                    name="monitoredDep"
+                    id="monitoredDep"
+                    className="card__column-input"
+                    onInput={handleInput}
+                  />
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td colSpan={2}>
+                {/* Observer's division */}
+                <div className="card__column-unit">
+                  <p>СТРУКТУРНОЕ ПОДРАЗДЕЛЕНИЕ:</p>
+                  <select
+                    onInput={handleInput}
+                    name="divisionName"
+                    id="divisionName"
+                    className="create-doc__field-content"
+                    style={{ width: "100%", border: "none" }}
+                  >
+                    {users?.map((el, idx) => (
+                      <option key={idx} value={el.department}>
+                        {el.department}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </td>
+              <td>
+                {/* Driver's driving experience */}
+                <div className="card__column-unit">
+                  <p>НАБЛЮДАЕМОЕ РАБОЧЕЕ ЗАДАНИЕ:</p>
+                  <input
+                    type="text"
+                    name="monitoredTask"
+                    id="monitoredTask"
+                    className="card__column-input"
+                    onInput={handleInput}
+                  />
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                {/* Observer's ride date */}
+                <div className="card__column-unit">
+                  <p>ДАТА / ВРЕМЯ:</p>
+                  <input
+                    type="datetime-local"
+                    name="dateTime"
+                    id="dateTime"
+                    className="card__column-input"
+                    onInput={handleInput}
+                  />
+                </div>
+              </td>
+              <td>
+                {/* Observer's ride start */}
+                <div className="card__column-unit">
+                  <p>КОЛИЧЕСТВО НАБЛЮДАЕМЫХ:</p>
+                  <input
+                    type="number"
+                    name="monitoringNum"
+                    id="monitoringNum"
+                    className="card__column-input"
+                    onInput={handleInput}
+                  />
+                </div>
+              </td>
+              <td>
+                {/* Observer's location */}
+                <div className="card__column-unit">
+                  <p>МЕСТО ПРОВЕДЕНИЯ:</p>
+                  <input
+                    type="text"
+                    name="location"
+                    id="location"
+                    className="card__column-input"
+                    onInput={handleInput}
+                  />
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        {/* Driving evaluation */}
+        <table className="card__table card__indicators">
+          <tbody>
+            <tr>
+              <th style={{ width: 60 }}>КОД</th>
+              <th style={{ width: 945 }}>АСПЕКТЫ ПОВЕДЕНИЯ</th>
+              <th>БЕЗОПАСНО</th>
+              <th>ОПАСНО</th>
+            </tr>
+            <tr className="card__table-green">
+              <td>1.0</td>
+              <td>ПРОЦЕДУРЫ</td>
+              <td className="card__table-safety"></td>
+              <td className="card__table-safety"></td>
+            </tr>
+            <tr>
+              <td>1.1</td>
+              <td>Подготовка к работе и выявление опасных факторов</td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety1"
+                  id="safe1"
+                  onInput={handleInput}
+                />
+              </td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety1"
+                  id="danger1"
+                  onInput={handleInput}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>1.2</td>
+              <td>Соблюдение пошаговых производственных инструкций</td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety2"
+                  id="safe2"
+                  onInput={handleInput}
+                />
+              </td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety2"
+                  id="danger2"
+                  onInput={handleInput}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>1.3</td>
+              <td>Соблюдение требований наряда-допуска</td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety3"
+                  id="safe3"
+                  onInput={handleInput}
+                />
+              </td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety3"
+                  id="danger3"
+                  onInput={handleInput}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>1.4</td>
+              <td>Взаимосвязь с коллегами</td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety25"
+                  id="safe4"
+                  onInput={handleInput}
+                />
+              </td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety25"
+                  id="danger4"
+                  onInput={handleInput}
+                />
+              </td>
+            </tr>
+            <tr className="card__table-green">
+              <td>2.0</td>
+              <td>СРЕДСТВА ИНДИВИДУАЛЬНОЙ ЗАЩИТЫ (СИЗ)</td>
+              <td className="card__table-safety"></td>
+              <td className="card__table-safety"></td>
+            </tr>
+            <tr>
+              <td>2.1</td>
+              <td>Защита тела (комбинезон)</td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety4"
+                  id="safe5"
+                  onInput={handleInput}
+                />
+              </td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety4"
+                  id="danger5"
+                  onInput={handleInput}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>2.2</td>
+              <td>Защита головы</td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety5"
+                  id="safe6"
+                  onInput={handleInput}
+                />
+              </td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety5"
+                  id="danger6"
+                  onInput={handleInput}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>2.3</td>
+              <td>Защита глаз и лица</td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety6"
+                  id="safe7"
+                  onInput={handleInput}
+                />
+              </td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety6"
+                  id="danger7"
+                  onInput={handleInput}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>2.4</td>
+              <td>Защита органов слуха</td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety7"
+                  id="safe8"
+                  onInput={handleInput}
+                />
+              </td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety7"
+                  id="danger8"
+                  onInput={handleInput}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>2.5</td>
+              <td>Защита органов дыхания</td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety8"
+                  id="safe9"
+                  onInput={handleInput}
+                />
+              </td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety8"
+                  id="danger9"
+                  onInput={handleInput}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>2.6</td>
+              <td>Защита рук</td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety9"
+                  id="safe10"
+                  onInput={handleInput}
+                />
+              </td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety9"
+                  id="safe10"
+                  onInput={handleInput}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>2.7</td>
+              <td>Защита ног</td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety10"
+                  id="safe11"
+                  onInput={handleInput}
+                />
+              </td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety10"
+                  id="danger11"
+                  onInput={handleInput}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>2.8</td>
+              <td>Защита от падения</td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety11"
+                  id="safe12"
+                  onInput={handleInput}
+                />
+              </td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety11"
+                  id="danger12"
+                  onInput={handleInput}
+                />
+              </td>
+            </tr>
+            <tr className="card__table-green">
+              <td>3.0</td>
+              <td>ПОЛОЖЕНИЕ / ДВИЖЕНИЕ ТЕЛА</td>
+              <td className="card__table-safety"></td>
+              <td className="card__table-safety"></td>
+            </tr>
+            <tr>
+              <td>3.1</td>
+              <td>Находиться «под ударом»</td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety12"
+                  id="safe13"
+                  onInput={handleInput}
+                />
+              </td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety12"
+                  id="danger13"
+                  onInput={handleInput}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>3.2</td>
+              <td>Избегать точек защемления</td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety13"
+                  id="safe14"
+                  onInput={handleInput}
+                />
+              </td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety13"
+                  id="danger14"
+                  onInput={handleInput}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>3.3</td>
+              <td>Следить за работой и смотреть под ноги</td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety14"
+                  id="safe15"
+                  onInput={handleInput}
+                />
+              </td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety14"
+                  id="danger15"
+                  onInput={handleInput}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>3.4</td>
+              <td>Подниматься/спускаться (люди)</td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety15"
+                  id="safe16"
+                  onInput={handleInput}
+                />
+              </td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety15"
+                  id="danger16"
+                  onInput={handleInput}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>3.5</td>
+              <td>Передвигаться по установленным дорожкам</td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety16"
+                  id="safe17"
+                  onInput={handleInput}
+                />
+              </td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety16"
+                  id="danger17"
+                  onInput={handleInput}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>3.6</td>
+              <td>Поднимать/опускать/толкать/тянуть (груз)</td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety17"
+                  id="safe18"
+                  onInput={handleInput}
+                />
+              </td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety17"
+                  id="danger18"
+                  onInput={handleInput}
+                />
+              </td>
+            </tr>
+            <tr className="card__table-green">
+              <td>4.0</td>
+              <td>Инструменты и оборудование</td>
+              <td className="card__table-safety"></td>
+              <td className="card__table-safety"></td>
+            </tr>
+            <tr>
+              <td>4.1</td>
+              <td>Выбор и использование инструментов /Оборудования</td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety18"
+                  id="safe19"
+                  onInput={handleInput}
+                />
+              </td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety18"
+                  id="danger19"
+                  onInput={handleInput}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>4.2</td>
+              <td>
+                Использование защитных ограждений/Устройств предупредительной
+                сигнализации
+              </td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety19"
+                  id="safe20"
+                  onInput={handleInput}
+                />
+              </td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety19"
+                  id="danger20"
+                  onInput={handleInput}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>5.0</td>
+              <td>МЕСТО ПРОВЕДЕНИЯ РАБОТ</td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety20"
+                  id="safe21"
+                  onInput={handleInput}
+                />
+              </td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety20"
+                  id="danger21"
+                  onInput={handleInput}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>5.1</td>
+              <td>Работа в стабильном положении</td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety21"
+                  id="safe22"
+                  onInput={handleInput}
+                />
+              </td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety21"
+                  id="danger22"
+                  onInput={handleInput}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>5.2</td>
+              <td>
+                Уборка / хранение инструментов и оборудования (порядок на
+                рабочем месте)
+              </td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety22"
+                  id="safe23"
+                  onInput={handleInput}
+                />
+              </td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety22"
+                  id="danger23"
+                  onInput={handleInput}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>5.3</td>
+              <td>Раздельный сбор и хранение отходов</td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety23"
+                  id="safe24"
+                  onInput={handleInput}
+                />
+              </td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety23"
+                  id="danger24"
+                  onInput={handleInput}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>5.4</td>
+              <td>Соответствующая маркировка контейнеров c химикатами</td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety24"
+                  id="safe25"
+                  onInput={handleInput}
+                />
+              </td>
+              <td className="card__table-safety">
+                <input
+                  type="radio"
+                  name="safety24"
+                  id="danger25"
+                  onInput={handleInput}
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        {/* Comments */}
+        <div className="comment">
+          <div className="comment__header">
+            КОММЕНТАРИИ <br />
+            (положительные или отрицательные): <br />
+            ЧТО?/КОГДА?/ПОЧЕМУ?/РЕШЕНИЕ
+          </div>
+          <textarea
+            name="comment"
+            id="comment"
+            cols={130}
+            rows={5}
+            className="comment__content"
+            placeholder="Comment"
+            onInput={handleInput}
+          />
+        </div>
+        {/* Comments */}
+        <div className="comment">
+          <div className="comment__header">
+            Комментарии по обратной связи в форме обмена <br /> мнениями между
+            наблюдателем и наблюдаемым(и):
+          </div>
+          <textarea
+            name="comment"
+            id="comment2"
+            cols={130}
+            rows={5}
+            className="comment__content"
+            placeholder="Comment"
+            onInput={handleInput}
+          />
+        </div>
+        {/* ADDITION BUTTON */}
+        <div className="create-doc__buttons" style={{ marginTop: 0 }}>
+          <a
+            href="/labor_protection/list/47"
+            className="create-doc__cancel-button create-doc__button-text"
+          >
+            Отменить
+          </a>
+          <button
+            type="submit"
+            className="create-doc__button create-doc__button-text"
+            onClick={handleSend}
+          >
+            Отправить
+          </button>
+        </div>
+      </div>
     </div>
-
   );
 };
 

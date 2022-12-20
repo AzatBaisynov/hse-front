@@ -47,7 +47,7 @@ const PnbrCardList = () => {
         <div className="doc-list__buttons">
           <NavLink
             exact
-            to="/labor_protection/folders/8/nest/0"
+            to="/labor_protection/folders/10/nest/0"
             className="go-back-button button-general"
           >
             Назад

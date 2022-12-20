@@ -33,7 +33,7 @@ const DocUpdate = () => {
 				console.log(data)
 				setDepartments(data.departments)
 				setUsers(data.users)
-				setDocument({ ...document, readerUser: data.users[0].username, department: data.departments[0].depName, reviewPeriod: "3-months" })
+				setDocument({ ...document, readerUser: data.users[0].username, department: data.users[0].department, reviewPeriod: "3-months" })
 			} catch (e) {
 				alert(e)
 			}
@@ -201,8 +201,8 @@ const DocUpdate = () => {
 								<option value={doc?.department?.id}>{doc?.department}</option>
 							}
 							{
-								departments?.filter(el => doc?.department !== el.depName).map((el, idx) => (
-									<option key={idx} value={el.depName}>{el.depName}</option>
+								users?.filter(el => doc?.department !== el.department).map((el, idx) => (
+									<option key={idx} value={el.department}>{el.department}</option>
 								))
 							}
 						</select>

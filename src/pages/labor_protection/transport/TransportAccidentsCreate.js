@@ -185,7 +185,7 @@ const TransportAccidentsCreate = () => {
         {/* ADDITION BUTTON */}
         <div className="create-doc__buttons">
           <a
-            href="./utilization_contracts_doc_list.html"
+            href="/labor_protection/list/61"
             className="create-doc__cancel-button create-doc__button-text"
           >
             Отменить

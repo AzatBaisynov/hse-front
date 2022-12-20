@@ -28,7 +28,7 @@ function CreateDocForm() {
                 console.log(data)
                 setDepartments(data.departments)
                 setUsers(data.users)
-                setDocument({ ...document, readerUser: data.users[0].username, department: data.departments[0].depName, reviewPeriod: "3-months"})
+                setDocument({ ...document, readerUser: data.users[0].username, department: data.users[0].department, reviewPeriod: "3-months"})
             } catch (e) {
                 alert(e)
             }
@@ -164,8 +164,8 @@ function CreateDocForm() {
                         <div className="create-doc__field-title">Ответственный департамент</div>
                         <select onInput={handleInput} name="responsible-department" id="department" className="create-doc__field-content">
                             {
-                                departments?.map((el, idx) => (
-                                    <option key={idx} value={el.depName}>{el.depName}</option>
+                                users?.map((el, idx) => (
+                                    <option key={idx} value={el.department}>{el.department}</option>
                                 ))
                             }
                         </select>

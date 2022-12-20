@@ -462,7 +462,7 @@ const PnbvCardRead = () => {
     {/* ADDITION BUTTON */}
     <div className="create-doc__buttons" style={{ marginTop: 0 }}>
       <a
-        href="./management_programs_doc_list.html"
+        href="/labor_protection/list/48"
         className="create-doc__cancel-button create-doc__button-text"
       >
         Отменить

@@ -14,6 +14,7 @@ const PpePurchase = () => {
 
   const handleSelectFiles = (e) => {
     setFile(e.target.files[0]);
+    console.log(file);
   };
 
   const runLoader = async (isLoading) => {

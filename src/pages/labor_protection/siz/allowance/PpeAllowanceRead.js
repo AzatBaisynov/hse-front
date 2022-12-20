@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import uploadIcon from "../../../../assets/images/upload-icon.svg";
 import { _LINK } from "../../../../data/links";

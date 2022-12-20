@@ -82,8 +82,28 @@ import TransportTrafficList from './pages/labor_protection/transport/TransportTr
 import TransportFuelConsumption from './pages/labor_protection/transport/TransportFuelConsumption';
 import TransportList from './pages/labor_protection/transport/TransportList';
 import ContractorCard from './pages/labor_protection/contractorManagement/ContractorCard';
+import ContractorList from './pages/labor_protection/contractorManagement/ContractorList';
+import ContractorCardRead from './pages/labor_protection/contractorManagement/ContractorCardRead';
+import ContractorCardEdit from './pages/labor_protection/contractorManagement/ContractorCardEdit';
+import ResponsibilityOrder from './pages/labor_protection/contractorManagement/responsibilityOrder/ResponsibilityOrderCreate';
+import ResponsibilityOrderRead from './pages/labor_protection/contractorManagement/responsibilityOrder/ResponsibilityOrderRead';
+import ResponsibilityOrderEdit from './pages/labor_protection/contractorManagement/responsibilityOrder/ResponsibilityOrderEdit';
+import ResponsibilityOrderList from './pages/labor_protection/contractorManagement/responsibilityOrder/ResponsibilityOrderList';
 import PnbrCardRead from './pages/labor_protection/pnb/pnbrCard/PnbrCardRead';
 import PnbvCardRead from './pages/labor_protection/pnb/pnbvCard/PnbvCardRead';
+import EmployeeCard from './pages/labor_protection/employeeCard/EmployeeCard';
+import EmployeeCardRead from './pages/labor_protection/employeeCard/EmployeeCardRead';
+import EmployeeCardList from './pages/labor_protection/employeeCard/EmployeeCardList';
+import EmployeeCardEdit from './pages/labor_protection/employeeCard/EmployeeCardEdit';
+import MedExamination from './pages/labor_protection/medExamination/MedExamination';
+import MedExaminationRead from './pages/labor_protection/medExamination/MedExaminationRead';
+import MedExaminationList from './pages/labor_protection/medExamination/MedExaminationList';
+import MedExaminationEdit from './pages/labor_protection/medExamination/MedExaminationEdit';
+import WorkingConditions from './pages/labor_protection/workingConditions/workingConditions'
+import WorkPermission from './pages/labor_protection/workPermission/WorkPermission'
+import WorkPermissionList from './pages/labor_protection/workPermission/WorkPermissionList'
+import WorkPermissionRead from './pages/labor_protection/workPermission/WorkPermissionRead'
+import WorkPermissionEdit from './pages/labor_protection/workPermission/WorkPermissionEdit'
 
 function App() {
   const { isAuth } = useSelector(store => store.login)
@@ -174,9 +194,29 @@ function App() {
           <Route exact path="/labor/transport/traffic/edit/:id" element={<MainLaborProtection><TransportTrafficViolationEdit/></MainLaborProtection>} />
           <Route exact path="/labor_protection/list/63" element={<MainLaborProtection><TransportFuelConsumption/></MainLaborProtection>} />
           <Route exact path="/labor_protection/list/62" element={<MainLaborProtection><TransportList/></MainLaborProtection>} />
-          <Route exact path="/labor_protection/list/69" element={<MainLaborProtection><ContractorCard/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/list/69" element={<MainLaborProtection><ContractorList/></MainLaborProtection>} />
           <Route exact path="/labor/pnb/pnbr_card/get/:id" element={<MainLaborProtection><PnbrCardRead/></MainLaborProtection>} />
           <Route exact path="/labor/pnb/pnbv_card/get/:id" element={<MainLaborProtection><PnbvCardRead/></MainLaborProtection>} />
+          <Route exact path="/labor/contractors/cards/get/:id" element={<MainLaborProtection><ContractorCardRead/></MainLaborProtection>} />
+          <Route exact path="/labor/contractors/cards/edit/:id" element={<MainLaborProtection><ContractorCardEdit/></MainLaborProtection>} />
+          <Route exact path="/labor/contractors/cards" element={<MainLaborProtection><ContractorCard/></MainLaborProtection>} />
+          <Route exact path="/labor/contractors/responsibility_order" element={<MainLaborProtection><ResponsibilityOrder/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/list/70" element={<MainLaborProtection><ResponsibilityOrderList/></MainLaborProtection>} />
+          <Route exact path="/labor/contractors/orders/get/:id" element={<MainLaborProtection><ResponsibilityOrderRead/></MainLaborProtection>} />
+          <Route exact path="/labor/contractors/orders/edit/:id" element={<MainLaborProtection><ResponsibilityOrderEdit/></MainLaborProtection>} />
+          <Route exact path="/labor/employees/cards" element={<MainLaborProtection><EmployeeCard/></MainLaborProtection>} />
+          <Route exact path="/labor/employees/cards/get/:id" element={<MainLaborProtection><EmployeeCardRead/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/list/65" element={<MainLaborProtection><EmployeeCardList/></MainLaborProtection>} />
+          <Route exact path="/labor/employees/cards/edit/:id" element={<MainLaborProtection><EmployeeCardEdit/></MainLaborProtection>} />
+          <Route exact path="/labor/employees/med_examination" element={<MainLaborProtection><MedExamination/></MainLaborProtection>} />
+          <Route exact path="/labor/employees/med_examination/get/:id" element={<MainLaborProtection><MedExaminationRead/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/list/66" element={<MainLaborProtection><MedExaminationList/></MainLaborProtection>} />
+          <Route exact path="/labor/employees/med_examination/edit/:id" element={<MainLaborProtection><MedExaminationEdit/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/list/67" element={<MainLaborProtection><WorkingConditions/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/work_permission/" element={<MainLaborProtection><WorkPermission/></MainLaborProtection>} />
+          <Route exact path="/labor_protection/list/46" element={<MainLaborProtection><WorkPermissionList/></MainLaborProtection>} />
+          <Route exact path="/labor/work_permission/get/:id" element={<MainLaborProtection><WorkPermissionRead/></MainLaborProtection>} />
+          <Route exact path="/labor/work_permission/edit/:id" element={<MainLaborProtection><WorkPermissionEdit/></MainLaborProtection>} />
         </Routes>
       </Router>
     );
