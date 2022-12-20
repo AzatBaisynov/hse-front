@@ -7,7 +7,35 @@ import "../../../../assets/style/ppe_reviews.css";
 const PpeReviews = () => {
   const [document, setDocument] = useState({});
   const { dirId } = useSelector((store) => store.files);
+  const [departments, setDepartments] = useState([]);
+  const [users, setUsers] = useState([]);
 
+  useEffect(() => {
+    const get = async () => {
+      const config = {
+        method: "GET",
+        url: `${_LINK}/v1/api/org/ldap/all`,
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      };
+      try {
+        const { data } = await axios(config);
+        console.log(data);
+        setDepartments(data.departments);
+        setUsers(data.users);
+        setDocument({
+          ...document,
+          senderUser: data.users[0].username,
+          issuingAuthority: data.users[0].department,
+          makerUser: data.users[0].username,
+        });
+      } catch (e) {
+        alert(e);
+      }
+    };
+    get();
+  }, []);
 
   const handleInput = (e) => {
     const { id, value } = e.target;
@@ -80,30 +108,51 @@ const PpeReviews = () => {
           </div>
           <div className="horizontal-form__column">
             <div className="column-title">ФИО / Name</div>
-            <input
-              type="text"
+            <select
               onInput={handleInput}
-              className="column-content"
+              name="employeeFullName"
               id="employeeFullName"
-            />
+              className="create-doc__field-content"
+              style={{ width: "100%", height: "43%", borde: "none" }}
+            >
+              {users?.map((el, idx) => (
+                <option key={idx} value={el.username}>
+                  {el.username}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="horizontal-form__column">
             <div className="column-title">Должность / Position</div>
-            <input
-              type="text"
+            <select
               onInput={handleInput}
-              className="column-content"
+              name="position"
               id="position"
-            />
+              className="create-doc__field-content"
+              style={{ height: "43%", borde: "none" }}
+            >
+              {users?.map((el, idx) => (
+                <option key={idx} value={el.userdesc}>
+                  {el.userdesc}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="horizontal-form__column">
             <div className="column-title">Подразделение / Division</div>
-            <input
-              type="text"
+            <select
               onInput={handleInput}
-              className="column-content"
+              name="divisionName"
               id="divisionName"
-            />
+              className="create-doc__field-content"
+              style={{ width: "100%", height: "43%", borde: "none" }}
+            >
+              {users?.map((el, idx) => (
+                <option key={idx} value={el.department}>
+                  {el.department}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="horizontal-form__column">
             <div className="column-title">Объект / Object</div>
@@ -127,22 +176,9 @@ const PpeReviews = () => {
           </div>
         </div>
         <div className="form__field">
-          <div
-            className="form__field-title"
-            style={{
-              backgroundColor: "rgba(50, 115, 174, 0.1)",
-              border: "1px solid #9ABAD7",
-              color: "#3273AE",
-              fontWeight: 600,
-            }}
-          >
+          <div className="form__field-title form__field-title_blue">
             Наименование СИЗ / Name of PPE
           </div>
-          {/* <select name="itemName" id="itemName" class="form__field-content form__field-content_long">
-              <option value="1">item 1</option> 
-              <option value="2">item 2</option>
-              <option value="3">item 3</option>
-          </select> */}
           <input
             list="ppeName"
             className="form__field-content form__field-content_long"
@@ -161,7 +197,7 @@ const PpeReviews = () => {
         {/* ADDITION BUTTON */}
         <div className="create-doc__buttons">
           <a
-            href="./management_programs_doc_list.html"
+            href="labor_protection/list/43"
             className="create-doc__decline"
           >
             Отменить

@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { _LINK } from "../../../../data/links";
 import "../../../../assets/style/pnbr_card.css";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 
 const PnbrCardRead = () => {
   const [document, setDocument] = useState({});
@@ -754,18 +754,13 @@ const PnbrCardRead = () => {
         </div>
         {/* ADDITION BUTTON */}
         <div className="create-doc__buttons" style={{ marginTop: 0 }}>
-          <a
-            href="/labor_protection/list/47"
-            className="create-doc__cancel-button create-doc__button-text"
+        <NavLink
+            exact
+            to="/labor_protection/list/47"
+            className="create-doc-button button-general"
           >
-            Назад
-          </a>
-          <button
-            type="submit"
-            className="create-doc__button create-doc__button-text"
-          >
-            Отправить
-          </button>
+            Закрыть
+          </NavLink>
         </div>
       </div>
     </div>

@@ -10,6 +10,35 @@ const PpeReviewsEdit = () => {
   const [document, setDocument] = useState({});
   const { dirId } = useSelector((store) => store.files);
   const { id } = useParams();
+  const [departments, setDepartments] = useState([]);
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const get = async () => {
+      const config = {
+        method: "GET",
+        url: `${_LINK}/v1/api/org/ldap/all`,
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      };
+      try {
+        const { data } = await axios(config);
+        console.log(data);
+        setDepartments(data.departments);
+        setUsers(data.users);
+        setDocument({
+          ...document,
+          senderUser: data.users[0].username,
+          issuingAuthority: data.users[0].department,
+          makerUser: data.users[0].username,
+        });
+      } catch (e) {
+        alert(e);
+      }
+    };
+    get();
+  }, []);
 
   useEffect(() => {
     const getDocument = async () => {
@@ -100,15 +129,54 @@ const PpeReviewsEdit = () => {
           </div>
           <div className="horizontal-form__column">
             <div className="column-title">ФИО / Name</div>
-            <input type="text" onInput={handleInput} className="column-content" id="employeeFullName" value={document?.employeeFullName} />
+            <select
+              onInput={handleInput}
+              value={document?.employeeFullName}
+              name="employeeFullName"
+              id="employeeFullName"
+              className="create-doc__field-content"
+              style={{ width: "100%", height: "43%", borde: "none" }}
+            >
+              {users?.map((el, idx) => (
+                <option key={idx} value={el.username}>
+                  {el.username}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="horizontal-form__column">
             <div className="column-title">Должность / Position</div>
-            <input type="text" onInput={handleInput} className="column-content" id="position" value={document?.position} />
+            <select
+              onInput={handleInput}
+              name="position"
+              id="position"
+              value={document?.position}
+              className="create-doc__field-content"
+              style={{ height: "43%", borde: "none" }}
+            >
+              {users?.map((el, idx) => (
+                <option key={idx} value={el.userdesc}>
+                  {el.userdesc}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="horizontal-form__column">
             <div className="column-title">Подразделение / Division</div>
-            <input type="text" onInput={handleInput} className="column-content" id="divisionName" value={document?.divisionName} />
+            <select
+              onInput={handleInput}
+              name="divisionName"
+              id="divisionName"
+              className="create-doc__field-content"
+              value={document?.divisionName}
+              style={{ width: "100%", height: "43%", borde: "none" }}
+            >
+              {users?.map((el, idx) => (
+                <option key={idx} value={el.department}>
+                  {el.department}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="horizontal-form__column">
             <div className="column-title">Объект / Object</div>
@@ -155,7 +223,7 @@ const PpeReviewsEdit = () => {
         {/* ADDITION BUTTON */}
         <div className="create-doc__buttons">
           <a
-            href="./management_programs_doc_list.html"
+            href="/labor_protection/list/43"
             className="create-doc__decline"
           >
             Отменить

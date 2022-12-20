@@ -37,6 +37,7 @@ const PpeReviewsList = () => {
   useEffect(() => {
     if (isOld) {
       const newB = back;
+      console.log(newB);
       newB.content.reverse();
       setBack(newB);
     }

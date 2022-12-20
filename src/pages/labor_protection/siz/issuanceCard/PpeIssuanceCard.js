@@ -13,6 +13,35 @@ const PpeIssuanceCard = () => {
   const [excel, setExcel] = useState({});
   const [document, setDocument] = useState({});
   const { dirId } = useSelector((store) => store.files);
+  const [departments, setDepartments] = useState([]);
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const get = async () => {
+      const config = {
+        method: "GET",
+        url: `${_LINK}/v1/api/org/ldap/all`,
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      };
+      try {
+        const { data } = await axios(config);
+        console.log(data);
+        setDepartments(data.departments);
+        setUsers(data.users);
+        setDocument({
+          ...document,
+          senderUser: data.users[0].username,
+          issuingAuthority: data.users[0].department,
+          makerUser: data.users[0].username,
+        });
+      } catch (e) {
+        alert(e);
+      }
+    };
+    get();
+  }, []);
 
   const handleSelectFiles = (e) => {
     setFile(e.target.files[0]);
@@ -159,17 +188,49 @@ const PpeIssuanceCard = () => {
                   <input type="text" id="employeeId" onInput={handleInput} />
                 </td>
                 <td>
-                  <input
-                    type="text"
-                    id="employeeFullName"
+                  <select
                     onInput={handleInput}
-                  />
+                    name="employeeFullName"
+                    id="employeeFullName"
+                    className="create-doc__field-content"
+                    style={{ width: "100%", height: "43%", borde: "none" }}
+                  >
+                    {users?.map((el, idx) => (
+                      <option key={idx} value={el.username}>
+                        {el.username}
+                      </option>
+                    ))}
+                  </select>
                 </td>
                 <td>
-                  <input type="text" id="position" onInput={handleInput} />
+                  <select
+                    onInput={handleInput}
+                    name="position"
+                    id="position"
+                    className="create-doc__field-content"
+                    style={{ height: "43%", borde: "none" }}
+                  >
+                    {users?.map((el, idx) => (
+                      <option key={idx} value={el.userdesc}>
+                        {el.userdesc}
+                      </option>
+                    ))}
+                  </select>
                 </td>
                 <td>
-                  <input type="text" id="divisionName" onInput={handleInput} />
+                  <select
+                    onInput={handleInput}
+                    name="divisionName"
+                    id="divisionName"
+                    className="create-doc__field-content"
+                    style={{ width: "100%", height: "43%", borde: "none" }}
+                  >
+                    {users?.map((el, idx) => (
+                      <option key={idx} value={el.department}>
+                        {el.department}
+                      </option>
+                    ))}
+                  </select>
                 </td>
                 <td>
                   <input type="text" id="cmcCode" onInput={handleInput} />

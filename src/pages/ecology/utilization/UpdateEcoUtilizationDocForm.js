@@ -199,7 +199,7 @@ const UpdateEcoUtilizationDocForm = () => {
 					<input type="text" name="executiveOrganization" value={document?.organization} onInput={handleInput} id="organization" className="form__field-content form__field-content_long" />
 				</div>
 				<div className="create-doc__field" >
-					<div className="create-doc__field-title">Загрузка документа</div>
+					<div className="create-doc__field-title">Договор</div>
 					<div className="create-doc__upload-file create-doc__field-content" style={{ width: "886px" }}>
 						<label htmlFor="file1" >
 							<span className="create-doc__label">
@@ -211,7 +211,7 @@ const UpdateEcoUtilizationDocForm = () => {
 					</div>
 				</div>
 				<div className="create-doc__field" >
-					<div className="create-doc__field-title">Загрузка документа</div>
+					<div className="create-doc__field-title">ЭСФ и АВР</div>
 					<div className="create-doc__upload-file create-doc__field-content" style={{ width: "886px" }}>
 						<label htmlFor="file1" >
 							<span className="create-doc__label">
@@ -223,7 +223,7 @@ const UpdateEcoUtilizationDocForm = () => {
 					</div>
 				</div>
 				<div className="create-doc__field" >
-					<div className="create-doc__field-title">Загрузка документа</div>
+					<div className="create-doc__field-title">Протокол (РП)</div>
 					<div className="create-doc__upload-file create-doc__field-content" style={{ width: "886px" }}>
 						<label htmlFor="file1" >
 							<span className="create-doc__label">

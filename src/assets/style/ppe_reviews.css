@@ -10,6 +10,10 @@
     flex-direction: column;
 }
 
+.horizontal-form__column_contractor {
+    width: 125px;
+}
+
 .column-title {
     background-color: rgba(50, 115, 174, 0.1);
     border: 1px solid #9ABAD7;
@@ -22,6 +26,18 @@
     height: 55px;
 }
 
+.column-title_cotractor {
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* width: inherit;   */
+}
+
+.horizontal-form__column_contractor .column-content {
+    height: 80px;
+}
+
 .column-content {
     border-width: 0px 1px 1px 1px;
     border-style: solid;
@@ -29,4 +45,20 @@
     padding: 11px;
     margin-right: -1px;
     height: 40px;
+}
+
+.contractors-table {
+    /* width: 96%; */
+    border-collapse: collapse;
+    background-color: rgba(50, 115, 174, 0.1);
+    color: #3273AE;
+    font-weight: 600;
+    padding: 11px;
+    font-size: 13px;
+    text-align: center;
+}
+
+.contractors-table th {
+    border: 1px solid #3273AE;
+    padding: 10px;
 }

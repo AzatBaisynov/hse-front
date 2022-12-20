@@ -45,6 +45,11 @@
     /* white-space: nowrap; */
 }
 
+.ensk-table select, input {
+    border: none;
+    width: 100%;
+}
+
 .ensk-table__grey-field {
     background-color: #F5F5F5;
 }

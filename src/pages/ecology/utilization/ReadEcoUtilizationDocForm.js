@@ -78,7 +78,7 @@ const ReadEcoUtilizationDocForm = () => {
 					<input type="text" name="executiveOrganization" id="organization" value={document?.organization} className="form__field-content form__field-content_long" />
 				</div>
 				<div className="create-doc__field" >
-					<div className="create-doc__field-title">Загрузка документа</div>
+					<div className="create-doc__field-title">Договор</div>
 					<div className="create-doc__upload-file create-doc__field-content" style={{ width: "886px" }}>
 						{link?.download && (
 							<a href={link?.href} download={link?.download}>
@@ -93,7 +93,7 @@ const ReadEcoUtilizationDocForm = () => {
 					</div>
 				</div>
 				<div className="create-doc__field" >
-					<div className="create-doc__field-title">Загрузка документа</div>
+					<div className="create-doc__field-title">ЭСФ и АВР</div>
 					<div className="create-doc__upload-file create-doc__field-content" style={{ width: "886px" }}>
 						{link1?.download && (
 							<a href={link1?.href} download={link1?.download}>
@@ -108,7 +108,7 @@ const ReadEcoUtilizationDocForm = () => {
 					</div>
 				</div>
 				<div className="create-doc__field" >
-					<div className="create-doc__field-title">Загрузка документа</div>
+					<div className="create-doc__field-title">Протокол (РП)</div>
 					<div className="create-doc__upload-file create-doc__field-content" style={{ width: "886px" }}>
 						{link2?.download && (
 							<a href={link2?.href} download={link2?.download}>
