@@ -24,7 +24,7 @@ const TransportTrafficViolationEdit = () => {
             const { data } = await axios(config)
             setDocument(data)
         } catch (e) {
-            alert(e)
+            console.log(e)
         }
     }
     getDocument()
@@ -36,8 +36,8 @@ const handleInput = (e) => {
     case "dateFull":
       setDocument({ ...document, dateFull: value });
       break;
-    case "dateTime":
-      setDocument({ ...document, dateTime: value });
+    case "position":
+      setDocument({ ...document, position: value });
       break;
     case "location":
       setDocument({ ...document, location: value });
@@ -86,7 +86,7 @@ const handleSend = async (e) => {
     const { data } = await axios(config);
     alert("Запись добавлена");
   } catch (e) {
-    alert(e);
+    console.log(e);
   }
   alert("Запись добавлена");
 };
@@ -114,10 +114,10 @@ const handleSend = async (e) => {
             <div className="form__field-title">Время</div>
             <input
               type="time"
-              name="dateTime"
-              id="dateTime"
+              name="startTime"
+              id="position"
               className="form__field-content"
-              value={document?.dateTime}
+              value={document?.position}
               onInput={handleInput}
             />
           </div>

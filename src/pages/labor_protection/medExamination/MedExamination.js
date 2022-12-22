@@ -42,7 +42,7 @@ const MedExamination = () => {
           makerUser: data.users[0].username,
         });
       } catch (e) {
-        alert(e);
+        console.log(e);
       }
     };
     get();
@@ -119,7 +119,7 @@ const MedExamination = () => {
             },
           });
         } catch (e) {
-          alert(e);
+          console.log(e);
         }
       }
 
@@ -137,7 +137,7 @@ const MedExamination = () => {
             }
           );
         } catch (e) {
-          alert(e);
+          console.log(e);
         }
       }
       if (file3?.name) {
@@ -154,11 +154,11 @@ const MedExamination = () => {
             }
           );
         } catch (e) {
-          alert(e);
+          console.log(e);
         }
       }
     } catch (e) {
-      alert(e);
+      console.log(e);
     }
     alert("Запись добавлена");
   };

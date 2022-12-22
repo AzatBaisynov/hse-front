@@ -22,7 +22,7 @@ const TransportTrafficViolationCreate = () => {
         const { data } = await axios(config);
         setDocument(data);
       } catch (e) {
-        alert(e);
+        console.log(e);
       }
     };
     getDocument();
@@ -49,11 +49,11 @@ const TransportTrafficViolationCreate = () => {
           <div className="form__field">
             <div className="form__field-title">Время</div>
             <input
-              type="time"
+              type="text"
               name="dateTime"
-              id="dateTime"
+              id="position"
               className="form__field-content"
-              value={document?.dateTime}
+              value={document?.position}
             />
           </div>
         </div>

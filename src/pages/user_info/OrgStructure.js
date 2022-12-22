@@ -28,7 +28,7 @@ function OrgStructure() {
                 setStructure(data)
                 console.log(data)
             } catch (e) {
-                alert(e)
+                console.log(e)
             }
         }
         get()
@@ -49,7 +49,7 @@ function OrgStructure() {
                 setStructure({ departments: data.departments })
                 console.log(data)
             } catch (e) {
-                alert(e)
+                console.log(e)
             }
         }
         get()
@@ -69,7 +69,7 @@ function OrgStructure() {
                     const { data } = await axios(config)
                     setCurrentPosition(data)
                 } catch (e) {
-                    alert(e)
+                    console.log(e)
                 }
             }
             get()
@@ -95,7 +95,7 @@ function OrgStructure() {
             console.log("data", data)
             setCurrentDepartment(data)
         } catch (e) {
-            alert(e)
+            console.log(e)
         }
     }
 
@@ -115,7 +115,7 @@ function OrgStructure() {
                 </details>
             </div>
             <div className="org-structure department-details">
-                <p className="department-details__department-name">Служба внутреннего контроля</p>
+                <p className="department-details__department-name">Сотрудники подразделения</p>
                 <div className="org-structure__employee-list">
                     {
                         currentDepartment?.map((el, idx) => (

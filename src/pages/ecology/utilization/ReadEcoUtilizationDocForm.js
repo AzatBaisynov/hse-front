@@ -38,7 +38,7 @@ const ReadEcoUtilizationDocForm = () => {
 				setLink2(l2)
 				console.log(l)
 			} catch (e) {
-				alert(e)
+				console.log(e)
 			}
 		}
 		getDocument()

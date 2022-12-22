@@ -106,7 +106,7 @@ const CreateEcoWasteDocForm = () => {
 						}
 					})
 				} catch (e) {
-					alert(e)
+					console.log(e)
 				}
 			}
 			if (file2?.name) {
@@ -123,7 +123,7 @@ const CreateEcoWasteDocForm = () => {
 						}
 					})
 				} catch (e) {
-					alert(e)
+					console.log(e)
 				}
 			}
 			if (file3?.name) {
@@ -140,13 +140,13 @@ const CreateEcoWasteDocForm = () => {
 						}
 					})
 				} catch (e) {
-					alert(e)
+					console.log(e)
 				}
 			}
 
 			alert("Запись добавлена")
 		} catch (e) {
-			alert(e)
+			console.log(e)
 		}
 	}
 

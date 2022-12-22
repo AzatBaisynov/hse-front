@@ -32,9 +32,10 @@ const CreateEcoOvocDocForm = () => {
 				console.log(data)
 				setDepartments(data.departments)
 				setUsers(data.users)
-				setDocument({ ...document, action: "Передать на ознакомление", senderUser: data.users[0].username, issuingAuthority: data.departments[0].depName, makerUser: data.users[0].username })
+				setDocument({ ...document, action: "approve", senderUser: data.users[0].username, issuingAuthority: data.departments[0].depName, makerUser: data.users[0].username })
 			} catch (e) {
-				alert(e)
+				// alert(e)
+				console.log(e);
 			}
 		}
 		get()
@@ -135,7 +136,8 @@ const CreateEcoOvocDocForm = () => {
 						}
 					})
 				} catch (e) {
-					alert(e)
+					// alert(e)
+					console.log(e);
 				}
 			}
 			if (file2?.name) {
@@ -152,7 +154,8 @@ const CreateEcoOvocDocForm = () => {
 						}
 					})
 				} catch (e) {
-					alert(e)
+					// alert(e)
+					console.log(e);
 				}
 			}
 			if (file3?.name) {
@@ -169,13 +172,15 @@ const CreateEcoOvocDocForm = () => {
 						}
 					})
 				} catch (e) {
-					alert(e)
+					// alert(e)
+					console.log(e);
 				}
 			}
 
 			alert("Запись добавлена")
 		} catch (e) {
-			alert(e)
+			// alert(e)
+			console.log(e);
 		}
 	}
 
@@ -218,8 +223,8 @@ const CreateEcoOvocDocForm = () => {
 						<div className="create-doc__field-title">Согласующий департамент</div>
 						<select onInput={handleInput} name="responsible-department" id="issuingAuthority" className="create-doc__field-content">
 							{
-								users?.map((el, idx) => (
-									<option key={idx} value={el.department}>{el.department}</option>
+								departments?.map((el, idx) => (
+									<option key={idx} value={el.depName}>{el.depName}</option>
 								))
 							}
 						</select>

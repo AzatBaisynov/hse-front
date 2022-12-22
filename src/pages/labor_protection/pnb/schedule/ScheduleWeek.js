@@ -42,12 +42,12 @@ const ScheduleWeek = () => {
             }
           );
         } catch (e) {
-          alert(e);
+          console.log(e);
         }
         runLoader(false);
       }
     } catch (e) {
-      alert(e);
+      console.log(e);
     }
   };
 

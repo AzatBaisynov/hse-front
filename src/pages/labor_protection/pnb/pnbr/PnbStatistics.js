@@ -70,7 +70,7 @@ const PnbStatistics = () => {
       const { data } = await axios(config);
       alert("Запись добавлена");
     } catch (e) {
-      alert(e);
+      console.log(e);
     }
     alert("Запись добавлена");
   };

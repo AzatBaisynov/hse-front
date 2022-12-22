@@ -13,8 +13,6 @@ const ReadEcoOvocDocForm = () => {
 	const [file3, setFile3] = useState({})
 	const [document, setDocument] = useState({})
 	const { dirId } = useSelector(store => store.files)
-	const [departments, setDepartments] = useState([])
-	const [users, setUsers] = useState([])
 	const [link1, setLink1] = useState({})
 	const [link2, setLink2] = useState({})
 	const navigate = useNavigate()
@@ -42,7 +40,8 @@ const ReadEcoOvocDocForm = () => {
 				const l2 = await downloadFile(`${_LINK}/v1/api/file/${data?.file2?.name}`, data?.file2?.name)
 				setLink2(l2)
 			} catch (e) {
-				alert(e)
+				// alert(e)
+				console.log(e);
 			}
 		}
 		getDocument()
@@ -143,7 +142,8 @@ const ReadEcoOvocDocForm = () => {
 						}
 					})
 				} catch (e) {
-					alert(e)
+					// alert(e)
+					console.log(e);
 				}
 			}
 			if (file2?.name) {
@@ -160,7 +160,8 @@ const ReadEcoOvocDocForm = () => {
 						}
 					})
 				} catch (e) {
-					alert(e)
+					// alert(e)
+					console.log(e);
 				}
 			}
 			if (file3?.name) {
@@ -177,13 +178,15 @@ const ReadEcoOvocDocForm = () => {
 						}
 					})
 				} catch (e) {
-					alert(e)
+					// alert(e)
+					console.log(e);
 				}
 			}
 
 			alert("Запись добавлена")
 		} catch (e) {
-			alert(e)
+			// alert(e)
+			console.log(e);
 		}
 	}
 
@@ -226,12 +229,7 @@ const ReadEcoOvocDocForm = () => {
 				<div className="create-doc__row">
 					<div className="create-doc__field">
 						<div className="create-doc__field-title">Действие</div>
-						<select value={document.issuingAuthority} name="responsible-department" id="action" className="create-doc__field-content">
-							<option value="Передать на ознакомление">Передать на ознакомление</option>
-							<option value="Передать на рассмотрение">Передать на рассмотрение</option>
-							<option value="Отправить на доработку">Отправить на доработку</option>
-							<option value="Согласовать документ">Согласовать документ</option>
-						</select>
+						<input value={document?.action} name="responsible-department" id="action" className="create-doc__field-content"/>
 					</div>
 					<div className="create-doc__field">
 						<div className="create-doc__field-title">Отправитель</div>
@@ -240,7 +238,7 @@ const ReadEcoOvocDocForm = () => {
 					</div>
 				</div>
 				<div className="create-doc__field" >
-					<div className="create-doc__field-title">Загрузка документа</div>
+					<div className="create-doc__field-title">Проектно-сметная документация (ПСД)</div>
 					<div className="create-doc__upload-file create-doc__field-content" style={{ width: "886px" }}>
 						{link1?.download && (
 							<a href={link1?.href} download={link1?.download}>
@@ -255,7 +253,7 @@ const ReadEcoOvocDocForm = () => {
 					</div>
 				</div>
 				<div className="create-doc__field" >
-					<div className="create-doc__field-title">Загрузка документа</div>
+					<div className="create-doc__field-title">ОВОС/РООС</div>
 					<div className="create-doc__upload-file create-doc__field-content" style={{ width: "886px" }}>
 						{link2?.download && (
 							<a href={link2?.href} download={link2?.download}>
@@ -269,7 +267,8 @@ const ReadEcoOvocDocForm = () => {
 						)}
 					</div>
 				</div>
-				<textarea name="comment" id="comment" onInput={handleInput} class="form__comment form__field-content" placeholder="Комментарий"></textarea>
+				<textarea name="comment" id="comment" value={document?.comment}
+				class="form__comment form__field-content" placeholder="Комментарий"></textarea>
 
 				<div className="create-doc__buttons">
 					<button type="submit" onClick={(e) => {

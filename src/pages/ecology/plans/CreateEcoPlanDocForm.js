@@ -95,7 +95,7 @@ const CreateEcoPlanDocForm = () => {
 						}
 					})
 				} catch (e) {
-					alert(e)
+					console.log(e)
 				}
 			}
 			if (file2?.name) {
@@ -112,7 +112,7 @@ const CreateEcoPlanDocForm = () => {
 						}
 					})
 				} catch (e) {
-					alert(e)
+					console.log(e)
 				}
 			}
 			if (file3?.name) {
@@ -129,13 +129,13 @@ const CreateEcoPlanDocForm = () => {
 						}
 					})
 				} catch (e) {
-					alert(e)
+					console.log(e)
 				}
 			}
 
 			alert("Запись добавлена")
 		} catch (e) {
-			alert(e)
+			console.log(e)
 		}
 	}
 

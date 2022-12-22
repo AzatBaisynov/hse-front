@@ -35,7 +35,7 @@ const DocUpdate = () => {
 				setUsers(data.users)
 				setDocument({ ...document, readerUser: data.users[0].username, department: data.users[0].department, reviewPeriod: "3-months" })
 			} catch (e) {
-				alert(e)
+				console.log(e)
 			}
 		}
 		get()
@@ -55,7 +55,7 @@ const DocUpdate = () => {
 				setLink(l)
 				console.log(l)
 			} catch (e) {
-				alert(e)
+				console.log(e)
 			}
 		}
 		getDocument()
@@ -134,13 +134,13 @@ const DocUpdate = () => {
 						}
 					})
 				} catch (e) {
-					alert(e)
+					console.log(e)
 				}
 			}
 
 			alert("Запись изменена")
 		} catch (e) {
-			alert(e)
+			console.log(e)
 		}
 	}
 
@@ -197,14 +197,19 @@ const DocUpdate = () => {
 					<div className="create-doc__field">
 						<div className="create-doc__field-title">Ответственный департамент</div>
 						<select onInput={handleInput} value={doc?.department?.name} name="responsible-department" id="department" className="create-doc__field-content">
-							{
+							{/* {
 								<option value={doc?.department?.id}>{doc?.department}</option>
 							}
 							{
 								users?.filter(el => doc?.department !== el.department).map((el, idx) => (
 									<option key={idx} value={el.department}>{el.department}</option>
 								))
-							}
+							} */}
+							{
+                                departments?.map((el, idx) => (
+                                    <option key={idx} value={el.depName}>{el.depName}</option>
+                                ))
+                            }
 						</select>
 					</div>
 					{/* REVISION TIME */}
@@ -244,14 +249,19 @@ const DocUpdate = () => {
 					<div className="create-doc__field">
 						<div className="create-doc__field-title">Доступ к чтению</div>
 						<select onInput={handleInput} name="responsible-department" id="reader" className="create-doc__field-content">
-							{
+							{/* {
 								<option value={doc?.readerUser}>{doc?.readerUser}</option>
 							}
 							{
 								users?.filter(el => el.username !== doc?.readerUser)?.map((el, idx) => (
 									<option key={idx} value={el.username}>{el.username}</option>
 								))
-							}
+							} */}
+							{
+                                users?.map((el, idx) => (
+                                    <option key={idx} value={el.username}>{el.username}</option>
+                                ))
+                            }
 						</select>
 
 					</div>

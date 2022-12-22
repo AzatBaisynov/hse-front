@@ -35,7 +35,7 @@ const UpdateEcoPlanDocForm = () => {
 				console.log(data)
 				setDocument(data)
 			} catch (e) {
-				alert(e)
+				console.log(e)(e)
 			}
 		}
 		getDocument()
@@ -123,7 +123,7 @@ const UpdateEcoPlanDocForm = () => {
 						}
 					})
 				} catch (e) {
-					alert(e)
+					console.log(e)(e)
 				}
 			}
 			if (file2?.name) {
@@ -140,7 +140,7 @@ const UpdateEcoPlanDocForm = () => {
 						}
 					})
 				} catch (e) {
-					alert(e)
+					console.log(e)(e)
 				}
 			}
 			if (file3?.name) {
@@ -157,13 +157,13 @@ const UpdateEcoPlanDocForm = () => {
 						}
 					})
 				} catch (e) {
-					alert(e)
+					console.log(e)(e)
 				}
 			}
 
-			alert("Запись добавлена")
+			console.log(e)("Запись добавлена")
 		} catch (e) {
-			alert(e)
+			console.log(e)(e)
 		}
 	}
 
@@ -209,7 +209,15 @@ const UpdateEcoPlanDocForm = () => {
 					</div>
 					<div className="form__field">
 						<div className="form__field-title">Орган выдачи</div>
-						<input type="text" name="fileName" value={document?.issuingAuthority} onInput={handleInput} id="issuingAuthority" className="form__field-content" />
+						<select className='form__field-content' name="fileName" onInput={handleInput} value={document?.issuingAuthority} id="issuingAuthority">
+							<option value="Министерство экологии, геологии и природных ресурсов РК">Министерство экологии, геологии и природных ресурсов РК</option>
+							<option value="Департамент экологии Алматинской области (АО)">Департамент экологии Алматинской области (АО)</option>
+							<option value="Департамент экологии Жамбылской области (ЖО)">Департамент экологии Жамбылской области (ЖО)</option>
+							<option value="Департамент экологии Туркестанской области (ТО)">Департамент экологии Туркестанской области (ТО)</option>
+							<option value="Управление природных ресурсов и регулирования природопользования Алматинской области (АО)">Управление природных ресурсов и регулирования природопользования Алматинской области (АО)</option>
+							<option value="Управление природных ресурсов и регулирования природопользования Жамбылской области (ЖО)">Управление природных ресурсов и регулирования природопользования Жамбылской области (ЖО)</option>
+							<option value="Управление природных ресурсов и регулирования природопользования Туркестанской области (ТО)">Управление природных ресурсов и регулирования природопользования Туркестанской области (ТО)</option>
+						</select>
 					</div>
 				</div>
 				<div className="create-doc__field" >

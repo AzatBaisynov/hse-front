@@ -36,7 +36,7 @@ function DocumentRead() {
 				setDepartments(data.departments)
 				setDocument({ ...document, department: { id: data.departments[0].id }, reviewPeriod: "3-months" })
 			} catch (e) {
-				alert(e)
+				console.log(e)
 			}
 		}
 		// get()
@@ -52,7 +52,7 @@ function DocumentRead() {
 				const { data } = await axios(config)
 				setUsers(data)
 			} catch (e) {
-				alert(e)
+				console.log(e)
 			}
 		}
 		// getUsers()
@@ -72,7 +72,7 @@ function DocumentRead() {
 				setLink(l)
 				console.log(l)
 			} catch (e) {
-				alert(e)
+				console.log(e)
 			}
 		}
 		getDocument()
@@ -132,7 +132,7 @@ function DocumentRead() {
 			const { data } = await axios(config)
 			alert("Запись добавлена")
 		} catch (e) {
-			alert(e)
+			console.log(e)
 		}
 	}
 

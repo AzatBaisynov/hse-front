@@ -27,7 +27,7 @@ const PnbvCardList = () => {
         const { data } = await axios(config);
         setBack(data);
       } catch (e) {
-        alert(e);
+        console.log(e);
       }
     };
     get();

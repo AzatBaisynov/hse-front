@@ -41,7 +41,7 @@ const UpdateEcoUtilizationDocForm = () => {
 				console.log(data)
 				setDocument(data)
 			} catch (e) {
-				alert(e)
+				console.log(e)
 			}
 		}
 		getDocument()
@@ -125,7 +125,7 @@ const UpdateEcoUtilizationDocForm = () => {
 						}
 					})
 				} catch (e) {
-					alert(e)
+					console.log(e)
 				}
 			}
 			if (file2?.name) {
@@ -142,7 +142,7 @@ const UpdateEcoUtilizationDocForm = () => {
 						}
 					})
 				} catch (e) {
-					alert(e)
+					console.log(e)
 				}
 			}
 			if (file3?.name) {
@@ -159,13 +159,13 @@ const UpdateEcoUtilizationDocForm = () => {
 						}
 					})
 				} catch (e) {
-					alert(e)
+					console.log(e)
 				}
 			}
 
 			alert("Запись добавлена")
 		} catch (e) {
-			alert(e)
+			console.log(e)
 		}
 	}
 

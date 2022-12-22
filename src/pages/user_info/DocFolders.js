@@ -28,7 +28,7 @@ function DocFolders() {
                 console.log(data)
                 setDirs(data)
             } catch (e) {
-                alert(e)
+                console.log(e)
             }
         }
         get()

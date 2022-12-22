@@ -22,7 +22,7 @@ const TransportAccidentsRead = () => {
         const { data } = await axios(config);
         setDocument(data);
       } catch (e) {
-        alert(e);
+        console.log(e);
       }
     };
     getDocument();
@@ -51,9 +51,9 @@ const TransportAccidentsRead = () => {
             <input
               type="time"
               name="dateTime"
-              id="dateTime"
+              id="position"
               className="form__field-content"
-              value={document?.dateTime}
+              value={document?.position}
             />
           </div>
         </div>

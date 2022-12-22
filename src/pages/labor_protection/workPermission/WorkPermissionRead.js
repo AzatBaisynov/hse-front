@@ -34,46 +34,11 @@ const WorkPermissionRead = () => {
         );
         setLink(l);
       } catch (e) {
-        alert(e);
+        console.log(e);
       }
     };
     getDocument();
   }, []);
-
-  const handleSend = async (e) => {
-    e.preventDefault();
-    const doc = document;
-    doc.dir = { id: dirId };
-    const config = {
-      method: "POST",
-      url: `${_LINK}/v1/api/labor/create/update`,
-      headers: {
-        Authorization: localStorage.getItem("token"),
-        "Content-Type": "application/json",
-      },
-      data: JSON.stringify(document),
-    };
-    try {
-      const { data } = await axios(config);
-      if (file?.name) {
-        const formData = new FormData();
-        formData.append("file", file, file.name);
-        try {
-          await axios.post(`${_LINK}/v1/api/labor/file/${data.id}`, formData, {
-            headers: {
-              Authorization: localStorage.getItem("token"),
-              "Content-Type": "multipart/form-data",
-            },
-          });
-        } catch (e) {
-          alert(e);
-        }
-      }
-    } catch (e) {
-      alert(e);
-    }
-    alert("Запись добавлена");
-  };
 
   return (
     <div
@@ -164,7 +129,7 @@ const WorkPermissionRead = () => {
                       style={{ cursor: "pointer" }}
                     />
                     <span style={{ cursor: "pointer" }}>
-                      {document?.uploadFile?.name ||
+                      {document?.uploadFile[0]?.name ||
                         "Нажмите или перетащите файл для загрузки"}
                     </span>
                   </span>

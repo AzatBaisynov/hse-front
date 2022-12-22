@@ -30,7 +30,7 @@ const ContractorCardEdit = () => {
         );
         setLink(l);
       } catch (e) {
-        alert(e);
+        console.log(e);
       }
     };
     getDocument();
@@ -112,7 +112,7 @@ const ContractorCardEdit = () => {
             },
           });
         } catch (e) {
-          alert(e);
+          console.log(e);
         }
       }
 
@@ -130,7 +130,7 @@ const ContractorCardEdit = () => {
             }
           );
         } catch (e) {
-          alert(e);
+          console.log(e);
         }
       }
       if (file3?.name) {
@@ -147,11 +147,11 @@ const ContractorCardEdit = () => {
             }
           );
         } catch (e) {
-          alert(e);
+          console.log(e);
         }
       }
     } catch (e) {
-      alert(e);
+      console.log(e);
     }
     alert("Запись добавлена");
   };

@@ -13,6 +13,10 @@ const WorkPermissionEdit = () => {
   const { dirId } = useSelector((store) => store.files);
   const [users, setUsers] = useState([]);
 
+  const handleSelectFiles = (e) => {
+    setFile(e.target.files[0]);
+  };
+
   useEffect(() => {
     const get = async () => {
       const config = {
@@ -26,14 +30,14 @@ const WorkPermissionEdit = () => {
         const { data } = await axios(config);
         console.log(data);
         setUsers(data.users);
-        setDocument({
-          ...document,
-          action: document?.action,
-          manager: data.users[0].username,
-          executor: data.users[0].username,
-        });
+        // setDocument({
+        //   ...document,
+        //   action: document?.action,
+        //   manager: data.users[0].username,
+        //   executor: data.users[0].username,
+        // });
       } catch (e) {
-        alert(e);
+        console.log(e);
       }
     };
     get();
@@ -61,7 +65,7 @@ const WorkPermissionEdit = () => {
         );
         setLink(l);
       } catch (e) {
-        alert(e);
+        console.log(e);
       }
     };
     getDocument();
@@ -98,6 +102,7 @@ const WorkPermissionEdit = () => {
     e.preventDefault();
     const doc = document;
     doc.dir = { id: dirId };
+    setDocument({ ...document, id });
     const config = {
       method: "POST",
       url: `${_LINK}/v1/api/labor/create/update`,
@@ -120,11 +125,11 @@ const WorkPermissionEdit = () => {
             },
           });
         } catch (e) {
-          alert(e);
+          console.log(e);
         }
       }
     } catch (e) {
-      alert(e);
+      console.log(e);
     }
     alert("Запись добавлена");
   };
@@ -234,23 +239,22 @@ const WorkPermissionEdit = () => {
             className="create-doc__upload-file create-doc__field-content"
             style={{ width: "886px" }}
           >
-            {link?.download && (
-              <a href={link?.href} download={link?.download}>
-                <label htmlFor="upload-file">
-                  <span className="create-doc__label">
-                    <img
-                      src={uploadIcon}
-                      alt=""
-                      style={{ cursor: "pointer" }}
-                    />
-                    <span style={{ cursor: "pointer" }}>
-                      {document?.uploadFile?.name ||
-                        "Нажмите или перетащите файл для загрузки"}
-                    </span>
-                  </span>
-                </label>
-              </a>
-            )}
+            <label htmlFor="file">
+              <span className="create-doc__label">
+                <img src={uploadIcon} alt="" />
+                <span>
+                  {(file?.name) ||
+                    "Нажмите или перетащите файл для загрузки"}
+                </span>
+              </span>
+            </label>
+            <input
+              type="file"
+              id="file"
+              hidden
+              multiple
+              onInput={handleSelectFiles}
+            />
           </div>
         </div>
         <textarea

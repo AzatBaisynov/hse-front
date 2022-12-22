@@ -34,9 +34,10 @@ const UpdateEcoOvocDocForm = () => {
 				console.log(data)
 				setDepartments(data.departments)
 				setUsers(data.users)
-				setDocument({ ...document, action: "Передать на ознакомление", senderUser: data.users[0].username, issuingAuthority: data.departments[0].depName, makerUser: data.users[0].username })
+				// setDocument({ ...document, action: document?.action, senderUser: data.users[0].username, issuingAuthority: data.departments[0].depName, makerUser: data.users[0].username })
 			} catch (e) {
-				alert(e)
+				// alert(e)
+				console.log(e);
 			}
 		}
 		get()
@@ -54,7 +55,8 @@ const UpdateEcoOvocDocForm = () => {
 				console.log(data)
 				setDocument(data)
 			} catch (e) {
-				alert(e)
+				// alert(e)
+				console.log(e);
 			}
 		}
 		getDocument()
@@ -128,6 +130,7 @@ const UpdateEcoOvocDocForm = () => {
 
 	const handleSend = async (e) => {
 		e.preventDefault()
+		setDocument({...document, id})
 		const config = {
 			method: "POST",
 			url: `${_LINK}/v1/api/eco/document/${dirId}`,
@@ -155,7 +158,8 @@ const UpdateEcoOvocDocForm = () => {
 						}
 					})
 				} catch (e) {
-					alert(e)
+					// alert(e)
+					console.log(e);
 				}
 			}
 			if (file2?.name) {
@@ -172,7 +176,8 @@ const UpdateEcoOvocDocForm = () => {
 						}
 					})
 				} catch (e) {
-					alert(e)
+					// alert(e)
+					console.log();
 				}
 			}
 			if (file3?.name) {
@@ -189,28 +194,30 @@ const UpdateEcoOvocDocForm = () => {
 						}
 					})
 				} catch (e) {
-					alert(e)
+					// alert(e)
+					console.log(e);
 				}
 			}
 
 			alert("Запись добавлена")
 		} catch (e) {
-			alert(e)
+			// alert(e)
+			console.log(e);
 		}
 	}
 
 	return (
 		<div className="container" style={{ flexDirection: "column", alignItems: "center", gap: "0" }}>
-			<p className="create-doc__title">Создать документ</p>
+			<p className="create-doc__title">Редактировать документ</p>
 			<form action="./pasropts_doc_list.html" className="create-doc__form">
 				<div className="create-doc__row">
 					<div className="form__field">
 						<div className="form__field-title">Имя файла</div>
-						<input type="text" name="fileName" value={document.fileTitle} onInput={handleInput} id="fileTitle" className="form__field-content" />
+						<input type="text" name="fileName" value={document?.fileTitle} onInput={handleInput} id="fileTitle" className="form__field-content" />
 					</div>
 					<div className="form__field">
 						<div className="form__field-title">Наименование документа</div>
-						<input type="text" name="docName" value={document.docTitle} onInput={handleInput} id="docTitle" className="form__field-content" />
+						<input type="text" name="docName" value={document?.docTitle} onInput={handleInput} id="docTitle" className="form__field-content" />
 					</div>
 				</div>
 				<div className="create-doc__row">
@@ -226,7 +233,7 @@ const UpdateEcoOvocDocForm = () => {
 				<div className="create-doc__row">
 					<div className="create-doc__field">
 						<div className="create-doc__field-title">Отправитель</div>
-						<select onInput={handleInput} name="responsible-department" id="senderUser" className="create-doc__field-content">
+						<select onInput={handleInput} value={document?.senderUser} name="senderUser" id="senderUser" className="create-doc__field-content">
 							{
 								users?.map((el, idx) => (
 									<option key={idx} value={el.username}>{el.username}</option>
@@ -236,10 +243,10 @@ const UpdateEcoOvocDocForm = () => {
 					</div>
 					<div className="create-doc__field">
 						<div className="create-doc__field-title">Согласующий департамент</div>
-						<select onInput={handleInput} name="responsible-department" id="issuingAuthority" className="create-doc__field-content">
+						<select onInput={handleInput} value={document?.issuingAuthority} name="responsible-department" id="issuingAuthority" className="create-doc__field-content">
 							{
-								users?.map((el, idx) => (
-									<option key={idx} value={el.department}>{el.department}</option>
+								departments?.map((el, idx) => (
+									<option key={idx} value={el.depName}>{el.depName}</option>
 								))
 							}
 						</select>
@@ -248,7 +255,7 @@ const UpdateEcoOvocDocForm = () => {
 				<div className="create-doc__row">
 					<div className="create-doc__field">
 						<div className="create-doc__field-title">Действие</div>
-						<select onInput={handleInput} name="responsible-department" id="action" className="create-doc__field-content">
+						<select onInput={handleInput} value={document?.action} name="responsible-department" id="action" className="create-doc__field-content">
 							<option value="Передать на ознакомление">Передать на ознакомление</option>
 							<option value="Передать на рассмотрение">Передать на рассмотрение</option>
 							<option value="Отправить на доработку">Отправить на доработку</option>
@@ -256,8 +263,8 @@ const UpdateEcoOvocDocForm = () => {
 						</select>
 					</div>
 					<div className="create-doc__field">
-						<div className="create-doc__field-title">Отправитель</div>
-						<select onInput={handleInput} name="responsible-department" id="makerUser" className="create-doc__field-content">
+						<div className="create-doc__field-title">Исполнитель</div>
+						<select onInput={handleInput} name="makerUser" id="makerUser" className="create-doc__field-content">
 							{
 								users?.map((el, idx) => (
 									<option key={idx} value={el.username}>{el.username}</option>
@@ -290,7 +297,7 @@ const UpdateEcoOvocDocForm = () => {
 						<input type="file" id="file2" hidden onInput={handleSelectFiles} />
 					</div>
 				</div>
-				<textarea name="comment" id="comment" value={document.comment} onInput={handleInput} class="form__comment form__field-content" placeholder="Комментарий"></textarea>
+				<textarea name="comment" id="comment" value={document?.comment} onInput={handleInput} class="form__comment form__field-content" placeholder="Комментарий"></textarea>
 
 				<div className="create-doc__buttons">
 					<a href="./pasropts_doc_list.html" className="create-doc__cancel-button create-doc__button-text">Отменить</a>

@@ -29,7 +29,7 @@ function DocEcologyFolders() {
 					console.log(data)
 					setDirs(data)
 				} catch (e) {
-					alert(e)
+					console.log(e)
 				}
 			} else {
 				const config = {
@@ -44,7 +44,7 @@ function DocEcologyFolders() {
 					console.log(data)
 					setDirs(data.dirs)
 				} catch (e) {
-					alert(e)
+					console.log(e)
 				}
 			}
 		}

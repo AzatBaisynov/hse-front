@@ -31,7 +31,7 @@ const MedExaminationRead = () => {
         );
         setLink(l);
       } catch (e) {
-        alert(e);
+        console.log(e);
       }
     };
     getDocument();
@@ -201,7 +201,7 @@ const MedExaminationRead = () => {
                 <td>
                   <div
                     className="create-doc__upload-file create-doc__field-content"
-                    style={{ width: "350px" }}
+                    style={{ width: "100%" }}
                   >
                     {link?.download && (
                       <a href={link?.href} download={link?.download}>

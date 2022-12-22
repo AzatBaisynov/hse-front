@@ -32,7 +32,7 @@ const ReadEcoPlan3DocForm = () => {
 				setLink(l)
 				console.log(l)
 			} catch (e) {
-				alert(e)
+				console.log(e)
 			}
 		}
 		getDocument()

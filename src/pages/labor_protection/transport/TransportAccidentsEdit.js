@@ -24,7 +24,7 @@ const TransportAccidentsEdit = () => {
             const { data } = await axios(config)
             setDocument(data)
         } catch (e) {
-            alert(e)
+            console.log(e)
         }
     }
     getDocument()
@@ -36,8 +36,8 @@ const handleInput = (e) => {
     case "dateFull":
       setDocument({ ...document, dateFull: value });
       break;
-    case "dateTime":
-      setDocument({ ...document, dateTime: value });
+    case "position":
+      setDocument({ ...document, position: value });
       break;
     case "location":
       setDocument({ ...document, location: value });
@@ -83,7 +83,7 @@ const handleSend = async (e) => {
     const { data } = await axios(config);
     alert("Запись добавлена");
   } catch (e) {
-    alert(e);
+    console.log(e);
   }
   alert("Запись добавлена");
 };
@@ -112,10 +112,10 @@ const handleSend = async (e) => {
             <input
               type="time"
               name="dateTime"
-              id="dateTime"
+              id="position"
               className="form__field-content"
               onInput={handleInput}
-              value={document?.dateTime}
+              value={document?.position}
             />
           </div>
         </div>

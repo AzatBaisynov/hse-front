@@ -14,8 +14,8 @@ const TransportAccidentsCreate = () => {
       case "dateFull":
         setDocument({ ...document, dateFull: value });
         break;
-      case "dateTime":
-        setDocument({ ...document, dateTime: value });
+      case "position":
+        setDocument({ ...document, position: value });
         break;
       case "location":
         setDocument({ ...document, location: value });
@@ -61,7 +61,7 @@ const TransportAccidentsCreate = () => {
       const { data } = await axios(config);
       alert("Запись добавлена");
     } catch (e) {
-      alert(e);
+      console.log(e);
     }
   };
 
@@ -88,7 +88,7 @@ const TransportAccidentsCreate = () => {
             <input
               type="time"
               name="dateTime"
-              id="dateTime"
+              id="position"
               className="form__field-content"
               onInput={handleInput}
             />

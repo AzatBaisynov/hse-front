@@ -31,7 +31,7 @@ const ResponsibilityOrderCreate = () => {
         );
         setLink(l);
       } catch (e) {
-        alert(e);
+        console.log(e);
       }
     };
     getDocument();

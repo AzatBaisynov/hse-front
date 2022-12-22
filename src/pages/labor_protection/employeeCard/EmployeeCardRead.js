@@ -24,7 +24,7 @@ const EmployeeCardRead = () => {
         const { data } = await axios(config);
         setDocument(data);
       } catch (e) {
-        alert(e);
+        console.log(e);
       }
     };
     getDocument();
