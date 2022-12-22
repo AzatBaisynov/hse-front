@@ -29,6 +29,7 @@ function Authorization () {
             dispatch(loginAction(data))
         }).catch(() => {
             setMessage("Invalid data")
+            alert("Неправильный логин или пароль!")
         })
     }
 

@@ -24,7 +24,7 @@ const PpeAllowance = () => {
 				break
 			case "dateFull": setDocument({ ...document, dateFull: value})
         break
-      case "docName ": setDocument({ ...document, docName : value})
+      case "docName": setDocument({ ...document, docName : value})
         break
       case "comment": setDocument({ ...document, comment: value})
         break
@@ -61,7 +61,7 @@ const PpeAllowance = () => {
 						}
 					})
 				} catch (e) {
-					alert(e)
+					console.log(e)
 				}
 			}
       
@@ -79,7 +79,7 @@ const PpeAllowance = () => {
 						}
 					})
 				} catch (e) {
-					alert(e)
+					console.log(e)
 				}
 			}
 			if (file3?.name) {
@@ -96,11 +96,11 @@ const PpeAllowance = () => {
 						}
 					})
 				} catch (e) {
-					alert(e)
+					console.log(e)
 				}
 			}
     } catch (e) {
-      alert(e);
+      console.log(e);
     }
     alert("Запись добавлена");
   };

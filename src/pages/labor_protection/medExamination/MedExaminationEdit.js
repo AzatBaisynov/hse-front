@@ -36,14 +36,14 @@ const MedExamination = () => {
         console.log(data);
         setDepartments(data.departments);
         setUsers(data.users);
-        setDocument({
-          ...document,
-          senderUser: data.users[0].username,
-          issuingAuthority: data.users[0].department,
-          makerUser: data.users[0].username,
-        });
+        // setDocument({
+        //   ...document,
+        //   senderUser: data.users[0].username,
+        //   issuingAuthority: data.users[0].department,
+        //   makerUser: data.users[0].username,
+        // });
       } catch (e) {
-        alert(e);
+        console.log(e);
       }
     };
     get();
@@ -120,7 +120,7 @@ const MedExamination = () => {
             },
           });
         } catch (e) {
-          alert(e);
+          console.log(e);
         }
       }
 
@@ -138,7 +138,7 @@ const MedExamination = () => {
             }
           );
         } catch (e) {
-          alert(e);
+          console.log(e);
         }
       }
       if (file3?.name) {
@@ -155,11 +155,11 @@ const MedExamination = () => {
             }
           );
         } catch (e) {
-          alert(e);
+          console.log(e);
         }
       }
     } catch (e) {
-      alert(e);
+      console.log(e);
     }
     alert("Запись добавлена");
   };
@@ -186,7 +186,7 @@ const MedExamination = () => {
         );
         setLink(l);
       } catch (e) {
-        alert(e);
+        console.log(e);
       }
     };
     getDocument();

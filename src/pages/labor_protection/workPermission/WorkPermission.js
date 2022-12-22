@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import uploadIcon from "../../../assets/images/upload-icon.svg";
 import { _LINK } from "../../../data/links";
 
@@ -9,6 +10,7 @@ const WorkPermissionRead = () => {
   const [document, setDocument] = useState({});
   const { dirId } = useSelector((store) => store.files);
   const [users, setUsers] = useState([]);
+  const { id } = useParams();
 
   const handleSelectFiles = (e) => {
     setFile(e.target.files[0]);
@@ -34,7 +36,7 @@ const WorkPermissionRead = () => {
           executor: data.users[0].username,
         });
       } catch (e) {
-        alert(e);
+        console.log(e);
       }
     };
     get();
@@ -71,6 +73,7 @@ const WorkPermissionRead = () => {
     e.preventDefault();
     const doc = document;
     doc.dir = { id: dirId };
+    setDocument({...document, id})
     const config = {
       method: "POST",
       url: `${_LINK}/v1/api/labor/create/update`,
@@ -93,11 +96,11 @@ const WorkPermissionRead = () => {
             },
           });
         } catch (e) {
-          alert(e);
+          console.log(e);
         }
       }
     } catch (e) {
-      alert(e);
+      console.log(e);
     }
     alert("Запись добавлена");
   };

@@ -31,7 +31,7 @@ const MainPage = () => {
         setBack(data);
         console.log(data);
       } catch (e) {
-        alert(e);
+        console.log(e);
       }
     };
     get();

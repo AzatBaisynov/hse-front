@@ -61,7 +61,7 @@ const ResponsibilityOrderEdit = () => {
             },
           });
         } catch (e) {
-          alert(e);
+          console.log(e);
         }
       }
 
@@ -79,7 +79,7 @@ const ResponsibilityOrderEdit = () => {
             }
           );
         } catch (e) {
-          alert(e);
+          console.log(e);
         }
       }
       if (file3?.name) {
@@ -96,11 +96,11 @@ const ResponsibilityOrderEdit = () => {
             }
           );
         } catch (e) {
-          alert(e);
+          console.log(e);
         }
       }
     } catch (e) {
-      alert(e);
+      console.log(e);
     }
     alert("Запись добавлена");
   };
@@ -127,7 +127,7 @@ const ResponsibilityOrderEdit = () => {
         );
         setLink(l);
       } catch (e) {
-        alert(e);
+        console.log(e);
       }
     };
     getDocument();

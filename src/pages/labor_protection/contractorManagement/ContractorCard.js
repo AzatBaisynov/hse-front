@@ -83,7 +83,7 @@ const ContractorCard = () => {
             },
           });
         } catch (e) {
-          alert(e);
+          console.log(e);
         }
       }
 
@@ -101,7 +101,7 @@ const ContractorCard = () => {
             }
           );
         } catch (e) {
-          alert(e);
+          console.log(e);
         }
       }
       if (file3?.name) {
@@ -118,11 +118,11 @@ const ContractorCard = () => {
             }
           );
         } catch (e) {
-          alert(e);
+          console.log(e);
         }
       }
     } catch (e) {
-      alert(e);
+      console.log(e);
     }
     alert("Запись добавлена");
   };

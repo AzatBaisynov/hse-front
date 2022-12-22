@@ -29,7 +29,7 @@ const PurchaseRequestMessage = () => {
         const { data } = await axios(config);
         setDocument(data);
       } catch (e) {
-        alert(e);
+        console.log(e);
       }
     };
     getDocument();
@@ -54,7 +54,7 @@ const PurchaseRequestMessage = () => {
 				const l = await downloadFile(`${_LINK}/v1/api/file/${data?.file?.name}`, data?.file?.name)
 				setLink(l)
     } catch (e) {
-      alert(e);
+      console.log(e);
     }
     alert("Запись добавлена");
   };

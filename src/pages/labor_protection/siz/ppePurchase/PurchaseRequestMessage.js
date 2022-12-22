@@ -57,11 +57,11 @@ const PurchaseRequestMessage = () => {
 						}
 					})
 				} catch (e) {
-					alert(e)
+					console.log(e)
 				}
 			}
     } catch (e) {
-      alert(e);
+      console.log(e);
     }
     alert("Запись добавлена");
   };

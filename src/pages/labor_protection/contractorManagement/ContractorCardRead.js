@@ -31,7 +31,7 @@ const ContractorCardRead = () => {
         );
         setLink(l);
       } catch (e) {
-        alert(e);
+        console.log(e);
       }
     };
     getDocument();

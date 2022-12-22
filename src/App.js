@@ -142,7 +142,7 @@ function App() {
           <Route exact path="/ecology/ovoc/get/:id" element={<MainEcology><ReadEcoOvocDocForm /></MainEcology>} />
           <Route exact path="/ecology/ovoc/edit/:id" element={<MainEcology><UpdateEcoOvocDocForm /></MainEcology>} />
           <Route exact path="/labor_protection/folders/:id/nest/:nest" element={<MainLaborProtection><DocLaborProtectionFolders /></MainLaborProtection>} />
-          <Route exact path="/labor_protection/list/43" element={<MainEcology><PpeReviewsList /></MainEcology>} />
+          <Route exact path="/labor_protection/list/43" element={<MainLaborProtection><PpeReviewsList /></MainLaborProtection>} />
           <Route exact path="/labor_protection/list/38" element={<MainLaborProtection><Ensk/></MainLaborProtection>} />
           <Route exact path="/labor_protection/list/39" element={<MainLaborProtection><PpeWarehouseManagement/></MainLaborProtection>} />
           <Route exact path="/labor_protection/list/40" element={<MainLaborProtection><PpePurchase/></MainLaborProtection>} />

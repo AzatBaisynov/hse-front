@@ -30,7 +30,7 @@ const PpeAllowanceEdit = () => {
         const { data } = await axios(config);
         setDocument(data);
       } catch (e) {
-        alert(e);
+        console.log(e);
       }
     };
     getDocument();
@@ -45,7 +45,7 @@ const PpeAllowanceEdit = () => {
       case "dateFull":
         setDocument({ ...document, dateFull: value });
         break;
-      case "docName ":
+      case "docName":
         setDocument({ ...document, docName: value });
         break;
       case "comment":
@@ -83,11 +83,11 @@ const PpeAllowanceEdit = () => {
 						}
 					})
 				} catch (e) {
-					alert(e)
+					console.log(e)
 				}
 			}
     } catch (e) {
-      alert(e);
+      console.log(e);
     }
     alert("Запись добавлена");
   };

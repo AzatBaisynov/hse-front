@@ -28,7 +28,7 @@ const WorkPermissionList = () => {
         const { data } = await axios(config);
         setBack(data);
       } catch (e) {
-        alert(e);
+        console.log(e);
       }
     };
     get();
@@ -43,6 +43,24 @@ const WorkPermissionList = () => {
       setBack(newB);
     }
   }, [isOld]);
+
+  const statusWriter = (str) => {
+		switch (str) {
+			case "Передать на ознакомление" : {
+				return (<p className='primary' style={{ width: "150px", color: "#fff"}}>Создан</p>)
+			}
+			case "Передать на рассмотрение": {
+				return (<p className='warn' style={{ width: "150px", color: "#fff", background: "#E89F5D;" }}>На рассмотрении</p>)
+			}
+			case "Отправить на доработку": {
+				return (<p className='error' style={{ width: "150px", color: "#fff", background: "#E85D5D;" }}>Отправлен на
+					доработку</p>)
+			}
+			case "Согласовать документ": {
+				return (<p className='success' style={{ width: "150px", color: "#fff", background: "#78CA85;" }}>Согласован</p>)
+			}
+		}
+	}
 
   return (
     <div className="doc-list-container">
@@ -178,7 +196,7 @@ const WorkPermissionList = () => {
               <td>{back[key]?.docName}</td>
               <td>{back[key]?.manager}</td>
               <td>{back[key]?.executor}</td>
-              <td>{back[key]?.action}</td>
+              <td>{statusWriter(back[key]?.action)}</td>
             </tr>
           ))}
         </tbody>

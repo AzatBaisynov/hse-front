@@ -27,14 +27,14 @@ const PpeReviewsEdit = () => {
         console.log(data);
         setDepartments(data.departments);
         setUsers(data.users);
-        setDocument({
-          ...document,
-          senderUser: data.users[0].username,
-          issuingAuthority: data.users[0].department,
-          makerUser: data.users[0].username,
-        });
+        // setDocument({
+        //   ...document,
+        //   senderUser: data.users[0].username,
+        //   issuingAuthority: data.users[0].department,
+        //   makerUser: data.users[0].username,
+        // });
       } catch (e) {
-        alert(e);
+        console.log(e);
       }
     };
     get();
@@ -53,7 +53,7 @@ const PpeReviewsEdit = () => {
             const { data } = await axios(config)
             setDocument(data)
         } catch (e) {
-            alert(e)
+            console.log(e)
         }
     }
     getDocument()
@@ -110,7 +110,7 @@ const PpeReviewsEdit = () => {
       const { data } = await axios(config);
       alert("Запись добавлена");
     } catch (e) {
-      alert(e);
+      console.log(e);
     }
     alert("Запись добавлена");
   };
