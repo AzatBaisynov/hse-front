@@ -18,7 +18,7 @@ const PnbrCardList = () => {
     const get = async () => {
       const config = {
         method: "get",
-        url: `${_LINK}/v1/api/labor/dir/47`,
+        url: `${_LINK}/v1/api/labor/pnbr/all`,
         headers: {
           Authorization: localStorage.getItem("token"),
         },
@@ -99,9 +99,7 @@ const PnbrCardList = () => {
                   <option value="security-dep">Департамент безопасности</option>
                   <option value="hr-dep">Департамент HR</option>
                   <option value="iso-dep">Департамент ПБ, ОТ, Э и ИСО</option>
-                  <option value="inner-control-dep">
-                    Служба внутреннего контроля
-                  </option>
+                  <option value="inner-control-dep">Служба внутреннего контроля</option>
                 </select>
               </div>
               <div className="form__field">

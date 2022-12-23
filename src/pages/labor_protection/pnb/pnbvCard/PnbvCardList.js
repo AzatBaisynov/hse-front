@@ -18,7 +18,7 @@ const PnbvCardList = () => {
     const get = async () => {
       const config = {
         method: "get",
-        url: `${_LINK}/v1/api/labor/dir/48`,
+        url: `${_LINK}/v1/api/labor/pnbv/all`,
         headers: {
           Authorization: localStorage.getItem("token"),
         },

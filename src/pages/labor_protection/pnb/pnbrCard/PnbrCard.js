@@ -26,10 +26,12 @@ const PnbrCard = () => {
         setUsers(data.users);
         setDocument({
           ...document,
-          senderUser: data.users[0].username,
-          issuingAuthority: data.users[0].department,
-          makerUser: data.users[0].username,
+          employeeFullName: data.users[0].username,
+          divisionName: data.users[0].department,
+          location: 'УТГ Алматы',
+          isPnbv: false
         });
+        
       } catch (e) {
         console.log(e);
       }
@@ -41,10 +43,10 @@ const PnbrCard = () => {
     const { id, value } = e.target;
     switch (id) {
       case "plan":
-        setDocument({ ...document, plan: value });
+        setDocument({ ...document, plan: true });
         break;
       case "fact":
-        setDocument({ ...document, fact: value });
+        setDocument({ ...document, plan: false });
         break;
       case "employeeFullName":
         setDocument({ ...document, employeeFullName: value });
@@ -68,154 +70,154 @@ const PnbrCard = () => {
         setDocument({ ...document, location: value });
         break;
       case "safe1":
-        setDocument({ ...document, safe1: true });
+        setDocument({ ...document, safety1: true });
         break;
       case "safe2":
-        setDocument({ ...document, safe2: true });
+        setDocument({ ...document, safety2: true });
         break;
       case "safe3":
-        setDocument({ ...document, safe3: true });
+        setDocument({ ...document, safety3: true });
         break;
       case "safe4":
-        setDocument({ ...document, safe4: true });
+        setDocument({ ...document, safety4: true });
         break;
       case "safe5":
-        setDocument({ ...document, safe5: true });
+        setDocument({ ...document, safety5: true });
         break;
       case "safe6":
-        setDocument({ ...document, safe6: true });
+        setDocument({ ...document, safety6: true });
         break;
       case "safe7":
-        setDocument({ ...document, safe7: true });
+        setDocument({ ...document, safety7: true });
         break;
       case "safe8":
-        setDocument({ ...document, safe8: true });
+        setDocument({ ...document, safety8: true });
         break;
       case "safe9":
-        setDocument({ ...document, safe9: true });
+        setDocument({ ...document, safety9: true });
         break;
       case "safe10":
-        setDocument({ ...document, safe10: true });
+        setDocument({ ...document, safety10: true });
         break;
       case "safe11":
-        setDocument({ ...document, safe11: true });
+        setDocument({ ...document, safety11: true });
         break;
       case "safe12":
-        setDocument({ ...document, safe12: true });
+        setDocument({ ...document, safety12: true });
         break;
       case "safe13":
-        setDocument({ ...document, safe13: true });
+        setDocument({ ...document, safety13: true });
         break;
       case "safe14":
-        setDocument({ ...document, safe14: true });
+        setDocument({ ...document, safety14: true });
         break;
       case "safe15":
-        setDocument({ ...document, safe15: true });
+        setDocument({ ...document, safety15: true });
         break;
       case "safe16":
-        setDocument({ ...document, safe16: true });
+        setDocument({ ...document, safety16: true });
         break;
       case "safe17":
-        setDocument({ ...document, safe17: true });
+        setDocument({ ...document, safety17: true });
         break;
       case "safe18":
-        setDocument({ ...document, safe18: true });
+        setDocument({ ...document, safety18: true });
         break;
       case "safe19":
-        setDocument({ ...document, safe19: true });
+        setDocument({ ...document, safety19: true });
         break;
       case "safe20":
-        setDocument({ ...document, safe20: true });
+        setDocument({ ...document, safety20: true });
         break;
       case "safe21":
-        setDocument({ ...document, safe21: true });
+        setDocument({ ...document, safety21: true });
         break;
       case "safe22":
-        setDocument({ ...document, safe22: true });
+        setDocument({ ...document, safety22: true });
         break;
       case "safe23":
-        setDocument({ ...document, safe23: true });
+        setDocument({ ...document, safety23: true });
         break;
       case "safe24":
-        setDocument({ ...document, safe24: true });
+        setDocument({ ...document, safety24: true });
         break;
       case "safe25":
-        setDocument({ ...document, safe25: true });
+        setDocument({ ...document, safety25: true });
         break;
       case "danger1":
-        setDocument({ ...document, danger1: true });
+        setDocument({ ...document, safety1: false });
         break;
       case "danger2":
-        setDocument({ ...document, danger2: true });
+        setDocument({ ...document, safety2: false });
         break;
       case "danger3":
-        setDocument({ ...document, danger3: true });
+        setDocument({ ...document, safety3: false });
         break;
       case "danger4":
-        setDocument({ ...document, danger4: true });
+        setDocument({ ...document, safety4: false });
         break;
       case "danger5":
-        setDocument({ ...document, danger5: true });
+        setDocument({ ...document, safety5: false });
         break;
       case "danger6":
-        setDocument({ ...document, danger6: true });
+        setDocument({ ...document, safety6: false });
         break;
       case "danger7":
-        setDocument({ ...document, danger7: true });
+        setDocument({ ...document, safety7: false });
         break;
       case "danger8":
-        setDocument({ ...document, danger8: true });
+        setDocument({ ...document, safety8: false });
         break;
       case "danger9":
-        setDocument({ ...document, danger9: true });
+        setDocument({ ...document, safety9: false });
         break;
       case "danger10":
-        setDocument({ ...document, danger10: true });
+        setDocument({ ...document, safety10: false });
         break;
       case "danger11":
-        setDocument({ ...document, danger11: true });
+        setDocument({ ...document, safety11: false });
         break;
       case "danger12":
-        setDocument({ ...document, danger12: true });
+        setDocument({ ...document, safety12: false });
         break;
       case "danger13":
-        setDocument({ ...document, danger13: true });
+        setDocument({ ...document, safety13: false });
         break;
       case "danger14":
-        setDocument({ ...document, danger14: true });
+        setDocument({ ...document, safety14: false });
         break;
       case "danger15":
-        setDocument({ ...document, danger15: true });
+        setDocument({ ...document, safety15: false });
         break;
       case "danger16":
-        setDocument({ ...document, danger16: true });
+        setDocument({ ...document, safety16: false });
         break;
       case "danger17":
-        setDocument({ ...document, danger17: true });
+        setDocument({ ...document, safety17: false });
         break;
       case "danger18":
-        setDocument({ ...document, danger18: true });
+        setDocument({ ...document, safety18: false });
         break;
       case "danger19":
-        setDocument({ ...document, danger19: true });
+        setDocument({ ...document, safety19: false });
         break;
       case "danger20":
-        setDocument({ ...document, danger20: true });
+        setDocument({ ...document, safety20: false });
         break;
       case "danger21":
-        setDocument({ ...document, danger21: true });
+        setDocument({ ...document, safety21: false });
         break;
       case "danger22":
-        setDocument({ ...document, danger22: true });
+        setDocument({ ...document, safety22: false });
         break;
       case "danger23":
-        setDocument({ ...document, danger23: true });
+        setDocument({ ...document, safety23: false });
         break;
       case "danger24":
-        setDocument({ ...document, danger24: true });
+        setDocument({ ...document, safety24: false });
         break;
       case "danger25":
-        setDocument({ ...document, danger25: true });
+        setDocument({ ...document, safety25: false });
         break;
       case "comment":
         setDocument({ ...document, comment: true });
@@ -230,9 +232,10 @@ const PnbrCard = () => {
     e.preventDefault();
     const doc = document;
     doc.dir = { id: dirId };
+    
     const config = {
       method: "POST",
-      url: `${_LINK}/v1/api/labor/create/update`,
+      url: `${_LINK}/v1/api/labor/pnbr`,
       headers: {
         Authorization: localStorage.getItem("token"),
         "Content-Type": "application/json",
@@ -275,7 +278,7 @@ const PnbrCard = () => {
                 name="schedule"
                 onInput={handleInput}
               />
-              <label htmlFor="plan">Не по графику</label>
+              <label htmlFor="fact">Не по графику</label>
             </div>
           </div>
         </div>
@@ -384,13 +387,18 @@ const PnbrCard = () => {
                 {/* Observer's location */}
                 <div className="card__column-unit">
                   <p>МЕСТО ПРОВЕДЕНИЯ:</p>
-                  <input
+                  {/* <input
                     type="text"
                     name="location"
                     id="location"
                     className="card__column-input"
                     onInput={handleInput}
-                  />
+                  /> */}
+                  <select id="location" className="card__column-input" onInput={handleInput}>
+                    <option value="УТГ Алматы">УТГ Алматы</option>
+                    <option value="УТГ Тараз">УТГ Тараз</option>
+                    <option value="УТГ Шымкент">УТГ Шымкент</option>
+                  </select>
                 </div>
               </td>
             </tr>

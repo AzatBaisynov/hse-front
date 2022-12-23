@@ -8,6 +8,9 @@ const PnbStatistics = () => {
   const [document, setDocument] = useState({});
   const { dirId } = useSelector((store) => store.files);
 
+  const [startPnbr, setStartPnbr] = useState(new Date());
+  const [endPnbr, setEndPnbr] = useState(new Date());
+
   const handleInput = (e) => {
     const { id, value } = e.target;
     switch (id) {
@@ -75,6 +78,30 @@ const PnbStatistics = () => {
     alert("Запись добавлена");
   };
 
+  const handleSendDatesPnbr = async (e) => {
+    
+    const config = {
+      method: "POST",
+      url: `${_LINK}/v1/api/labor/between`,
+      headers: {
+        Authorization: localStorage.getItem("token"),
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify({
+        start: startPnbr,
+        end: endPnbr,
+        isPnbr: false
+      }),
+    };
+    try {
+      console.log(config)
+      const {data} = await axios(config)
+      console.log(data)
+    } catch(e) {
+      console.log({error: e})
+    }
+  }
+
   return (
     <div className="create-doc-container">
       <div className="pnbr">
@@ -96,7 +123,10 @@ const PnbStatistics = () => {
               name="startDatePnbr"
               id="startDatePnbr"
               className="form__field-content form__field-content_short"
-              onInput={handleInput}
+              onInput={(e) => {
+                handleInput(e)
+                setStartPnbr(e.target.value + "T00:00")
+              }}
             />
           </div>
           <div className="form__field">
@@ -108,7 +138,11 @@ const PnbStatistics = () => {
               name="endDatePnbr"
               id="endDatePnbr"
               className="form__field-content form__field-content_short"
-              onInput={handleInput}
+              onInput={(e) => {
+                handleInput(e)
+                setEndPnbr(e.target.value + "T23:59:59")
+                handleSendDatesPnbr()
+              }}
             />
           </div>
         </div>
