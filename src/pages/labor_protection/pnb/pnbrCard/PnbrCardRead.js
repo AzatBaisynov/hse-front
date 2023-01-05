@@ -12,7 +12,7 @@ const PnbrCardRead = () => {
     const getDocument = async () => {
       const config = {
         method: "GET",
-        url: `${_LINK}/v1/api/labor/id/${id}`,
+        url: `${_LINK}/v1/api/labor/pnbr/${id}`,
         headers: {
           Authorization: localStorage.getItem("token"),
         },
@@ -20,6 +20,7 @@ const PnbrCardRead = () => {
       try {
         const { data } = await axios(config);
         setDocument(data);
+        console.log(data)
       } catch (e) {
         console.log(e);
       }
@@ -67,7 +68,7 @@ const PnbrCardRead = () => {
                 type="radio"
                 id="fact"
                 name="schedule"
-                checked={document?.fact}
+                checked={!document?.plan}
               />
               <label htmlFor="plan">Не по графику</label>
             </div>
@@ -201,7 +202,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety1"
                   id="safe1"
-                  checked={document?.safe1}
+                  checked={document?.safety1}
                 />
               </td>
               <td className="card__table-safety">
@@ -209,7 +210,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety1"
                   id="danger1"
-                  checked={document?.danger1}
+                  checked={!document?.safety1}
                 />
               </td>
             </tr>
@@ -221,7 +222,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety2"
                   id="safe2"
-                  checked={document?.safe2}
+                  checked={document?.safety2}
                 />
               </td>
               <td className="card__table-safety">
@@ -229,7 +230,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety2"
                   id="danger2"
-                  checked={document?.danger2}
+                  checked={!document?.safety2}
                 />
               </td>
             </tr>
@@ -241,7 +242,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety3"
                   id="safe3"
-                  checked={document?.safe3}
+                  checked={document?.safety3}
                 />
               </td>
               <td className="card__table-safety">
@@ -249,7 +250,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety3"
                   id="danger3"
-                  checked={document?.danger3}
+                  checked={!document?.safety3}
                 />
               </td>
             </tr>
@@ -261,7 +262,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety25"
                   id="safe4"
-                  checked={document?.safe4}
+                  checked={document?.safety4}
                 />
               </td>
               <td className="card__table-safety">
@@ -269,7 +270,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety25"
                   id="danger4"
-                  checked={document?.danger4}
+                  checked={!document?.safety4}
                 />
               </td>
             </tr>
@@ -287,7 +288,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety4"
                   id="safe5"
-                  checked={document?.safe5}
+                  checked={document?.safety5}
                 />
               </td>
               <td className="card__table-safety">
@@ -295,7 +296,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety4"
                   id="danger5"
-                  checked={document?.danger5}
+                  checked={!document?.safety5}
                 />
               </td>
             </tr>
@@ -307,7 +308,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety5"
                   id="safe6"
-                  checked={document?.safe6}
+                  checked={document?.safety6}
                 />
               </td>
               <td className="card__table-safety">
@@ -315,7 +316,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety5"
                   id="danger6"
-                  checked={document?.danger6}
+                  checked={!document?.safety6}
                 />
               </td>
             </tr>
@@ -327,7 +328,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety6"
                   id="safe7"
-                  checked={document?.safe7}
+                  checked={document?.safety7}
                 />
               </td>
               <td className="card__table-safety">
@@ -335,7 +336,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety6"
                   id="danger7"
-                  checked={document?.danger7}
+                  checked={!document?.safety7}
                 />
               </td>
             </tr>
@@ -347,7 +348,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety7"
                   id="safe8"
-                  checked={document?.safe8}
+                  checked={document?.safety8}
                 />
               </td>
               <td className="card__table-safety">
@@ -355,7 +356,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety7"
                   id="danger8"
-                  checked={document?.danger8}
+                  checked={!document?.safety8}
                 />
               </td>
             </tr>
@@ -367,7 +368,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety8"
                   id="safe9"
-                  checked={document?.safe9}
+                  checked={document?.safety9}
                 />
               </td>
               <td className="card__table-safety">
@@ -375,7 +376,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety8"
                   id="danger9"
-                  checked={document?.danger9}
+                  checked={!document?.safety9}
                 />
               </td>
             </tr>
@@ -387,7 +388,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety9"
                   id="safe10"
-                  checked={document?.safe10}
+                  checked={document?.safety10}
                 />
               </td>
               <td className="card__table-safety">
@@ -395,7 +396,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety9"
                   id="danger10"
-                  checked={document?.danger10}
+                  checked={!document?.safety10}
                 />
               </td>
             </tr>
@@ -407,7 +408,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety10"
                   id="safe11"
-                  checked={document?.safe11}
+                  checked={document?.safety11}
                 />
               </td>
               <td className="card__table-safety">
@@ -415,7 +416,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety10"
                   id="danger11"
-                  checked={document?.danger11}
+                  checked={!document?.safety11}
                 />
               </td>
             </tr>
@@ -427,7 +428,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety11"
                   id="safe12"
-                  checked={document?.safe12}
+                  checked={document?.safety12}
                 />
               </td>
               <td className="card__table-safety">
@@ -435,7 +436,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety11"
                   id="danger12"
-                  checked={document?.danger12}
+                  checked={!document?.safety12}
                 />
               </td>
             </tr>
@@ -453,7 +454,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety12"
                   id="safe13"
-                  checked={document?.safe13}
+                  checked={document?.safety13}
                 />
               </td>
               <td className="card__table-safety">
@@ -461,7 +462,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety12"
                   id="danger13"
-                  checked={document?.danger13}
+                  checked={!document?.safety13}
                 />
               </td>
             </tr>
@@ -473,7 +474,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety13"
                   id="safe14"
-                  checked={document?.safe14}
+                  checked={document?.safety14}
                 />
               </td>
               <td className="card__table-safety">
@@ -481,7 +482,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety13"
                   id="danger14"
-                  checked={document?.danger14}
+                  checked={!document?.safety14}
                 />
               </td>
             </tr>
@@ -493,7 +494,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety14"
                   id="safe15"
-                  checked={document?.safe15}
+                  checked={document?.safety15}
                 />
               </td>
               <td className="card__table-safety">
@@ -501,7 +502,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety14"
                   id="danger15"
-                  checked={document?.danger15}
+                  checked={!document?.safety15}
                 />
               </td>
             </tr>
@@ -513,7 +514,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety15"
                   id="safe16"
-                  checked={document?.safe16}
+                  checked={document?.safety16}
                 />
               </td>
               <td className="card__table-safety">
@@ -521,7 +522,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety15"
                   id="danger16"
-                  checked={document?.danger16}
+                  checked={!document?.safety16}
                 />
               </td>
             </tr>
@@ -533,7 +534,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety16"
                   id="safe17"
-                  checked={document?.safe17}
+                  checked={document?.safety17}
                 />
               </td>
               <td className="card__table-safety">
@@ -541,7 +542,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety16"
                   id="danger17"
-                  checked={document?.danger17}
+                  checked={!document?.safety17}
                 />
               </td>
             </tr>
@@ -553,7 +554,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety17"
                   id="safe18"
-                  checked={document?.safe18}
+                  checked={document?.safety18}
                 />
               </td>
               <td className="card__table-safety">
@@ -561,7 +562,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety17"
                   id="danger18"
-                  checked={document?.danger18}
+                  checked={!document?.safety18}
                 />
               </td>
             </tr>
@@ -579,7 +580,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety18"
                   id="safe19"
-                  checked={document?.safe19}
+                  checked={document?.safety19}
                 />
               </td>
               <td className="card__table-safety">
@@ -587,7 +588,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety18"
                   id="danger19"
-                  checked={document?.danger19}
+                  checked={!document?.safety19}
                 />
               </td>
             </tr>
@@ -602,7 +603,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety19"
                   id="safe20"
-                  checked={document?.safe20}
+                  checked={document?.safety20}
                 />
               </td>
               <td className="card__table-safety">
@@ -610,7 +611,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety19"
                   id="danger20"
-                  checked={document?.danger20}
+                  checked={!document?.safety20}
                 />
               </td>
             </tr>
@@ -622,7 +623,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety20"
                   id="safe21"
-                  checked={document?.safe21}
+                  checked={document?.safety21}
                 />
               </td>
               <td className="card__table-safety">
@@ -630,7 +631,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety20"
                   id="danger21"
-                  checked={document?.danger21}
+                  checked={!document?.safety21}
                 />
               </td>
             </tr>
@@ -642,7 +643,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety21"
                   id="safe22"
-                  checked={document?.safe22}
+                  checked={document?.safety22}
                 />
               </td>
               <td className="card__table-safety">
@@ -650,7 +651,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety21"
                   id="danger22"
-                  checked={document?.danger22}
+                  checked={!document?.safety22}
                 />
               </td>
             </tr>
@@ -665,7 +666,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety22"
                   id="safe23"
-                  checked={document?.safe23}
+                  checked={document?.safety23}
                 />
               </td>
               <td className="card__table-safety">
@@ -673,7 +674,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety22"
                   id="danger23"
-                  checked={document?.danger23}
+                  checked={!document?.safety23}
                 />
               </td>
             </tr>
@@ -685,7 +686,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety23"
                   id="safe24"
-                  checked={document?.safe24}
+                  checked={document?.safety24}
                 />
               </td>
               <td className="card__table-safety">
@@ -693,7 +694,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety23"
                   id="danger24"
-                  checked={document?.danger24}
+                  checked={!document?.safety24}
                 />
               </td>
             </tr>
@@ -705,7 +706,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety24"
                   id="safe25"
-                  checked={document?.safe25}
+                  checked={document?.safety25}
                 />
               </td>
               <td className="card__table-safety">
@@ -713,7 +714,7 @@ const PnbrCardRead = () => {
                   type="radio"
                   name="safety24"
                   id="danger25"
-                  checked={document?.danger25}
+                  checked={!document?.safety25}
                 />
               </td>
             </tr>

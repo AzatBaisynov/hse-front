@@ -12,7 +12,7 @@ const PnbvCardRead = () => {
     const getDocument = async () => {
       const config = {
         method: "GET",
-        url: `${_LINK}/v1/api/labor/id/${id}`,
+        url: `${_LINK}/v1/api/labor/pnbr/${id}`,
         headers: {
           Authorization: localStorage.getItem("token"),
         },
@@ -60,7 +60,7 @@ const PnbvCardRead = () => {
           <label htmlFor="plan">По графику</label>
         </div>
         <div>
-          <input type="radio" defaultValue="fact" id="fact" name="schedule" checked={document?.plan} />
+          <input type="radio" defaultValue="fact" id="fact" name="schedule" checked={!document?.plan} />
           <label htmlFor="plan">Не по графику</label>
         </div>
       </div>
@@ -207,20 +207,20 @@ const PnbvCardRead = () => {
             Предпоездковая проверка автомобиля, а также осмотр помех вокруг ТС
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety1" id="safe1" defaultValue="safe" checked={document?.safe1}/>
+            <input type="radio" name="safety1" id="safe1" defaultValue="safe" checked={document?.safety1}/>
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety1" id="danger1" defaultValue="danger" checked={document?.danger1} />
+                <input type="radio" name="safety1" id="danger1" defaultValue="danger" checked={!document?.safety1} />
           </td>
         </tr>
         <tr>
           <td>1.2</td>
           <td>Водитель использует ремень безопасности</td>
           <td className="card__table-safety">
-            <input type="radio" name="safety2" id="safe2" defaultValue="safe" checked={document?.safe2} />
+                <input type="radio" name="safety2" id="safe2" defaultValue="safe" checked={document?.safety2} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety2" id="danger2" defaultValue="danger" checked={document?.danger2} />
+                <input type="radio" name="safety2" id="danger2" defaultValue="danger" checked={!document?.safety2} />
           </td>
         </tr>
         <tr>
@@ -229,10 +229,10 @@ const PnbvCardRead = () => {
             Контролирует использование ремней безопасности всеми пассажирами
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety3" id="safe3" defaultValue="safe" checked={document?.safe3} />
+                <input type="radio" name="safety3" id="safe3" defaultValue="safe" checked={document?.safety3} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety3" id="danger3" defaultValue="danger" checked={document?.danger3} />
+                <input type="radio" name="safety3" id="danger3" defaultValue="danger" checked={!document?.safety3} />
           </td>
         </tr>
         <tr className="card__table-green">
@@ -245,10 +245,10 @@ const PnbvCardRead = () => {
           <td>2.1</td>
           <td>Водитель соблюдает безопасную дистанцию во время движения ТС</td>
           <td className="card__table-safety">
-            <input type="radio" name="safety4" id="safe4" defaultValue="safe" checked={document?.safe4} />
+                <input type="radio" name="safety4" id="safe4" defaultValue="safe" checked={document?.safety4} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety4" id="danger4" defaultValue="danger" checked={document?.danger4} />
+                <input type="radio" name="safety4" id="danger4" defaultValue="danger" checked={!document?.safety4} />
           </td>
         </tr>
         <tr>
@@ -259,10 +259,10 @@ const PnbvCardRead = () => {
             начала маневра
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety5" id="safe5" defaultValue="safe" checked={document?.safe5} />
+                <input type="radio" name="safety5" id="safe5" defaultValue="safe" checked={document?.safety5} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety5" id="danger5" defaultValue="danger" checked={document?.danger5} />
+                <input type="radio" name="safety5" id="danger5" defaultValue="danger" checked={!document?.safety5} />
           </td>
         </tr>
         <tr>
@@ -272,10 +272,10 @@ const PnbvCardRead = () => {
             условиям
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety6" id="safe6" defaultValue="safe" checked={document?.safe6} />
+                <input type="radio" name="safety6" id="safe6" defaultValue="safe" checked={document?.safety6} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety6" id="danger6" defaultValue="danger" checked={document?.danger6} />
+                <input type="radio" name="safety6" id="danger6" defaultValue="danger" checked={!document?.safety6} />
           </td>
         </tr>
         <tr>
@@ -285,60 +285,60 @@ const PnbvCardRead = () => {
             переходам
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety7" id="safe7" defaultValue="safe" checked={document?.safe7} />
+                <input type="radio" name="safety7" id="safe7" defaultValue="safe" checked={document?.safety7} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety7" id="danger7" defaultValue="danger" checked={document?.danger7} />
+                <input type="radio" name="safety7" id="danger7" defaultValue="danger" checked={!document?.safety7} />
           </td>
         </tr>
         <tr>
           <td>2.5</td>
           <td>Плавно тормозит и не осуществляет резких торможений</td>
           <td className="card__table-safety">
-            <input type="radio" name="safety8" id="safe8" defaultValue="safe" checked={document?.safe8} />
+                <input type="radio" name="safety8" id="safe8" defaultValue="safe" checked={document?.safety8} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety8" id="danger8" defaultValue="danger" checked={document?.danger8} />
+                <input type="radio" name="safety8" id="danger8" defaultValue="danger" checked={!document?.safety8} />
           </td>
         </tr>
         <tr>
           <td>2.6</td>
           <td>Безопасно совершает переезд перекрестков и ЖД путей</td>
           <td className="card__table-safety">
-            <input type="radio" name="safety9" id="safe9" defaultValue="safe" checked={document?.safe9} />
+                <input type="radio" name="safety9" id="safe9" defaultValue="safe" checked={document?.safety9} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety9" id="danger9" defaultValue="danger" checked={document?.danger9} />
+                <input type="radio" name="safety9" id="danger9" defaultValue="danger" checked={!document?.safety9} />
           </td>
         </tr>
         <tr>
           <td>2.7</td>
           <td>Безопасно совершает обгон</td>
           <td className="card__table-safety">
-            <input type="radio" name="safety10" id="safe10" defaultValue="safe" checked={document?.safe10} />
+                <input type="radio" name="safety10" id="safe10" defaultValue="safe" checked={document?.safety0} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety10" id="danger10" defaultValue="danger" checked={document?.danger10} />
+                <input type="radio" name="safety10" id="danger10" defaultValue="danger" checked={!document?.safety10} />
           </td>
         </tr>
         <tr>
           <td>2.8</td>
           <td>Своевременно использует внешние световые приборы</td>
           <td className="card__table-safety">
-            <input type="radio" name="safety11" id="safe11" defaultValue="safe" checked={document?.safe11} />
+                <input type="radio" name="safety11" id="safe11" defaultValue="safe" checked={document?.safety11} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety11" id="danger11" defaultValue="danger" checked={document?.danger11} />
+                <input type="radio" name="safety11" id="danger11" defaultValue="danger" checked={!document?.safety11} />
           </td>
         </tr>
         <tr>
           <td>2.9</td>
           <td>Не использует мобильный телефон во время движения ТС </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety12" id="safe12" defaultValue="safe" checked={document?.safe12} />
+            <input type="radio" name="safety12" id="safe12" defaultValue="safe" checked={document?.safety12} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety12" id="danger12" defaultValue="danger" checked={document?.danger12} />
+            <input type="radio" name="safety12" id="danger12" defaultValue="danger" checked={!document?.safety12} />
           </td>
         </tr>
         <tr className="card__table-green">
@@ -351,50 +351,50 @@ const PnbvCardRead = () => {
           <td>3.1</td>
           <td>Водитель соблюдает безопасную дистанцию во время остановки ТС</td>
           <td className="card__table-safety">
-            <input type="radio" name="safety13" id="safe13" defaultValue="safe" checked={document?.safe13} />
+            <input type="radio" name="safety13" id="safe13" defaultValue="safe" checked={document?.safety13} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety13" id="danger13" defaultValue="danger" checked={document?.danger13} />
+            <input type="radio" name="safety13" id="danger13" defaultValue="danger" checked={!document?.safety13} />
           </td>
         </tr>
         <tr>
           <td>3.2</td>
           <td>Полностью останавливает ТС перед «СТОП» знаком</td>
           <td className="card__table-safety">
-            <input type="radio" name="safety14" id="safe14" defaultValue="safe" checked={document?.safe14} />
+            <input type="radio" name="safety14" id="safe14" defaultValue="safe" checked={document?.safety14} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety14" id="danger14" defaultValue="danger" checked={document?.danger14} />
+            <input type="radio" name="safety14" id="danger14" defaultValue="danger" checked={!document?.safety14} />
           </td>
         </tr>
         <tr>
           <td>3.3</td>
           <td>Безопасно совершает движение задним ходом</td>
           <td className="card__table-safety">
-            <input type="radio" name="safety15" id="safe15" defaultValue="safe" checked={document?.safe15} />
+            <input type="radio" name="safety15" id="safe15" defaultValue="safe" checked={document?.safety15} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety15" id="danger15" defaultValue="danger" checked={document?.danger15} />
+            <input type="radio" name="safety15" id="danger15" defaultValue="danger" checked={!document?.safety15} />
           </td>
         </tr>
         <tr>
           <td>3.4</td>
           <td>Паркует ТС в предназначенных для остановки местах</td>
           <td className="card__table-safety">
-            <input type="radio" name="safety16" id="safe16" defaultValue="safe" checked={document?.safe16} />
+            <input type="radio" name="safety16" id="safe16" defaultValue="safe" checked={document?.safety16} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety16" id="danger16" defaultValue="danger" checked={document?.danger16} />
+            <input type="radio" name="safety16" id="danger16" defaultValue="danger" checked={!document?.safety16} />
           </td>
         </tr>
         <tr>
           <td>3.5</td>
           <td>Осуществляет парковку ТС лицом к выезду</td>
           <td className="card__table-safety">
-            <input type="radio" name="safety17" id="safe17" defaultValue="safe" checked={document?.safe17} />
+            <input type="radio" name="safety17" id="safe17" defaultValue="safe" checked={document?.safety17} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety17" id="danger17" defaultValue="danger" checked={document?.danger17} />
+            <input type="radio" name="safety17" id="danger17" defaultValue="danger" checked={!document?.safety17} />
           </td>
         </tr>
         <tr className="card__table-green">
@@ -407,20 +407,20 @@ const PnbvCardRead = () => {
           <td>4.1</td>
           <td>Чувствовали ли вы себя безопасно во время поездки</td>
           <td className="card__table-safety">
-            <input type="radio" name="safety18" id="safe18" defaultValue="safe" checked={document?.safe18} />
+            <input type="radio" name="safety18" id="safe18" defaultValue="safe" checked={document?.safety18} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety18" id="danger18" defaultValue="danger" checked={document?.danger18} />
+            <input type="radio" name="safety18" id="danger18" defaultValue="danger" checked={!document?.safety18} />
           </td>
         </tr>
         <tr>
           <td>4.2</td>
           <td>Технические неисправности</td>
           <td className="card__table-safety">
-            <input type="radio" name="safety19" id="safe19" defaultValue="safe" checked={document?.safe19} />
+            <input type="radio" name="safety19" id="safe19" defaultValue="safe" checked={document?.safety19} />
           </td>
           <td className="card__table-safety">
-            <input type="radio" name="safety19" id="danger19" defaultValue="danger" checked={document?.danger19} />
+            <input type="radio" name="safety19" id="danger19" defaultValue="danger" checked={!document?.safety19} />
           </td>
         </tr>
       </tbody>
